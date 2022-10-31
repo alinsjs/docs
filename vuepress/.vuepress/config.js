@@ -2,7 +2,7 @@ const {version} = require('../../package.json');
 const path = require('path');
 
 module.exports = {
-    title: `cnchar (v${version})`, // 标题
+    title: `Alins (v${version})`, // 标题
     configureWebpack: () => {
         const NODE_ENV = process.env.NODE_ENV;
         // 判断是否是生产环境
@@ -55,7 +55,7 @@ module.exports = {
         // 顶部导航栏配置
         nav: [
             {text: '主页', link: '/'}, // 内部链接 以docs为根目录
-            {text: '捐赠', link: '/guide/donate'},
+            // {text: '捐赠', link: '/guide/donate'},
             {text: 'GitHub', link: 'https://www.github.com/theajack/cnchar'},
             {
                 text: '使用说明',
@@ -93,14 +93,14 @@ module.exports = {
                 ],
             },
             {
-                text: '关于作者',
+                text: 'Author',
                 items: [
-                    {text: 'GitHub地址', link: 'https://www.github.com/theajack'}, // 外部链接
-                    {text: 'Gitee地址', link: 'http://www.gitee.com/theajack'},
-                    {
-                        text: 'CSDN账号',
-                        link: 'https://blog.csdn.net/yanxiaomu',
-                    },
+                    {text: 'GitHub', link: 'https://www.github.com/theajack'}, // 外部链接
+                    // {text: 'Gitee地址', link: 'http://www.gitee.com/theajack'},
+                    // {
+                    //     text: 'CSDN账号',
+                    //     link: 'https://blog.csdn.net/yanxiaomu',
+                    // },
                 ],
             },
         ],
@@ -164,7 +164,7 @@ module.exports = {
             ],
         },
         sidebarDepth: 1, // 将同时提取markdown中h2，显示在侧边栏上
-        lastUpdated: '最后更新于', // 文档更新时间：每个文件git最后提交的时间
+        lastUpdated: 'Last updated', // 文档更新时间：每个文件git最后提交的时间
     },
 
     markdown: {

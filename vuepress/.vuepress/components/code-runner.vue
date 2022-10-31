@@ -75,7 +75,7 @@
     }
     .code-btn{
         float: right;
-        color: #007acc;
+        color: #ec5c2f;
         margin-left: 10px;
         cursor: pointer;
         transition: transform .3s ease;
