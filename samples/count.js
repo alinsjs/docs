@@ -1,36 +1,25 @@
 /*
  * @Author: chenzhongsheng
- * @Date: 2022-11-01 07:51:40
+ * @Date: 2022-11-01 08:57:21
  * @Description: Coding something
  */
 window.jsboxCode = {
     lib: 'https://cdn.jsdelivr.net/npm/alins',
     lang: 'js',
-    code: /* javascript */`const {
-    div, $, css, style, button, hover, click, input, cls
-} = Alins;
+    wrapCode: true,
+    needUI: true,
+    hideLog: true,
+    useDefaultUI: true,
+    code: /* javascript */`
+const { button, comp, click, $, mount } = Alins;
 
-function Style () {
-    const num = $(30);
-    const active = $(false);
-
-    css('.main')(
-        style({
-            color: '#888',
-            marginLeft: $\`${num}px\`,
-        }),
-        ['&.active', style.fontSize(num)],
-        ['.child', style.marginTop(num)]
-    ).mount();
-
-    return div(\`parent.main\`,
-        cls({active}),
-        hover('color: #f44'),
-        input.model(num, 'number'),
-        button('toggle active', click(() => active.value = !active.value)),
-        div('child.child'),
+function Count () {
+    const count = $(0);
+    return button(
+        click(() => {count.value++;}),
+        $\`Count is \${count}\`
     );
 }
 
-mount(comp(Style));`
+comp(Count).mount('#jx-app');`
 };
