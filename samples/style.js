@@ -11,7 +11,7 @@ window.jsboxCode = {
     hideLog: true,
     useDefaultUI: true,
     code: /* javascript */`const {
-    div, $ , button, hover, click, input, cls, css, style
+    div, $ , button, hover, click, input, cls, css, style, comp
 } = AlinsStyle;
 function Style () {
     const num = $(30);
