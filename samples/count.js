@@ -10,8 +10,7 @@ window.jsboxCode = {
     needUI: true,
     hideLog: true,
     useDefaultUI: true,
-    code: /* javascript */`
-const { button, comp, click, $, mount } = Alins;
+    code: /* javascript */`const { button, comp, click, $, mount } = Alins;
 
 function Count () {
     const count = $(0);
