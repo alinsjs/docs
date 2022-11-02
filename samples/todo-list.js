@@ -10,6 +10,7 @@ window.jsboxCode = {
     needUI: true,
     hideLog: true,
     useDefaultUI: true,
+    clearWhenReRun: true,
     code: /* javascript */`const {comp, button, div, input, click, $, style} = AlinsStyle;
 
 function todoList () {

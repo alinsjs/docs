@@ -12,6 +12,7 @@ window.jsboxCode = {
     needUI: true,
     hideLog: true,
     useDefaultUI: true,
+    clearWhenReRun: true,
     code: /* javascript */`const {
     button, comp, prop, click, $, input, span, dom
 } = Alins;

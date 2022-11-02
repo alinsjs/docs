@@ -10,6 +10,7 @@ window.jsboxCode = {
     needUI: true,
     hideLog: true,
     useDefaultUI: true,
+    clearWhenReRun: true,
     code: /* javascript */`const {
     div, $ , button, hover, click, input, cls, css, style, comp
 } = AlinsStyle;
