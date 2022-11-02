@@ -21,13 +21,13 @@ function Style () {
     css('.main')(
         style({
             color: '#888',
-            marginLeft: $\`\${num}px\`,
+            marginLeft: num,
         }),
         ['&.active', style.fontSize(num)],
         ['.child', style.marginTop(num)]
     ).mount();
 
-    return div(\`parent.main\`,
+    return div('parent.main',
         cls({active}),
         hover('color: #f44'),
         input.model(num, 'number'),
