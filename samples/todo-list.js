@@ -11,7 +11,7 @@ window.jsboxCode = {
     hideLog: true,
     useDefaultUI: true,
     clearWhenReRun: true,
-    code: /* javascript */`const {comp, button, div, input, click, $, style} = AlinsStyle;
+    code: /* javascript */`const {comp, button, div, input, click, $, style, value} = AlinsStyle;
 
 function todoList () {
     const edit = $('');
@@ -22,6 +22,7 @@ function todoList () {
     };
     const removeItem = (index) => { list.splice(index.value, 1); };
     const finishItem = (item) => { item.done = !item.done.value; };
+    const clear = () => { list[value] = []; };
 
     const itemStyle = (item) => {
         return style.textDecoration(() => item.done.value ? 'line-through' : 'none')
@@ -42,6 +43,7 @@ function todoList () {
                 ),
             ]),
         ),
+        button('clear', click(clear)),
     ];
 }
 comp(todoList).mount('#jx-app');`
