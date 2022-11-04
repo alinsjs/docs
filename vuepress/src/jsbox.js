@@ -2,6 +2,8 @@ import event from './event';
 import {parseUrlParam} from './util';
 let jsbox = null;
 
+const DEF_CONFIG = 'remind=false&mes=false'
+
 function getUrl () {
     let url = '';
     const host = window.location.host;
@@ -10,7 +12,7 @@ function getUrl () {
     } else {
         url = `${window.location.protocol}//theajack.gitee.io`;
     }
-    return url + '/jsbox/?env=cnchar&remind=false&mes=false';
+    return url + '/jsbox/?'+ DEF_CONFIG;
 }
 
 function main () {
@@ -22,6 +24,12 @@ function main () {
     const mask = initDom();
     const iframe = mask.querySelector('.jsbox-iframe');
     const closeIcon = mask.querySelector('.jsbox-close');
+    function setUrl(url){
+        if(jsbox.url !== url){
+            jsbox.url = url;
+            iframe.src = jsbox.url;
+        }
+    }
     function open () {
         mask.style.display = 'block';
         document.body.style.overflow = 'hidden';
@@ -43,17 +51,23 @@ function main () {
         if (jsbox._id !== _id || iframeId !== _id) {
             jsbox._id = _id;
             const config = (location.host.indexOf('localhost') !== -1) ? 'http://localhost:8080/config.js' : 'https://fastly.jsdelivr.net/gh/theajack/cnchar@gh-pages/config.js';
-            jsbox.url = `${getUrl()}&config=${encodeURIComponent(config)}&id=${_id}`;
-            iframe.src = jsbox.url;
+            setUrl(`${getUrl()}&config=${encodeURIComponent(config)}&id=${_id}`);
         }
         open();
     }
     function code (_code = '', lang = 'javascript') {
         if (jsbox._code !== _code) {
             jsbox._code = _code;
-            jsbox.url = `${getUrl()}&code=${encodeURIComponent(_code)}&lang=${lang}`;
-            iframe.src = jsbox.url;
+            setUrl(`${getUrl()}&code=${encodeURIComponent(_code)}&lang=${lang}`);
         }
+        open();
+    }
+    function openUrl(url){
+        setUrl(url.replace('?', `?${DEF_CONFIG}&`));
+        open();
+    }
+    function openGitHub(str){
+        setUrl(`${getUrl()}&github=${str}`)
         open();
     }
     closeIcon.onclick = close;
@@ -61,7 +75,9 @@ function main () {
         open,
         close,
         code,
-        id
+        id,
+        openUrl,
+        openGitHub
     };
     return jsbox;
 }

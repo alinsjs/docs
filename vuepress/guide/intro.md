@@ -10,43 +10,44 @@ sidebarDepth: 0  // 吐槽：这里设置0无效！只能设置1或2！
 
 --------------------
 
-<p>
-    <a href="https://www.github.com/theajack/cnchar/stargazers" target="_black">
-        <img src="https://img.shields.io/github/stars/theajack/cnchar?logo=github" alt="stars" />
+<div style="margin: 10px">
+    <a href="https://www.github.com/alinsjs/alins/stargazers" target="_black">
+        <img src="https://img.shields.io/github/stars/alinsjs/alins?logo=github" alt="stars" />
     </a>
-    <a href="https://www.github.com/theajack/cnchar/network/members" target="_black">
-        <img src="https://img.shields.io/github/forks/theajack/cnchar?logo=github" alt="forks" />
+    <a href="https://www.github.com/alinsjs/alins/network/members" target="_black">
+        <img src="https://img.shields.io/github/forks/alinsjs/alins?logo=github" alt="forks" />
     </a>
-    <a href="https://www.npmjs.com/package/cnchar" target="_black">
-        <img src="https://img.shields.io/npm/v/cnchar?logo=npm" alt="version" />
+    <a href="https://www.npmjs.com/package/alins" target="_black">
+        <img src="https://img.shields.io/npm/v/alins?logo=npm" alt="version" />
     </a>
-    <a href="https://www.npmjs.com/package/cnchar" target="_black">
-        <img src="https://img.shields.io/npm/dm/cnchar?color=%23ffca28&logo=npm" alt="downloads" />
+    <a href="https://www.npmjs.com/package/alins" target="_black">
+        <img src="https://img.shields.io/npm/dm/alins?color=%23ffca28&logo=npm" alt="downloads" />
     </a>
-    <a href="https://www.jsdelivr.com/package/npm/cnchar" target="_black">
-        <img src="https://data.jsdelivr.com/v1/package/npm/cnchar/badge" alt="jsdelivr" />
+    <a href="https://www.jsdelivr.com/package/npm/alins" target="_black">
+        <img src="https://data.jsdelivr.com/v1/package/npm/alins/badge" alt="jsdelivr" />
     </a>
+</div>
+
+<div style="margin: 10px">
     <a href="https://github.com/theajack" target="_black">
         <img src="https://img.shields.io/badge/Author-%20theajack%20-7289da.svg?&logo=github" alt="author" />
     </a>
-    <a href="https://www.github.com/theajack/cnchar/blob/master/LICENSE" target="_black">
-        <img src="https://img.shields.io/github/license/theajack/cnchar?color=%232DCE89&logo=github" alt="license" />
+    <a href="https://www.github.com/alinsjs/alins/blob/master/LICENSE" target="_black">
+        <img src="https://img.shields.io/github/license/alinsjs/alins?color=%232DCE89&logo=github" alt="license" />
     </a>
-    <a href="https://fastly.jsdelivr.net/gh/theajack/cnchar/dist/cnchar.latest.min.js"><img src="https://img.shields.io/bundlephobia/minzip/cnchar.svg" alt="Size"></a>
-    <a href="https://github.com/theajack/cnchar/search?l=javascript"><img src="https://img.shields.io/github/languages/top/theajack/cnchar.svg" alt="TopLang"></a>
-    <a href="https://github.com/theajack/cnchar/issues"><img src="https://img.shields.io/github/issues-closed/theajack/cnchar.svg" alt="issue"></a>
-    <a href="https://www.github.com/theajack/cnchar"><img src="https://img.shields.io/librariesio/dependent-repos/npm/cnchar.svg" alt="Dependent"></a>
-</p>
+    <a href="https://cdn.jsdelivr.net/npm/alins"><img src="https://img.shields.io/bundlephobia/minzip/alins.svg" alt="Size"></a>
+    <a href="https://github.com/alinsjs/alins/search?l=javascript"><img src="https://img.shields.io/github/languages/top/alinsjs/alins.svg" alt="TopLang"></a>
+    <a href="https://github.com/alinsjs/alins/issues"><img src="https://img.shields.io/github/issues-closed/alinsjs/alins.svg" alt="issue"></a>
+    <a href="https://www.github.com/alinsjs/alins"><img src="https://img.shields.io/librariesio/dependent-repos/npm/alins.svg" alt="Dependent"></a>
+</div>
 
-**cnchar 是一款功能全面、多端支持的汉字拼音笔画 js 库**
-
-**[English](https://github.com/theajack/cnchar/blob/master/helper/README.en.md) | [在线试用/文档](https://theajack.github.io/cnchar) | [更新日志](https://github.com/theajack/cnchar/blob/master/helper/version.md) | [反馈错误/缺漏](https://github.com/theajack/cnchar/issues/new) | [Gitee](https://gitee.com/theajack/cnchar) | QQ Group: 958278438 | [留言板](https://theajack.github.io/message-board/?app=cnchar)**
+**[English](https://github.com/alinsjs/alins/blob/master/README.md) | [文档](https://theajack.github.io/alins) | [更新日志](https://github.com/alinsjs/alins/blob/master/helper/version.md) | [反馈错误/缺漏](https://github.com/alinsjs/alins/issues/new) | [Gitee](https://gitee.com/alinsjs/alins) | [留言板](https://theajack.github.io/message-board/?app=alins)**
 
 ### 应用例子
 
 开始文档之前，先通过一些应用案例看看 cnchar 能够做些什么
 
-[汉字打字游戏](https://theajack.github.io/type/) | [打字弹钢琴](https://theajack.github.io/piano/) | [成语接龙](https://theajack.github.io/jsbox/?github=theajack.cnchar@master.helper/jsbox/idiom.js) | [通讯录排序](https://theajack.github.io/jsbox/?github=theajack.cnchar@master.helper/jsbox/sort.js) | [取名字](https://theajack.github.io/jsbox/?github=theajack.cnchar@master.helper/jsbox/name.js) | [输入法](https://theajack.github.io/jsbox/?github=theajack.cnchar@master.helper/jsbox/input.js) | [歇后语](https://theajack.github.io/jsbox/?github=theajack.cnchar@master.helper/jsbox/xhy.js) | [语音识别与合成](https://theajack.github.io/jsbox/?github=theajack.cnchar@master.helper/jsbox/voice.js) | [简繁体转换](https://theajack.github.io/jsbox/?github=theajack.cnchar@master.helper/jsbox/trad.js)
+[计数器](https://theajack.github.io/type/) | [打字弹钢琴](https://theajack.github.io/piano/) | [成语接龙](https://theajack.github.io/jsbox/?github=theajack.cnchar@master.helper/jsbox/idiom.js) | [通讯录排序](https://theajack.github.io/jsbox/?github=theajack.cnchar@master.helper/jsbox/sort.js) | [取名字](https://theajack.github.io/jsbox/?github=theajack.cnchar@master.helper/jsbox/name.js) | [输入法](https://theajack.github.io/jsbox/?github=theajack.cnchar@master.helper/jsbox/input.js) | [歇后语](https://theajack.github.io/jsbox/?github=theajack.cnchar@master.helper/jsbox/xhy.js) | [语音识别与合成](https://theajack.github.io/jsbox/?github=theajack.cnchar@master.helper/jsbox/voice.js) | [简繁体转换](https://theajack.github.io/jsbox/?github=theajack.cnchar@master.helper/jsbox/trad.js)
 
 ## 1. 前言
 

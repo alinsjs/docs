@@ -37,3 +37,34 @@ html,body{
         cursor: pointer;
     }
 }
+
+/*暗色主题*/
+
+html, body ,.navbar, .navbar .links, .search-box input, .suggestions{
+    background-color: #111!important;
+}
+.suggestions, .navbar, .sidebar, h2, .code-box, .page-nav .inner, .search-box input{
+    border-color: #666!important;
+}
+.suggestion.focused {
+    background-color: #444!important;
+}
+[data-theme=dark] .comment-editor, [data-theme=dark] .comment-s-input, [data-theme=dark] .comment-list .comment-item .comment-item-content {
+    background-color: #111!important;
+}
+.nav-dropdown {
+    background-color: #141414!important;
+    border-color: #444!important;
+}
+.home-wrapper .start-w {
+    border-top: none!important;
+}
+tr:nth-child(2n), .sidebar {
+    background-color: #181818!important;
+}
+th,td{
+    border: 1px solid #666!important;
+}
+.theme-default-content pre, .theme-default-content pre[class*="language-"]{
+    background-color: #000!important;
+}

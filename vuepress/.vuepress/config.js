@@ -178,11 +178,8 @@ module.exports = {
         // 官方图片放大组件 目前是所有img都可以点击放大。具体配置见https://v1.vuepress.vuejs.org/zh/plugin/official/plugin-medium-zoom.html
         ['@vuepress/medium-zoom', {selector: 'img'}],
         ['vuepress-plugin-tc-comment', {
-            // host: 'localhost:6868', // dev
-            host: 'www.shiyix.cn', // View https://github.com/theajack/comment for details
-            getUrl: '/api/comment/cnchar',
-            insertUrl: '/api/comment/cnchar',
-            replyUrl: '/api/reply/cnchar',
+            appName: 'alins', // create your own app name
+            theme: 'dark',
         }]
     ],
 

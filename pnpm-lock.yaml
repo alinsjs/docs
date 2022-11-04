@@ -29,7 +29,7 @@ specifiers:
   vue: ^2.5.2
   vue-highlight.js: ^2.2.0
   vuepress: ^1.0.2
-  vuepress-plugin-tc-comment: ^0.0.11
+  vuepress-plugin-tc-comment: 0.1.0
 
 devDependencies:
   '@babel/core': 7.19.6
@@ -60,7 +60,7 @@ devDependencies:
   vue: 2.7.13
   vue-highlight.js: 2.2.0_enpbzzljhlsnd35eijuwp2aeam
   vuepress: 1.9.7
-  vuepress-plugin-tc-comment: 0.0.11
+  vuepress-plugin-tc-comment: 0.1.0
 
 packages:
 
@@ -10866,8 +10866,8 @@ packages:
     engines: {node: '>=6'}
     dev: true
 
-  /tc-comment/0.0.12:
-    resolution: {integrity: sha512-Q+GVVKdp6GhjJHIgYCsWZ9vGrXs2lE41owMb4sh0iVVdkAYDjndzY3tvfT3mel/b8w11wlR8L3aq1xADvWJFQQ==}
+  /tc-comment/1.0.0:
+    resolution: {integrity: sha512-VLqS0/FbV83E1UHisvVAwJfq96f/E8yI9RO63WdLvSZ5OTw/nl7jpaUkn5rCDhgMfJF+TTJ9d6+kr/eSiJmRFA==}
     dev: true
 
   /term-size/2.2.1:
@@ -11717,10 +11717,10 @@ packages:
       smoothscroll-polyfill: 0.4.4
     dev: true
 
-  /vuepress-plugin-tc-comment/0.0.11:
-    resolution: {integrity: sha512-kth+Oc+dnPc5JEpuOMbCO1U/HxXZbc4O1wT+z2/ufrouDLXKOzJMhPGcQ70s0XCtm9Q0KCsW4EPjpqQSGzYgzg==}
+  /vuepress-plugin-tc-comment/0.1.0:
+    resolution: {integrity: sha512-cXFthJYZZGebcnUgfrk0R3RUoJg2L1C8FjxUw94EVyd3l+h1FyrxCEZTnK7Fn5EvAHE2NQZevX6rvGTfFcBgyA==}
     dependencies:
-      tc-comment: 0.0.12
+      tc-comment: 1.0.0
     dev: true
 
   /vuepress/1.9.7:
