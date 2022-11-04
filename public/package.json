@@ -9,7 +9,7 @@
     "typings": "index.d.ts",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/theajack/cnchar.git"
+        "url": "git+https://github.com/alinsjs/alins.git"
     },
     "keywords": [
         "汉字拼音",
@@ -23,7 +23,7 @@
     "author": "theajack",
     "license": "MIT",
     "bugs": {
-        "url": "https://github.com/theajack/cnchar/issues"
+        "url": "https://github.com/alinsjs/alins/issues"
     },
     "homepage": "https://theajack.github.io/cnchar/"
 }

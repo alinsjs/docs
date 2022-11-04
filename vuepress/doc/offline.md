@@ -11,11 +11,11 @@ cnchar 在 3.1.0 版本新增了 [cnchar-data](https://github.com/cn-char/cnchar
 
 另外 voice, draw, explain 三个仓库也支持独立 setResourceBase
 
-具体请参考 [cnchar-types](https://github.com/theajack/cnchar/tree/master/src/cnchar-types)
+具体请参考 [cnchar-types](https://github.com/alinsjs/alins/tree/master/src/cnchar-types)
 
 ## 2. cnchar-data
 
-该库为[cnchar](https://www.github.com/theajack/cnchar)的资源cdn库
+该库为[cnchar](https://www.github.com/alinsjs/alins)的资源cdn库
 
 也可以用于支持离线化使用cnchar部分在线资源，及生产环境部署到自己的服务器中
 

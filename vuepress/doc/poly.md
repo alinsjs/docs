@@ -16,7 +16,7 @@ cdn使用
 
 <div>
   <highlight-code lang='html'>
-&lt;script src="https://fastly.jsdelivr.net/npm/cnchar-poly/cnchar.poly.min.js">&lt;/script>
+&lt;script src="https://cdn.jsdelivr.net/npm/cnchar-poly/cnchar.poly.min.js">&lt;/script>
   </highlight-code>
 </div>
 
@@ -40,5 +40,5 @@ cnchar.use(poly); // use 在浏览器环境中非必须
 
 由于多音词依赖分词与词库，且cnchar是一个静态的js库，所以可能会有诸多不准确的读音
 
-如果遇到不准缺的多音词，欢迎提[issue或pr](https://github.com/theajack/cnchar/issues/new)
+如果遇到不准缺的多音词，欢迎提[issue或pr](https://github.com/alinsjs/alins/issues/new)
 

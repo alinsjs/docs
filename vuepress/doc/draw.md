@@ -13,7 +13,7 @@ draw 的参数比较繁多，首先需要理解的是，draw 分为四种绘制�
 - stroke: 按汉字笔顺单步绘制
 - test: 测试模式，用户可以在容器内绘制汉字，cnchar-draw会检测是否绘制正确
 
-具体使用也可以参考`cnchar-draw`的类型声明文件：[cnchar.draw.d.ts](https://github.com/theajack/cnchar/blob/master/src/cnchar/plugin/draw/index.d.ts)
+具体使用也可以参考`cnchar-draw`的类型声明文件：[cnchar.draw.d.ts](https://github.com/alinsjs/alins/blob/master/src/cnchar/plugin/draw/index.d.ts)
 
 npm安装
 
@@ -27,7 +27,7 @@ cdn使用
 
 <div>
   <highlight-code lang='html'>
-&lt;script src="https://fastly.jsdelivr.net/npm/cnchar-draw/cnchar.draw.min.js">&lt;/script>
+&lt;script src="https://cdn.jsdelivr.net/npm/cnchar-draw/cnchar.draw.min.js">&lt;/script>
   </highlight-code>
 </div>
 
@@ -60,7 +60,7 @@ cnchar.draw('你好', options); // options 为可选参数
   </highlight-code>
 </div>
 
-以下是 options 的所有可选参数及描述，具体使用可以在 [JSBox](https://theajack.github.io/jsbox?theme=dark&config=https%3A%2F%2Ffastly.jsdelivr.net%2Fgh%2Ftheajack%2Fcnchar%2Fdocs%2Fconfig.js&id=normal-draw) 上自行在线尝试
+以下是 options 的所有可选参数及描述，具体使用可以在 [JSBox](https://theajack.github.io/jsbox?theme=dark&config=https%3A%2F%2Fcdn.jsdelivr.net%2Fgh%2Ftheajack%2Fcnchar%2Fdocs%2Fconfig.js&id=normal-draw) 上自行在线尝试
 
 <div>
   <highlight-code lang='typescript'>

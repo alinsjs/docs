@@ -13,7 +13,7 @@
     export default {
         methods: {
             starGithub () {
-                window.open('https://github.com/theajack/cnchar');
+                window.open('https://github.com/alinsjs/alins');
             }
         }
     };

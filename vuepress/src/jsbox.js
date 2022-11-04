@@ -2,6 +2,9 @@ import event from './event';
 import {parseUrlParam} from './util';
 let jsbox = null;
 
+// dev: serve ./samples/playground
+const BASE_URL = (location.host.indexOf('localhost') !== -1) ? 'http://localhost:8080/' : 'https://cdn.jsdelivr.net/gh/theajack/cnchar@gh-pages/config.js';
+
 const DEF_CONFIG = 'remind=false&mes=false'
 
 function getUrl () {
@@ -50,15 +53,15 @@ function main () {
         }
         if (jsbox._id !== _id || iframeId !== _id) {
             jsbox._id = _id;
-            const config = (location.host.indexOf('localhost') !== -1) ? 'http://localhost:8080/config.js' : 'https://fastly.jsdelivr.net/gh/theajack/cnchar@gh-pages/config.js';
+            const config = isDev 
             setUrl(`${getUrl()}&config=${encodeURIComponent(config)}&id=${_id}`);
         }
         open();
     }
-    function code (_code = '', lang = 'javascript') {
+    function code (_code = '', lang = 'javascript', env='alins') { // alins | alins-style
         if (jsbox._code !== _code) {
             jsbox._code = _code;
-            setUrl(`${getUrl()}&code=${encodeURIComponent(_code)}&lang=${lang}`);
+            setUrl(`${getUrl()}&env=${env}&code=${encodeURIComponent(_code)}&lang=${lang}`);
         }
         open();
     }
@@ -70,6 +73,7 @@ function main () {
         setUrl(`${getUrl()}&github=${str}`)
         open();
     }
+    function
     closeIcon.onclick = close;
     jsbox = {
         open,

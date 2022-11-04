@@ -43,7 +43,7 @@ html,body{
 html, body ,.navbar, .navbar .links, .search-box input, .suggestions{
     background-color: #111!important;
 }
-.suggestions, .navbar, .sidebar, h2, .code-box, .page-nav .inner, .search-box input{
+.suggestions, .navbar, .sidebar, h2, .code-box, .page-nav .inner, .search-box input.focused{
     border-color: #666!important;
 }
 .suggestion.focused {

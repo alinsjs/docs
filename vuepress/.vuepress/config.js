@@ -9,7 +9,7 @@ module.exports = {
         if (NODE_ENV === 'production') {
             return {
                 output: {
-                    publicPath: 'https://fastly.jsdelivr.net/gh/theajack/cnchar@gh-pages/'
+                    publicPath: 'https://cdn.jsdelivr.net/gh/alinsjs/alins@gh-pages/'
                     // publicPath: '/docs/' // debug
                 },
                 resolve: {
@@ -32,11 +32,10 @@ module.exports = {
     },
     description: '功能全面、多端支持的汉字拼音笔画js库', // 描述
     dest: './docs/', // 基本url
-    // base: '/cnchar/',
-    base: '/cnchar/', // gh-pages分支这里需要改成 / 因为 cnchar.js.org的配置
+    base: '/alins/', // gh-pages分支这里需要改成 / 因为 cnchar.js.org的配置
     // 注入到当前页面的 HTML <head> 中的标签
     head: [
-        ['link', {rel: 'icon', href: 'https://fastly.jsdelivr.net/gh/theajack/cnchar@gh-pages/assets/v1/images/i.ico'}], // 增加一个自定义的 favicon
+        ['link', {rel: 'icon', href: 'https://shiyix.cn/alins.ico'}], // 增加一个自定义的 favicon
     ],
     // dest: './dist', //打包位置
     port: 6868, // 端口号
@@ -56,7 +55,7 @@ module.exports = {
         nav: [
             {text: '主页', link: '/'}, // 内部链接 以docs为根目录
             // {text: '捐赠', link: '/guide/donate'},
-            {text: 'GitHub', link: 'https://www.github.com/theajack/cnchar'},
+            {text: 'GitHub', link: 'https://www.github.com/alinsjs/alins'},
             {
                 text: '使用说明',
                 items: [
