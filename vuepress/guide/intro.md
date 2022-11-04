@@ -44,8 +44,6 @@ sidebarDepth: 0  // 吐槽：这里设置0无效！只能设置1或2！
 <code-btn type='text' text='Todo List' url='@todo-list'/> |
 <code-btn type='text' text='CSS-In-JS' url='@style'/>
 
-
-
 ## 1. 前言
 
 Alins 是一个 All-in-js web ui 框架，支持单向数据流+双向绑定，无虚拟dom

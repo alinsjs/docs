@@ -1,3 +1,10 @@
+<!--
+ * @Author: chenzhongsheng
+ * @Date: 2022-10-30 02:42:04
+ * @Description: Coding something
+ * @LastEditors: chenzhongsheng
+ * @LastEditTime: 2022-11-04 23:51:12
+-->
 
 ## 1. 介绍
 
@@ -5,11 +12,11 @@ cnchar在2.2.0加入了成语功能，启用该功能需要安装 `cnchar-idiom`
 
 使用方式如下：
 
-<div>
+<!-- <div>
   <highlight-code lang='typescript'>
 cnchar.idiom(text: string | number | Array<string|number>):Array<string>;
   </highlight-code>
-</div>
+</div> -->
 
 看一个具体例子
 

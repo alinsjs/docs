@@ -73,7 +73,6 @@ function main () {
         setUrl(`${getUrl()}&github=${str}`)
         open();
     }
-    function
     closeIcon.onclick = close;
     jsbox = {
         open,
