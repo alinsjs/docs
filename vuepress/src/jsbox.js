@@ -3,9 +3,9 @@ import {parseUrlParam} from './util';
 let jsbox = null;
 
 // dev: serve ./samples/playground
-const BASE_URL = (location.host.indexOf('localhost') !== -1) ? 'http://localhost:8080/' : 'https://cdn.jsdelivr.net/gh/theajack/cnchar@gh-pages/config.js';
+const BASE_URL = (location.host.indexOf('localhost') !== -1) ? 'http://localhost:8080/' : 'https://cdn.jsdelivr.net/gh/theajack/cnchar@gh-pages/';
 
-const DEF_CONFIG = 'remind=false&mes=false'
+const DEF_CONFIG = 'remind=false&mes=false';
 
 function getUrl () {
     let url = '';
@@ -15,7 +15,7 @@ function getUrl () {
     } else {
         url = `${window.location.protocol}//theajack.gitee.io`;
     }
-    return url + '/jsbox/?'+ DEF_CONFIG;
+    return url + '/jsbox/?' + DEF_CONFIG;
 }
 
 function main () {
@@ -27,8 +27,8 @@ function main () {
     const mask = initDom();
     const iframe = mask.querySelector('.jsbox-iframe');
     const closeIcon = mask.querySelector('.jsbox-close');
-    function setUrl(url){
-        if(jsbox.url !== url){
+    function setUrl (url) {
+        if (jsbox.url !== url) {
             jsbox.url = url;
             iframe.src = jsbox.url;
         }
@@ -53,24 +53,24 @@ function main () {
         }
         if (jsbox._id !== _id || iframeId !== _id) {
             jsbox._id = _id;
-            const config = isDev 
+            const config = BASE_URL + 'config.js';
             setUrl(`${getUrl()}&config=${encodeURIComponent(config)}&id=${_id}`);
         }
         open();
     }
-    function code (_code = '', lang = 'javascript', env='alins') { // alins | alins-style
+    function code (_code = '', lang = 'javascript', env = 'alins') { // alins | alins-style
         if (jsbox._code !== _code) {
             jsbox._code = _code;
             setUrl(`${getUrl()}&env=${env}&code=${encodeURIComponent(_code)}&lang=${lang}`);
         }
         open();
     }
-    function openUrl(url){
+    function openUrl (url) {
         setUrl(url.replace('?', `?${DEF_CONFIG}&`));
         open();
     }
-    function openGitHub(str){
-        setUrl(`${getUrl()}&github=${str}`)
+    function openGitHub (str) {
+        setUrl(`${getUrl()}&github=${str}`);
         open();
     }
     closeIcon.onclick = close;

@@ -30,12 +30,14 @@ module.exports = {
             };
         }
     },
-    description: '功能全面、多端支持的汉字拼音笔画js库', // 描述
+    description: 'Alins - All-in-JS Web FrameWork', // 描述
     dest: './docs/', // 基本url
     base: '/alins/', // gh-pages分支这里需要改成 / 因为 cnchar.js.org的配置
     // 注入到当前页面的 HTML <head> 中的标签
     head: [
         ['link', {rel: 'icon', href: 'https://shiyix.cn/alins.ico'}], // 增加一个自定义的 favicon
+        ['script', {src: `https://cdn.jsdelivr.net/npm/alins@${version}`}],
+        ['script', {src: `https://cdn.jsdelivr.net/npm/alins-style@${version}`}],
     ],
     // dest: './dist', //打包位置
     port: 6868, // 端口号

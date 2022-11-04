@@ -3,13 +3,13 @@
  * @Date: 2022-11-04 20:16:21
  * @Description: Coding something
  * @LastEditors: chenzhongsheng
- * @LastEditTime: 2022-11-04 21:46:18
+ * @LastEditTime: 2022-11-05 00:47:59
 -->
 <template>
-    <el-button class="code-btn"
-        :type='type'
-        size="large"
-        @click='run'>{{text}}</el-button>
+    <el-button class='code-btn'
+               :type='type'
+               size='large'
+               @click='run'>{{text}}</el-button>
 </template>
 
 <script>
@@ -35,19 +35,19 @@
         },
         methods: {
             run () {
-                if(!this.url){
-                    this.$toast('url 错误')
+                if (!this.url) {
+                    this.$toast('url 错误');
                     return;
                 }
                 let url = '';
-                if(this.url[0] === '/'){
-                    url = `${location.protocol}://${location.host}${this.url}`
-                }else if(this.url.indexOf('http') === 0){
+                if (this.url[0] === '/') {
+                    url = `${location.protocol}://${location.host}${this.url}`;
+                } else if (this.url.indexOf('http') === 0) {
                     url = this.url;
-                }else if(this.url[0] === '@'){
-                    url = `https://theajack.github.io/jsbox?github=alinsjs.docs.samples/${this.url.substring(1)}.js`
-                }else{
-                    url = `https://theajack.github.io/jsbox?github=${this.url}`
+                } else if (this.url[0] === '@') {
+                    url = `https://theajack.github.io/jsbox?github=alinsjs.docs.samples/${this.url.substring(1)}.js`;
+                } else {
+                    url = `https://theajack.github.io/jsbox?github=${this.url}`;
                 }
                 jsbox.openUrl(url);
             }

@@ -1,7 +1,12 @@
+/*
+ * @Author: chenzhongsheng
+ * @Date: 2022-10-30 02:42:53
+ * @Description: Coding something
+ * @LastEditors: chenzhongsheng
+ * @LastEditTime: 2022-11-05 00:47:47
+ */
 module.exports = {
-  // "parser": '@typescript-eslint/parser', // 启用会导致vue文件eslint错误
   "plugins": [
-    '@typescript-eslint',
     'jest'
   ],
   "env": {
@@ -17,8 +22,7 @@ module.exports = {
     "plugin:vue/essential"
   ],
   "parserOptions": {
-    // "parser": "babel-eslint",
-    "parser": "@typescript-eslint/parser",
+    "parser": "babel-eslint",
     "ecmaVersion": 2018,
     "ecmaFeatures": {
       "arrowFunctions": true,
@@ -41,12 +45,6 @@ module.exports = {
   },
   "rules": {
     // 'no-var': "error",
-    // 优先使用 interface 而不是 type
-    '@typescript-eslint/consistent-type-definitions': [
-        "error",
-        "interface"
-    ],
-    "@typescript-eslint/no-unused-vars": "error", // 使用 ts 未使用变量的规则 比如枚举类型在es中会报错
     "no-extend-native": 0,
     "no-new": 0,
     "no-var": 2,
