@@ -3,7 +3,7 @@
  * @Date: 2022-11-04 20:16:21
  * @Description: Coding something
  * @LastEditors: chenzhongsheng
- * @LastEditTime: 2022-11-05 00:47:59
+ * @LastEditTime: 2022-11-05 01:03:26
 -->
 <template>
     <el-button class='code-btn'
@@ -45,7 +45,9 @@
                 } else if (this.url.indexOf('http') === 0) {
                     url = this.url;
                 } else if (this.url[0] === '@') {
-                    url = `https://theajack.github.io/jsbox?github=alinsjs.docs.samples/${this.url.substring(1)}.js`;
+                    jsbox.openSample(this.url.substring(1));
+                    return;
+                    // url = `https://theajack.github.io/jsbox?github=alinsjs.docs.samples/${}.js`;
                 } else {
                     url = `https://theajack.github.io/jsbox?github=${this.url}`;
                 }

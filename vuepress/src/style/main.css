@@ -43,8 +43,8 @@ html,body{
 html, body ,.navbar, .navbar .links, .search-box input, .suggestions{
     background-color: #111!important;
 }
-.suggestions, .navbar, .sidebar, h2, .code-box, .page-nav .inner, .search-box input.focused{
-    border-color: #666!important;
+.suggestions, .navbar, .sidebar, h2, .code-box, .page-nav .inner, .search-box input, .search-box input.focused{
+    border-color: #444!important;
 }
 .suggestion.focused {
     background-color: #444!important;
@@ -67,4 +67,29 @@ th,td{
 }
 .theme-default-content pre, .theme-default-content pre[class*="language-"]{
     background-color: #000!important;
+}
+div[class*="language-"]{
+    background-color: transparent!important;
+}
+
+/*code-runner中的类*/
+.code-result{
+    background-color: #000;
+    padding: 20px;
+    border-radius: 5px;
+    /* border: 1px solid #222;
+    box-shadow: 0px 0px 10px 1px #222; */
+    border: 1px solid #4e2619;
+    box-shadow: 0px 0px 10px 5px #2c1711;
+    line-height: 23px;
+}
+
+.theme-default-content code{
+    background-color: #784534!important;
+}
+.theme-default-content pre code, .theme-default-content pre[class*="language-"] code{
+    background-color: transparent!important;
+}
+.token.comment{
+    color: #2e9f2e!important;
 }

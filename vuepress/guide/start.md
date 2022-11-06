@@ -1,149 +1,99 @@
+<!--
+ * @Author: chenzhongsheng
+ * @Date: 2022-10-30 02:42:04
+ * @Description: Coding something
+ * @LastEditors: chenzhongsheng
+ * @LastEditTime: 2022-11-05 20:56:40
+-->
 
 ## 1. npm安装
 
-cnchar包含了一个基本库和多个插件库，用于实现不同的功能，您可以按需安装其中的功能库，但是 `cnchar` 这个基础库是必须安装的
+```
+npm i alins
+```
 
-（注：draw、idiom、xhy、radical、words、explain、voice可以独立使用）
+<code-runner title='只使用alins'></code-runner>
 
-安装[主库](https://npmjs.com/package/cnchar)：
+```js
+import {$, div, click} from 'alins';
+const mes = $('Hello World');
+div($`${mes}!`, click(()=>{mes.value+='!';})).mount();
+```
 
-<div>
-  <highlight-code>
-npm i cnchar
-  </highlight-code>
-</div>
+### 独立使用 alins-style
 
-按需安装功能库：
+```
+npm i alins-style
+```
 
-<div>
-  <highlight-code>
-npm i cnchar-poly cnchar-order cnchar-trad cnchar-draw cnchar-idiom cnchar-xhy cnchar-radical cnchar-words cnchar-explain cnchar-voice cnchar-random cnchar-code cnchar-input cnchar-info cnchar-name
-  </highlight-code>
-</div>
+<code-runner title='alins-style独立使用'></code-runner>
 
-浏览器环境中功能库可以直接使用：
+```js
+import {$, style} from 'alins-style';
+const color = $('#fff');
+const div = document.createElement('div');
+div.innerText = 'Click to change color';
+div.onclick = () => {color.value = '#f44';};
+style({color}).mount(div);
 
-<div>
-  <highlight-code lang='javascript'>
-    import cnchar from 'cnchar';
-    // 以下功能库请按需使用
-    import 'cnchar-poly';
-    import 'cnchar-order';
-    import 'cnchar-trad';
-    import 'cnchar-draw';
-    import 'cnchar-idiom';
-    import 'cnchar-xhy';
-    import 'cnchar-radical';
-    import 'cnchar-words';
-    import 'cnchar-explain';
-    import 'cnchar-voice';
-    import 'cnchar-random';
-    import 'cnchar-input';
-    import 'cnchar-code';
-    import 'cnchar-info';
-    import 'cnchar-name';
-  </highlight-code>
-</div>
+document.getElementById('jx-app').appendChild(div);
+```
 
-非浏览器环境中功能库需要使用use方法加载，且不支持 `cnchar-draw`、`cnchar-voice` 库：
+### alins 和 alins-style 一起使用
 
-<div>
-  <highlight-code lang='javascript'>
+```
+npm i alins alins-style
+```
 
-// 请保证最先引入 cnchar 基础库，其他几个库顺序无所谓
-import cnchar from 'cnchar';
-import 'cnchar-poly';
-// ... 其他插件请参考第二章 2. 功能及插件概览
-// 插件请按需取用
+<code-runner title='alins alins-style一起使用'></code-runner>
 
-console.log('汉字'.spell()); // prototype 方式调用
-console.log(cnchar.spell('汉字')); // cnchar api 调用
+```js
+import {$, div, click} from 'alins';
+import {style} from 'alins-style';
 
-  </highlight-code>
-</div>
+const color = $('#fff');
 
-commonjs 模块
-
-<div>
-  <highlight-code lang='javascript'>
-
-// 请保证最先引入 cnchar 基础库，其他几个库顺序无所谓
-var cnchar = require('cnchar');
-var poly = require('cnchar-poly');
-// ... 其他插件请参考第二章 2. 功能及插件概览
-// 插件请按需取用
-// 注：cnchar-draw，cnchar-voice 在非浏览器环境下不可使用
-cnchar.use(poly);
-
-console.log('汉字'.spell()); // prototype 方式调用
-console.log(cnchar.spell('汉字')); // cnchar api 调用
-
-  </highlight-code>
-</div>
+div($`Click to change color: ${color}`, 
+  style({color}),
+  click(()=>{color.value = '#f44';}),
+).mount();
+```
 
 ## 2. CDN引用
 
-使用 script 标签使用：
+### alins
 
-<div>
-  <highlight-code lang='html'>
-      &lt;script src="https://cdn.jsdelivr.net/npm/cnchar/cnchar.min.js">&lt;/script>
-      &lt;!--以下功能库请按需使用-->
-      &lt;script src="https://cdn.jsdelivr.net/npm/cnchar-poly/cnchar.poly.min.js">&lt;/script>
-      &lt;script src="https://cdn.jsdelivr.net/npm/cnchar-order/cnchar.order.min.js">&lt;/script>
-      &lt;script src="https://cdn.jsdelivr.net/npm/cnchar-trad/cnchar.trad.min.js">&lt;/script>
-      &lt;script src="https://cdn.jsdelivr.net/npm/cnchar-draw/cnchar.draw.min.js">&lt;/script>
-      &lt;script src="https://cdn.jsdelivr.net/npm/cnchar-idiom/cnchar.idiom.min.js"> &lt;/script>
-      &lt;script src="https://cdn.jsdelivr.net/npm/cnchar-radical/cnchar.radical.min.js"> &lt;/script>
-      &lt;script src="https://cdn.jsdelivr.net/npm/cnchar-xhy/cnchar.xhy.min.js"> &lt;/script>
-      &lt;script src="https://cdn.jsdelivr.net/npm/cnchar-words/cnchar.words.min.js"> &lt;/script>
-      &lt;script src="https://cdn.jsdelivr.net/npm/cnchar-explain/cnchar.explain.min.js"> &lt;/script>
-      &lt;script src="https://cdn.jsdelivr.net/npm/cnchar-voice/cnchar.voice.min.js"> &lt;/script>
-      &lt;script src="https://cdn.jsdelivr.net/npm/cnchar-random/cnchar.random.min.js"> &lt;/script>
-      &lt;script src="https://cdn.jsdelivr.net/npm/cnchar-input/cnchar.input.min.js"> &lt;/script>
-      &lt;script src="https://cdn.jsdelivr.net/npm/cnchar-code/cnchar.code.min.js"> &lt;/script>
-      &lt;script src="https://cdn.jsdelivr.net/npm/cnchar-info/cnchar.info.min.js"> &lt;/script>
-      &lt;script src="https://cdn.jsdelivr.net/npm/cnchar-name/cnchar.name.min.js"> &lt;/script>
-  </highlight-code>
-</div>
+<code-runner title='CDN 使用 alins' :result="false"></code-runner>
 
-## 3. cnchar-all
+```html
+<script src="https://cdn.jsdelivr.net/npm/alins"></script>
+<script>
+  Alins.div('Hello World!').mount();
+</script>
+```
 
-如果您需要使用cnchar及其插件的所有功能，可以通过安装`cnchar-all`来使用完整功能，这个库引用了上面的所有库
+### alins-style
 
-<div>
-  <highlight-code>
-npm i cnchar-all
-  </highlight-code>
-</div>
+使用 cdn 方式引入alins-style，会默认包含alins代码，若只希望独立使用 style，请参考下面的 alins-style-standalone
 
-commonjs 模块
+<code-runner title='CDN alins-style' :result="false"></code-runner>
 
-<div>
-  <highlight-code lang='javascript'>
-    import cnchar from 'cnchar-all';
-  </highlight-code>
-</div>
+```html
+<script src="https://cdn.jsdelivr.net/npm/alins-style"></script>
+<script>
+  console.log(AlinsStyle, AlinsStyle.div);
+</script>
+```
 
-cdn方式
+### alins-style-standalone
 
-<div>
-  <highlight-code lang='html'>
-    &lt;script src="https://cdn.jsdelivr.net/npm/cnchar-all/cnchar.all.min.js">&lt;/script>
-  </highlight-code>
-</div>
+独立使用alins-style - alins-style.standalone.min.js
 
-## 4. 简单使用
+<code-runner title='CDN alins-style standalone' :result="false"></code-runner>
 
-cnchar 具有两个最核心的方法`spell` 和 `stroke`，分别用于获取汉字的拼音和笔画数：
-
-<div>
-  <codebox id='easy-use' title='spell/stroke'></codebox>
-</div>
-
-这只是一个最简单的使用，这两个方法具有很多参数可选，具体请参阅 [cnchar](/cnchar/doc/cnchar) 部分
-
-<!-- <codebox title='spell' id='spell' desc='拼写测试测试2'></codebox> -->
-
-<!-- <baseComponent-star></baseComponent-star> -->
-
+```html
+<script src="https://cdn.jsdelivr.net/npm/alins-style/dist/alins-style.standalone.min.js"></script>
+<script>
+  console.log(AlinsStyle);
+</script>
+```

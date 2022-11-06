@@ -1,9 +1,8 @@
 import event from './event';
-import {parseUrlParam} from './util';
 let jsbox = null;
 
-// dev: serve ./samples/playground
-const BASE_URL = (location.host.indexOf('localhost') !== -1) ? 'http://localhost:8080/' : 'https://cdn.jsdelivr.net/gh/theajack/cnchar@gh-pages/';
+// dev: serve ./samples/
+const BASE_URL = (location.host.indexOf('localhost') !== -1) ? 'http://localhost:60845/' : 'https://cdn.jsdelivr.net/gh/theajack/cnchar@gh-pages/';
 
 const DEF_CONFIG = 'remind=false&mes=false';
 
@@ -41,23 +40,6 @@ function main () {
         mask.style.display = 'none';
         document.body.style.overflow = 'auto';
     }
-    function id (_id = '') {
-        let iframeId = _id;
-        try {
-            const iframeWindow = iframe.contentWindow;
-            const search = iframeWindow.document.location.search;
-            if (search) {
-                iframeId = parseUrlParam(search, 'id');
-            }
-        } catch (e) {
-        }
-        if (jsbox._id !== _id || iframeId !== _id) {
-            jsbox._id = _id;
-            const config = BASE_URL + 'config.js';
-            setUrl(`${getUrl()}&config=${encodeURIComponent(config)}&id=${_id}`);
-        }
-        open();
-    }
     function code (_code = '', lang = 'javascript', env = 'alins') { // alins | alins-style
         if (jsbox._code !== _code) {
             jsbox._code = _code;
@@ -73,14 +55,18 @@ function main () {
         setUrl(`${getUrl()}&github=${str}`);
         open();
     }
+    function openSample (name) {
+        setUrl(`${getUrl()}&codeSrc=${BASE_URL}samples/${name}.js`);
+        open();
+    }
     closeIcon.onclick = close;
     jsbox = {
         open,
         close,
         code,
-        id,
         openUrl,
-        openGitHub
+        openGitHub,
+        openSample,
     };
     return jsbox;
 }

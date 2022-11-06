@@ -36,8 +36,11 @@ module.exports = {
     // 注入到当前页面的 HTML <head> 中的标签
     head: [
         ['link', {rel: 'icon', href: 'https://shiyix.cn/alins.ico'}], // 增加一个自定义的 favicon
-        ['script', {src: `https://cdn.jsdelivr.net/npm/alins@${version}`}],
-        ['script', {src: `https://cdn.jsdelivr.net/npm/alins-style@${version}`}],
+        // ['script', {src: `https://cdn.jsdelivr.net/npm/alins@${version}`}],
+        // ['script', {src: `https://cdn.jsdelivr.net/npm/alins-style@${version}`}],
+        // dev use
+        ['script', {src: `/alins.min.js`}],
+        ['script', {src: `/alins-style.min.js`}],
     ],
     // dest: './dist', //打包位置
     port: 6868, // 端口号
@@ -57,46 +60,36 @@ module.exports = {
         nav: [
             {text: '主页', link: '/'}, // 内部链接 以docs为根目录
             // {text: '捐赠', link: '/guide/donate'},
-            {text: 'GitHub', link: 'https://www.github.com/alinsjs/alins'},
+            // {text: 'GitHub', link: 'https://www.github.com/alinsjs/alins'},
+            
             {
                 text: '使用说明',
                 items: [
                     {text: '简介', link: '/guide/intro'},
                     {text: '快速上手', link: '/guide/start'},
                     {text: '更新日志', link: '/guide/version'},
-                    {text: '捐赠', link: '/guide/donate'},
+                    // {text: '捐赠', link: '/guide/donate'},
                 ]
             },
             {
                 text: '文档',
                 // 这里是下拉列表展现形式。
                 items: [
-                    {text: 'cnchar: 拼音+笔画', link: '/doc/cnchar'},
-                    {text: 'cnchar-poly: 多音词', link: '/doc/poly'},
-                    {text: 'cnchar-order: 笔顺', link: '/doc/order'},
-                    {text: 'cnchar-trad: 繁体字', link: '/doc/trad'},
-                    {text: 'cnchar-draw: 汉字可视化', link: '/doc/draw'},
-                    {text: 'cnchar-idiom: 成语', link: '/doc/idiom'},
-                    {text: 'cnchar-xhy: 歇后语', link: '/doc/xhy'},
-                    {text: 'cnchar-radical: 偏旁部首', link: '/doc/radical'},
-                    {text: 'cnchar-words: 组词', link: '/doc/words'},
-                    {text: 'cnchar-explain: 释义', link: '/doc/explain'},
-                    {text: 'cnchar-voice: 语音', link: '/doc/voice'},
-                    {text: 'cnchar-random: 随机生成', link: '/doc/random'},
-                    {text: 'cnchar-input: 输入法', link: '/doc/input'},
-                    {text: 'cnchar-code: 编码', link: '/doc/code'},
-                    {text: 'cnchar-name: 姓名', link: '/doc/name'},
-                    {text: 'cnchar-info: 汉字信息', link: '/doc/info'},
-                    {text: '工具方法', link: '/doc/tool'},
-                    {text: '自定义插件', link: '/doc/plugin'},
-                    {text: '自定义数据', link: '/doc/custom'},
-                    {text: '自定义部署:离线使用', link: '/doc/offline'},
+                    {text: 'dom构造', link: '/doc/dom'},
+                    {text: '事件', link: '/doc/on'},
+                    {text: '组件', link: '/doc/comp'},
+                    {text: '响应式数据', link: '/doc/react'},
+                    {text: '控制器', link: '/doc/controller'},
+                    {text: '生命周期', link: '/doc/life'},
+                    {text: 'css-in-js', link: '/doc/style'},
                 ],
             },
             {
-                text: 'Author',
+                text: 'GitHub',
                 items: [
-                    {text: 'GitHub', link: 'https://www.github.com/theajack'}, // 外部链接
+                    {text: 'Alins', link: 'https://www.github.com/alinsjs/alins'},
+                    {text: 'Docs', link: 'https://www.github.com/alinsjs/docs'},
+                    {text: 'Author', link: 'https://www.github.com/theajack'}, // 外部链接
                     // {text: 'Gitee地址', link: 'http://www.gitee.com/theajack'},
                     // {
                     //     text: 'CSDN账号',
@@ -104,37 +97,35 @@ module.exports = {
                     // },
                 ],
             },
+            // {
+            //     text: 'Author',
+            //     items: [
+            //         {text: 'GitHub', link: 'https://www.github.com/theajack'}, // 外部链接
+            //         // {text: 'Gitee地址', link: 'http://www.gitee.com/theajack'},
+            //         // {
+            //         //     text: 'CSDN账号',
+            //         //     link: 'https://blog.csdn.net/yanxiaomu',
+            //         // },
+            //     ],
+            // },
         ],
         // 这里使用的是多个侧边栏设置
         sidebar: {
             // 如果你不需要文档版本功能，只需去掉2.0，1.0文件夹，将md文件直接放在components文件夹下
             '/doc/': [
                 {
-                    title: 'cnchar文档', // 必要的
+                    title: 'alins文档', // 必要的
                     path: '', // 如果你不想'基础组件'可点击并有对应说明，就直接设为空，或者不写,并且nav的link也不要指向 '/components/2.0/'而是'/components/2.0/catButton'
                     collapsable: false, // 可选的, 右侧侧边栏是否展开,默认值是 true
                     // 如果组件很多时，建议将children配置单独放到一个js文件中，然后进行引入
                     children: [
-                        {title: 'cnchar', path: 'cnchar'},
-                        {title: 'cnchar-poly', path: 'poly'},
-                        {title: 'cnchar-order', path: 'order'},
-                        {title: 'cnchar-trad', path: 'trad'},
-                        {title: 'cnchar-draw', path: 'draw'},
-                        {title: 'cnchar-idiom', path: 'idiom'},
-                        {title: 'cnchar-xhy', path: 'xhy'},
-                        {title: 'cnchar-radical', path: 'radical'},
-                        {title: 'cnchar-words', path: 'words'},
-                        {title: 'cnchar-explain', path: 'explain'},
-                        {title: 'cnchar-voice', path: 'voice'},
-                        {title: 'cnchar-random', path: 'random'},
-                        {title: 'cnchar-input', path: 'input'},
-                        {title: 'cnchar-code', path: 'code'},
-                        {title: 'cnchar-name', path: 'name'},
-                        {title: 'cnchar-info', path: 'info'},
-                        {title: '工具方法', path: 'tool'},
-                        {title: '自定义插件', path: 'plugin'},
-                        {title: '自定义数据', path: 'custom'},
-                        {title: '自定义部署:离线使用', path: 'offline'},
+                        {title: 'dom构造', path: 'dom'},
+                        {title: '事件', path: 'on'},
+                        {title: '组件', path: 'comp'},
+                        {title: '响应式数据', path: 'react'},
+                        {title: '控制器', path: 'controller'},
+                        {title: '生命周期', path: 'life'},
+                        {title: 'css-in-js', path: 'style'},
                     ],
                 },
             ],
@@ -156,10 +147,10 @@ module.exports = {
                             title: '更新日志',
                             path: 'version',
                         },
-                        {
-                            title: '捐赠',
-                            path: 'donate',
-                        }
+                        // {
+                        //     title: '捐赠',
+                        //     path: 'donate',
+                        // }
                     ],
                 },
             ],

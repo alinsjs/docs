@@ -1,3 +1,10 @@
+<!--
+ * @Author: chenzhongsheng
+ * @Date: 2022-10-30 02:42:04
+ * @Description: Coding something
+ * @LastEditors: chenzhongsheng
+ * @LastEditTime: 2022-11-05 12:11:07
+-->
 <template>
     <div v-show='localCode!==""' class='code-runner' ref='runner'>
         <span class='code-title'>{{title}}</span>
@@ -15,17 +22,22 @@
         props: {
             title: {
                 type: String,
-                default: 'JsBox'
+                default: '演示程序'
             },
             desc: {
                 type: String,
-                default: '点击右侧按钮运行'
+                default: '点击右侧按钮可以自行修改'
+            },
+            result: {
+                type: Boolean,
+                default: true
             },
         },
         data () {
             return {
                 localCode: '',
                 localLang: '',
+                env: 'alins'
             };
         },
         mounted () {
@@ -45,18 +57,37 @@
                     this.localLang = 'html';
                 }
 
-                if (this.localLang)
-                    this.localCode = next.innerText;
+                if (this.localLang) {
+                    this.localCode = this.transformCode(next.innerText);
+                }
+                this.initResult(next);
+
+            },
+            initResult (next) {
+                if (!this.result) return;
+
+                const div = document.createElement('div');
+                next.appendChild(div);
+                div.className = 'code-result';
+
+                const code = this.localCode.replace(/"#jx\-app"/g, 'dom')
+                    .replace(/document\.getElementById\('jx\-app'\)/g, 'dom');
+
+                new Function('dom', code)(div);
             },
             run () {
-                jsbox.code(this.localCode, this.localLang);
+                jsbox.code(this.localCode, this.localLang, this.env);
             },
             copy () {
-                if (copy(this.localCode)) {
-                    this.$message.success('复制成功');
-                } else {
-                    this.$message.error('复制成功');
-                }
+                this.$toast(copy(this.localCode) ? '复制成功' : '复制失败');
+            },
+            transformCode (code) {
+                this.env = /from *['"]alins\-style['"]/.test(code) ? 'alins-style' : 'alins';
+                return code.replace(/\.mount\(\)/g, '.mount("#jx-app")')
+                    .replace(/import ({.*?}) from '(.*?)'/g, (str, $1, $2) => {
+                        const comment = ($2 === 'alins' && this.env !== 'alins') ? '/* cdn 引用时只需要引入alins-style即可*/\n' : '';
+                        return `${comment}const ${$1} = ${this.env === 'alins' ? 'Alins' : 'AlinsStyle'}`;
+                    });
             }
         }
     };
@@ -64,7 +95,7 @@
 
 <style lang="less" scoped>
 .code-runner{
-    margin-top: 10px;
+    margin-top: 15px;
     .code-title{
         font-weight: bold;
         margin-right: 10px;
