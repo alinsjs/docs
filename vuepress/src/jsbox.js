@@ -2,7 +2,8 @@ import event from './event';
 let jsbox = null;
 
 // dev: serve ./samples/
-const BASE_URL = (location.host.indexOf('localhost') !== -1) ? 'http://localhost:60845/' : 'https://cdn.jsdelivr.net/gh/theajack/cnchar@gh-pages/';
+// ssr 下获取不到 location 所以使用函数
+const BASE_URL = () => (location.host.indexOf('localhost') !== -1) ? 'http://localhost:60845/' : 'https://cdn.jsdelivr.net/gh/theajack/cnchar@gh-pages/';
 
 const DEF_CONFIG = 'remind=false&mes=false';
 
@@ -56,7 +57,7 @@ function main () {
         open();
     }
     function openSample (name) {
-        setUrl(`${getUrl()}&codeSrc=${BASE_URL}samples/${name}.js`);
+        setUrl(`${getUrl()}&codeSrc=${BASE_URL()}samples/${name}.js`);
         open();
     }
     closeIcon.onclick = close;

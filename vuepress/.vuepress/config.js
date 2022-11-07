@@ -63,9 +63,10 @@ module.exports = {
             // {text: 'GitHub', link: 'https://www.github.com/alinsjs/alins'},
             
             {
-                text: '使用说明',
+                text: '起步',
                 items: [
                     {text: '简介', link: '/guide/intro'},
+                    {text: '示例程序', link: '/guide/sample'},
                     {text: '快速上手', link: '/guide/start'},
                     {text: '更新日志', link: '/guide/version'},
                     // {text: '捐赠', link: '/guide/donate'},
@@ -131,26 +132,15 @@ module.exports = {
             ],
             '/guide/': [
                 {
-                    title: '使用说明',
+                    title: '起步',
                     path: '',
                     collapsable: false,
                     children: [
-                        {
-                            title: '简介',
-                            path: 'intro',
-                        },
-                        {
-                            title: '快速上手',
-                            path: 'start',
-                        },
-                        {
-                            title: '更新日志',
-                            path: 'version',
-                        },
-                        // {
-                        //     title: '捐赠',
-                        //     path: 'donate',
-                        // }
+                        {title: '简介', path: 'intro'},
+                        {title: '示例程序', path: 'sample'},
+                        {title: '快速上手', path: 'start'},
+                        {title: '更新日志', path: 'version'},
+                        // {title: '捐赠', path: 'donate'},
                     ],
                 },
             ],
