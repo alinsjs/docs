@@ -19,16 +19,13 @@
         "汉字工具"
     ],
     "scripts": {
-        "build:readme": "node ./helper/scripts/init-readme.js",
-        "publish": "node ./helper/scripts/publish.js",
-        "test": "node ./helper/test/index.js",
         "lint": "eslint src --ext js",
         "jest": "jest",
         "dev": "vuepress dev vuepress",
         "build": "vuepress build vuepress",
-        "purge": "node ./helper/scripts/purge-cdn.js",
+        "purge": "node ./scripts/purge-cdn.js",
         "count": "count-code-line",
-        "release": "node ./helper/scripts/push-release.js",
+        "release": "node ./scripts/push-release.js",
         "fix": "eslint --fix **/*.vue"
     },
     "devDependencies": {
