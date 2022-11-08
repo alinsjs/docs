@@ -65,7 +65,7 @@
                 initJSBox().openSample('todo-list');
             },
             install () {
-                window.location.href = '/docs/guide/start.html';
+                window.location.href = '/docs/guide/install.html';
             },
         },
     };

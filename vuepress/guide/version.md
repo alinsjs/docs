@@ -3,8 +3,14 @@
  * @Date: 2022-11-03 09:30:54
  * @Description: Coding something
  * @LastEditors: chenzhongsheng
- * @LastEditTime: 2022-11-07 21:55:54
+ * @LastEditTime: 2022-11-09 01:36:33
 -->
+## 0.0.9
+
+1. input builder & moduelReturn 支持 mount 
+2. feat: dom 支持直接使用 react数据作为textContent 
+3. fix: comp和dom builder使用函数作为参数 
+4. fix: style 多数据绑定中绑定报错的问题
 
 ## 0.0.8
 

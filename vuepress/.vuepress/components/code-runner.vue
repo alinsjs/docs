@@ -3,18 +3,16 @@
  * @Date: 2022-10-30 02:42:04
  * @Description: Coding something
  * @LastEditors: chenzhongsheng
- * @LastEditTime: 2022-11-08 07:54:22
+ * @LastEditTime: 2022-11-08 22:11:22
 -->
 <template>
     <div v-show='localCode!==""' class='code-runner' ref='runner'>
         <span class='code-title'>{{title}}</span>
         <span class='code-desc'>{{result ? desc: '点击右侧按钮在jsbox中运行该代码'}}</span>
-        <i class='ei-code code-btn' @click='jsbox' title='打开jsbox'></i>
+        <i class='ei-play code-btn' @click='jsbox' title='打开jsbox'></i>
         <i class='ei-copy code-btn' @click='copy' title='复制代码'></i>
-        <i v-show='result' class='ei-play code-btn' @click='run' title='重新运行'></i>
-        <!-- <i class='code-btn'
-           :class='{"ei-edit": !isEdit, "ei-undo": isEdit}'
-           @click='edit' title='编辑运行'></i> -->
+        <i v-if='isEdit' class='ei-undo code-btn' @click='run' title='重新运行'></i>
+        <i v-show='result' v-else class='ei-code code-btn' @click='edit' title='开启编辑'></i>
     </div>
 </template>
 
@@ -30,7 +28,7 @@
             },
             desc: {
                 type: String,
-                default: '可以编辑下面代码重新运行'
+                default: '右侧按钮可以开启编辑|在线运行'
             },
             result: {
                 type: Boolean,
@@ -47,10 +45,12 @@
                 isEdit: false,
                 localCode: '',
                 localLang: '',
-                env: 'alins'
+                env: 'alins',
+                next: null,
             };
         },
         mounted () {
+            this.next = this.getNext();
             jsbox = initJSBox();
             this.initCode();
         },
@@ -63,7 +63,7 @@
                 return next;
             },
             initCode () {
-                const next = this.getNext();
+                const next = this.next;
                 if (!next) return;
                 if (next.className.indexOf('language-js') !== -1) {
                     this.localLang = 'javascript';
@@ -72,21 +72,27 @@
                 }
 
                 this.runBase(next);
-
-                if (this.result) {
-                    const pre = next.querySelector('pre');
-                    pre.setAttribute('contenteditable', 'true');
-                }
             },
             run () {
-                const next = this.getNext();
+                const next = this.next;
                 if (!next) return;
                 if (this.codeResultEl) this.codeResultEl.innerHTML = '';
                 this.runBase(next);
+                this.$toast('重新运行成功');
+            },
+            edit () {
+                const next = this.next;
+                const pre = next.querySelector('pre');
+                pre.classList.add('edited');
+                const code = pre.children[0];
+                code.setAttribute('contenteditable', 'true');
+                code.setAttribute('spellcheck', 'false');
+                code.innerText = code.innerText;
+                this.isEdit = true;
             },
             runBase (next) {
                 if (this.localLang) {
-                    this.localCode = this.transformCode(next.querySelector('pre').innerText);
+                    this.localCode = this.transformCode(next.querySelector('code').innerText);
                 }
                 this.initResult(next);
             },
@@ -112,7 +118,7 @@
                 jsbox.code(this.localCode, this.localLang, this.env);
             },
             copy () {
-                this.$toast(copy(this.localCode) ? '复制成功' : '复制失败');
+                this.$toast(copy(this.next.querySelector('code').innerText) ? '复制成功' : '复制失败');
             },
             transformCode (code) {
                 this.env = /from *['"]alins\-style['"]/.test(code) ? 'alins-style' : 'alins';

@@ -97,6 +97,15 @@ pre[class*="language-"] {
     outline: none;
     border: 1px solid #000;
 }
-pre[class*="language-"][contenteditable] {
+pre[class*="language-"].edited {
     border: 1px solid #b04827;
+}
+pre[class*="language-"] code {
+    display: block;
+    line-height: 24px;
+    outline: none;
+}
+blockquote {
+    color: #ecd45a!important;
+    border-left: 0.2rem solid #ecd45a!important;
 }

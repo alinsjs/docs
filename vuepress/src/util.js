@@ -64,7 +64,7 @@ export function execute ({
 export function copy (str) {
     let input = document.getElementById('_copy_input_');
     if (!input) {
-        input = document.createElement('input');
+        input = document.createElement('textarea');
         input.setAttribute('type', 'text');
         input.setAttribute(
             'style',

@@ -3,7 +3,7 @@
  * @Date: 2022-11-05 10:50:46
  * @Description: Coding something
  * @LastEditors: chenzhongsheng
- * @LastEditTime: 2022-11-08 07:52:35
+ * @LastEditTime: 2022-11-08 22:31:19
 -->
 ## 1. dom-builder
 
@@ -165,7 +165,7 @@ div('Parent',
 
 如果要设置某dom元素的html内容，需要借助 html 函数
 
-注：使用了html函数之后，所有的子元素、子builder都会不生效
+>  注：使用了html函数之后，所有的子元素、子builder都会不生效
 
 
 <code-runner title='html函数'></code-runner>
@@ -199,10 +199,34 @@ div().mount();
 const parent = div();
 div().mount(parent); 
 parent.mount(); 
-// 注：挂载到其他domBuilder上时必须要保证改domBuilder还未被挂载
+// >  注：挂载到其他domBuilder上时必须要保证改domBuilder还未被挂载
 ```
 
-## 4. 总结示例
+## 4. 函数作为参数
+
+支持使用函数作为builder的参数，这在一些复杂逻辑中可以使用闭包封装内部逻辑
+
+当然如果这种场景过于复杂，一般建议使用组件
+
+<code-runner title='函数作为参数'></code-runner>
+
+```js
+import {div} from 'alins';
+div(
+    () => '.class-name[title=func]:text',
+    () => div('单个元素'),
+    () => [
+        div('数组类型元素'),
+        div('数组类型元素')
+    ],
+    () => {
+        console.log('do something')
+        return div('逻辑处理')
+    }
+).mount();
+```
+
+## 5. 总结示例
 
 <code-runner />
 

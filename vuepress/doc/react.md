@@ -3,7 +3,7 @@
  * @Date: 2022-11-05 10:51:15
  * @Description: Coding something
  * @LastEditors: chenzhongsheng
- * @LastEditTime: 2022-11-08 07:56:11
+ * @LastEditTime: 2022-11-08 23:46:54
 -->
 ## 1. 响应式概述
 
@@ -15,7 +15,7 @@ Alins 使用 react函数 声明一个响应式数据，为了书写方便，Alin
 
 ## 2. react函数
 
-我们使用 react函数 创建一个响应式数据, 如果需要手动对响应式数据监听变更，我们可以使用 subscribe 方法，改方法名是一个 sybmol
+我们使用 react函数 创建一个响应式数据, 如果需要手动对响应式数据监听变更，我们可以使用 subscribe 方法，该方法名是一个 sybmol
 
 如果需要对 响应式数据 赋值我们需要使用value属性，该属性在响应式值类型中是一个字符串，在对象类型中是一个symbol，其中对象类型赋值也可以不借助 value属性，而是直接访问属性名
 
@@ -36,7 +36,7 @@ num[subscribe]((newValue, old)=>{
 button('Add num', click(() => {num.value++})).mount();
 ```
 
-注：一般开发应用过程我们不需要主动监听变更，这里只是演示一下 react 函数如何独立使用
+>  注：一般开发应用过程我们不需要主动监听变更，这里只是演示一下 react 函数如何独立使用
 
 通过使用 forceUpdate 方法可以主动触发响应式数据绑定的响应回调
 
@@ -183,5 +183,16 @@ div(
 ).mount()
 ```
 
-后续所有的绑定使用基本也都是这四种组合的使用
+> 注：后续所有的绑定使用基本也都是这四种组合的使用
+
+对于dom文本的绑定也可以直接使用 react对象作为参数
+
+<code-runner/>
+
+```js
+import {$, div} from 'alins';
+const msg = $('Hello World!');
+div(msg).mount()
+```
+
 

@@ -30,7 +30,7 @@ const MainEventNames = [
 ]
 ```
 
-注：input事件由于与 input标签命名冲突，导出时的变量名为 $input，使用 events 访问时不受影响
+>  注：input事件由于与 input标签命名冲突，导出时的变量名为 $input，使用 events 访问时不受影响
 
 对于没有默认导出的事件有以下两种使用方式
 
@@ -58,7 +58,7 @@ const onclick = ()=>{ alert('clicked!') }
 button('click me', on('click')(onclick)).mount();
 ```
 
-注： `on('click') 等价与 click`
+>  注： `on('click') 等价与 click`
 
 ## 2. 事件传参
 

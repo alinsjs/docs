@@ -3,12 +3,12 @@
  * @Date: 2022-11-05 10:51:23
  * @Description: Coding something
  * @LastEditors: chenzhongsheng
- * @LastEditTime: 2022-11-08 08:56:04
+ * @LastEditTime: 2022-11-08 21:46:11
 -->
 
 ## 1. 控制器概述
 
-控制器用于对dom或组件进行逻辑控制，如根据数据重复渲染元素，根绝react数据控制显示哪一个元素等
+控制器用于对dom或组件进行逻辑控制，如根据数据重复渲染元素，根据响应数据控制显示哪一个元素等
 
 alins中控制器有 for，if，show，switch，model
 
@@ -60,7 +60,7 @@ import {$, div, button, click} from 'alins';
 const isAdult = $(true);
 div(
     button('toggle boolean', click(()=>{isAdult.value = !isAdult.value})),
-    div.if(isAdult)('I am a audlt')
+    div.if(isAdult)('I am a adult')
 ).mount();
 ```
 
@@ -71,15 +71,15 @@ import {$, div, button, click} from 'alins';
 const age = $(17);
 div(
     button('add age', click(() => {age.value++})),
-    div.if(() => age.value<18)('I am not a audlt')
-        .elif(() => age.value === 18)('I am a audlt(age=18)')
-        .else($`/h3:I am a audlt and age is ${age}`)
-        // 注：此处可以改变dom元素的标签
+    div.if(() => age.value<18)('I am not a adult')
+        .elif(() => age.value === 18)('I am a adult(age=18)')
+        .else($`/h3:I am a adult and age is ${age}`)
+        // >  注：此处可以改变dom元素的标签
         // else 条件非必须
 ).mount();
 ```
 
-注：if elif else 传入的判断条件必须要是响应式布尔类型 （React数据、computed数据或者函数）
+>  注：if elif else 传入的判断条件必须要是响应式布尔类型 （React数据、computed数据或者函数）
 
 ## 4. show
 
@@ -94,7 +94,7 @@ import {$, div, span, button, click} from 'alins';
 const isAdult = $(true);
 div(
     button('toggle boolean', click(()=>{isAdult.value = !isAdult.value})),
-    div.show(isAdult)('I am a audlt')
+    div.show(isAdult)('I am a adult')
 ).mount();
 ```
 
@@ -114,7 +114,7 @@ div(
         .case(18)('I am not a adult age only 18')
         .case(19)($`I am not a adult age = ${age}`)
         .default('/h3:I am not a adult age more then 19')
-        // 注：此处可以改变dom元素的标签
+        // >  注：此处可以改变dom元素的标签
         // default 分支非必须
 ).mount();
 ```
@@ -133,7 +133,7 @@ input.model(msg).mount();
 ```
 
 
-注：按照语法最后一个括号调用是必须的，但是alins做了处理，如果input内容为空，可以省略builder调用
+>  注：按照语法最后一个括号调用是必须的，但是alins做了处理，如果input内容为空，可以省略builder调用
 
 如果要对input元素增加内容，则可以加上
 

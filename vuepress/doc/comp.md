@@ -3,7 +3,7 @@
  * @Date: 2022-11-05 10:51:06
  * @Description: Coding something
  * @LastEditors: chenzhongsheng
- * @LastEditTime: 2022-11-06 00:37:27
+ * @LastEditTime: 2022-11-08 22:35:33
 -->
 
 ## 1. comp-builder
@@ -11,7 +11,7 @@
 Alins中，一个函数即为一个组件，通过 comp 函数包裹之后会生成一个 comp-builder，通过将其挂载到dom节点、dom-builder、comp-builder 对象上，就可以实现将这个 comp-builder 对象渲染到文档上
 
 
-以下是一个 dom-builder对象的结构
+以下是一个 comp-builder对象的结构
 
 ```ts
 interface IComponentBuilder {
@@ -31,7 +31,7 @@ const HelloWorld = () => div('Hello World!');
 comp(HelloWorld).mount();
 ```
 
-组件的返回值是一个 TElementChild ，该类型可以是 null（null会被跳过）、dom元素、dom-builder、comp-builder，还可以时候后续章节中将会介绍到的对象，以及可以使他们的数组形式
+组件的返回值是一个 TElementChild ，该类型可以是 null（null会被跳过）、dom元素、dom-builder、comp-builder，还可以是后续章节中将会介绍到的对象，以及可以使他们的数组形式
 
 ```ts
 type TElementChild = null | HTMLElement | IElementBuilder | IComponentBuilder |
@@ -55,7 +55,7 @@ const Parent = () => [
 comp(Parent).mount();
 ```
 
-注：props 中的属性都经过了响应式处理，普通取值需要使用 .value 访问。详见后续 响应式数据
+>  注：props 中的属性都经过了响应式处理，普通取值需要使用 .value 访问。详见后续 响应式数据
 
 ## 3. event函数
 
@@ -105,5 +105,29 @@ const Parent = () => [
         slotB: () => div('I am a function slot'),
     })),
 ];
+comp(Parent).mount();
+```
+
+## 4. 函数作为组件返回值
+
+支持使用函数作为组件的返回值
+
+<code-runner title='函数作为组件返回值'></code-runner>
+
+```js
+import {comp, div, slot} from 'alins';
+const Child = ({slots}) => div('Child', slots);
+const Parent = () => [
+    comp(Child, slot(div('I am a slot'))),
+    () => { // function as return
+        const slotObj = slot(() => div('I am a function slot'))
+        return comp(Child, slotObj)
+    },
+    () => [ // function return array
+        comp(Child, slot(div('I am a slot:3'))),
+        comp(Child, slot(div('I am a slot:4'))),
+    ],
+];
+
 comp(Parent).mount();
 ```
