@@ -37,12 +37,12 @@ sidebarDepth: 0  // 吐槽：这里设置0无效！只能设置1或2！
     <a href="https://www.github.com/alinsjs/alins"><img src="https://img.shields.io/librariesio/dependent-repos/npm/alins.svg" alt="Dependent"></a>
 </div>
 
-### Samples
+<!-- ### Samples
 
 <code-btn type='text' text='Counter' url='@count'/> | 
 <code-btn type='text' text='Components & Model' url='@model'/> |
 <code-btn type='text' text='Todo List' url='@todo-list'/> |
-<code-btn type='text' text='CSS-In-JS' url='@style'/>
+<code-btn type='text' text='CSS-In-JS' url='@style'/> -->
 
 ## 1. 前言
 
@@ -58,17 +58,17 @@ Alins 一切皆函数，让您可以以函数调用的方式拼接Web开发中�
 
 [反馈问题](https://github.com/alins/issues/new) 
 
-## 2. Features
+## 2. 特性
 
-1. No vdom, the listening data is accurately modified to dom/textNode, and the dom node is reused
-2. Alins-style CSS-in-JS scheme, atomic properties/building block combinations/style response changes
-3. Good componentization support
-4. Support for, if, show, switch, model controller
-5. Support computed and watch
-6. One-way data flow + two-way binding
-7. Good TS support
+1. 无vdom，监听数据精准修改到dom/textNode，dom节点复用
+2. alins-style css-in-js方案，原子属性/积木式组合/样式响应变更
+3. 良好的组件化支持
+4. 支持for,if,show,switch,model控制器
+5. 支持computed、watch
+6. 单向数据流 + 双向绑定
+7. 良好的ts支持
 
-## 3. Packages
+## 3. 包结构
 
 |     名称     | 描述 |   功能   | 支持版本 |
 | :----------: | :------------------------------: | :--------------------: | :--------------------: |

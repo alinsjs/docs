@@ -6,7 +6,7 @@ cnchar--功能全面、多端支持的汉字拼音笔画js库
 <!-- ---
 home: true
 # heroImage: /favicon.png
-actionText: 快速上手 →
+actionText: 安装使用 →
 actionLink: /guide/
 features:
 - title: 开箱即用

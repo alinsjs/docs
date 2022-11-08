@@ -3,11 +3,11 @@
  * @Date: 2022-11-05 10:51:15
  * @Description: Coding something
  * @LastEditors: chenzhongsheng
- * @LastEditTime: 2022-11-07 08:55:43
+ * @LastEditTime: 2022-11-08 07:56:11
 -->
 ## 1. 响应式概述
 
-Alins 使用 react 声明一个响应式数据，为了书写方便，Alins 导出了 $ 作为 react 的别名
+Alins 使用 react函数 声明一个响应式数据，为了书写方便，Alins 导出了 $ 作为 react 的别名
 
 响应式数据分为值类型和对象类型，都可以使用 $ 函数定义，对象类型在Alins内部使用 createProxy 方法定义，Alins也导出了这个方法
 
@@ -15,7 +15,7 @@ Alins 使用 react 声明一个响应式数据，为了书写方便，Alins 导�
 
 ## 2. react函数
 
-我们使用 react 函数创建一个响应式数据, 如果需要手动对响应式数据监听变更，我们可以使用 subscribe 方法，改方法名是一个 sybmol
+我们使用 react函数 创建一个响应式数据, 如果需要手动对响应式数据监听变更，我们可以使用 subscribe 方法，改方法名是一个 sybmol
 
 如果需要对 响应式数据 赋值我们需要使用value属性，该属性在响应式值类型中是一个字符串，在对象类型中是一个symbol，其中对象类型赋值也可以不借助 value属性，而是直接访问属性名
 
@@ -156,12 +156,14 @@ button('Mod num', click(() => { num.value ++; })).mount();
 响应式数据按照使用场景分类可以分为 `模板使用` 和 `传参使用`
 
 > 模板使用 指将响应式数据内嵌在模板字符串中，通过react函数调用 如: $\`Hello ${msg}\`
+
 > 传参使用 指将响应式数据作为参数，在支持响应式的函数中传入使用 如: html(msg)
 
 按照使用方式分类可以分为 `直接使用` 和 `函数引用使用`
 
 > 直接使用 如: $\`Hello ${msg}\` 、 html(msg)
-> 传参使用 指通过函数包裹使用 如：$\`Hello ${()=>msg.value+"!"}\` 、 html(()=>msg.value+"!")
+
+> 函数引用使用 指通过函数包裹使用 如：$\`Hello ${()=>msg.value+"!"}\` 、 html(()=>msg.value+"!")
 
 模板使用示例
 

@@ -3,12 +3,12 @@
         <div class='title'>
             <img src='https://shiyix.cn/alins.png' alt=''>
         </div>
-        <div class='desc'><span>Al</span>l-<span>in</span>-j<span>s</span> Web UI <span class="sub-desc">Framework</span></div>
+        <div class='desc'><span>Al</span>l-<span>in</span>-j<span>s</span> Web UI <span class='sub-desc'>Framework</span></div>
         
         <div class='start-w'>
             <el-button type='primary' @click='start'>Get Started <i class='ei-location-arrow'></i></el-button>
             <el-button type='primary' @click='run'>Playground <i class='ei-cube-alt'></i></el-button>
-            <el-button type='primary' @click='run'>Install <i class="ei-hand-up"></i></el-button>
+            <el-button type='primary' @click='install'>Install <i class='ei-hand-up'></i></el-button>
         </div>
         <div class='feature-w'>
             <div class='f-i'>
@@ -19,14 +19,14 @@
                 <div class='f-des'>No v-dom</div>
             </div>
             <div class='f-i'>
-                <div class='f-t'><i class="ei-cogs"></i>Controllers</div>
+                <div class='f-t'><i class='ei-cogs'></i>Controllers</div>
                 <div class='f-des'>For</div>
                 <div class='f-des'>If/Show</div>
                 <div class='f-des'>Switch</div>
                 <div class='f-des'>Model</div>
             </div>
             <div class='f-i'>
-                <div class='f-t'><i class="ei-paint-brush"></i>CSS In JS</div>
+                <div class='f-t'><i class='ei-paint-brush'></i>CSS In JS</div>
                 <div class='f-des'>Reactive Css</div>
                 <div class='f-des'>Reactive Style</div>
                 <div class='f-des'>Atom Style</div>
@@ -41,6 +41,7 @@
 </template>
 
 <script>
+    import initJSBox from '../../src/jsbox';
     export default {
         data () {
             return {
@@ -58,10 +59,13 @@
         },
         methods: {
             start () {
-                window.location.href = '/cnchar/guide/intro';
+                window.location.href = '/docs/guide/intro.html';
             },
             run () {
-                window.open('https://theajack.github.io/jsbox/?github=theajack.cnchar@master');
+                initJSBox().openSample('todo-list');
+            },
+            install () {
+                window.location.href = '/docs/guide/start.html';
             },
         },
     };

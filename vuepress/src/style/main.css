@@ -93,3 +93,10 @@ div[class*="language-"]{
 .token.comment{
     color: #2e9f2e!important;
 }
+pre[class*="language-"] {
+    outline: none;
+    border: 1px solid #000;
+}
+pre[class*="language-"][contenteditable] {
+    border: 1px solid #b04827;
+}

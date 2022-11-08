@@ -3,7 +3,7 @@ let jsbox = null;
 
 // dev: serve ./samples/
 // ssr 下获取不到 location 所以使用函数
-const BASE_URL = () => (location.host.indexOf('localhost') !== -1) ? 'http://localhost:60845/' : 'https://cdn.jsdelivr.net/gh/theajack/cnchar@gh-pages/';
+// const BASE_URL = () => (location.host.indexOf('localhost') !== -1) ? '/';
 
 const DEF_CONFIG = 'remind=false&mes=false';
 
@@ -57,7 +57,7 @@ function main () {
         open();
     }
     function openSample (name) {
-        setUrl(`${getUrl()}&codeSrc=${BASE_URL()}samples/${name}.js`);
+        setUrl(`${getUrl()}&codeSrc=${location.protocol}//${location.host}/docs/samples/${name}.js`);
         open();
     }
     closeIcon.onclick = close;

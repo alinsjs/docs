@@ -3,7 +3,7 @@
  * @Date: 2022-11-05 10:50:46
  * @Description: Coding something
  * @LastEditors: chenzhongsheng
- * @LastEditTime: 2022-11-05 21:17:51
+ * @LastEditTime: 2022-11-08 07:52:35
 -->
 ## 1. dom-builder
 
@@ -53,16 +53,21 @@ const MainDomNames = [
 
 可以看到上面只包含一小部分常用的dom元素，对于其他的没有导出的我们可以通过 doms对象来使用
 
+<code-runner/>
+
 ```js
 import {doms} from 'alins';
-console.log(doms.header, doms.section);
+doms.header('header').mount();
+doms.section('section').mount();
 ```
 
 那么如果需要自定义dom标签内，我们可以使用dom函数
 
+<code-runner/>
+
 ```js
 import {dom} from 'alins';
-dom('my-element')().mount();
+dom('my-element')('Hello!').mount();
 ```
 
 dom() 函数 会返回一个dom builder，所以 `dom('div') 等价与 div`

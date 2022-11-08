@@ -67,7 +67,7 @@ module.exports = {
                 items: [
                     {text: '简介', link: '/guide/intro'},
                     {text: '示例程序', link: '/guide/sample'},
-                    {text: '快速上手', link: '/guide/start'},
+                    {text: '安装使用', link: '/guide/install'},
                     {text: '更新日志', link: '/guide/version'},
                     // {text: '捐赠', link: '/guide/donate'},
                 ]
@@ -138,7 +138,7 @@ module.exports = {
                     children: [
                         {title: '简介', path: 'intro'},
                         {title: '示例程序', path: 'sample'},
-                        {title: '快速上手', path: 'start'},
+                        {title: '安装使用', path: 'install'},
                         {title: '更新日志', path: 'version'},
                         // {title: '捐赠', path: 'donate'},
                     ],

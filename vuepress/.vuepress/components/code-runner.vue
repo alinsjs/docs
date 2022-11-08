@@ -3,14 +3,18 @@
  * @Date: 2022-10-30 02:42:04
  * @Description: Coding something
  * @LastEditors: chenzhongsheng
- * @LastEditTime: 2022-11-05 12:11:07
+ * @LastEditTime: 2022-11-08 07:54:22
 -->
 <template>
     <div v-show='localCode!==""' class='code-runner' ref='runner'>
         <span class='code-title'>{{title}}</span>
-        <span class='code-desc'>{{desc}}</span>
-        <i class='ei-play code-btn' @click='run' title='在线运行'></i>
+        <span class='code-desc'>{{result ? desc: '点击右侧按钮在jsbox中运行该代码'}}</span>
+        <i class='ei-code code-btn' @click='jsbox' title='打开jsbox'></i>
         <i class='ei-copy code-btn' @click='copy' title='复制代码'></i>
+        <i v-show='result' class='ei-play code-btn' @click='run' title='重新运行'></i>
+        <!-- <i class='code-btn'
+           :class='{"ei-edit": !isEdit, "ei-undo": isEdit}'
+           @click='edit' title='编辑运行'></i> -->
     </div>
 </template>
 
@@ -26,15 +30,21 @@
             },
             desc: {
                 type: String,
-                default: '点击右侧按钮可以自行修改'
+                default: '可以编辑下面代码重新运行'
             },
             result: {
                 type: Boolean,
                 default: true
             },
         },
+        // computed: {
+        //     editClass () {
+        //         return this.isEdit ? 'ei-undo' : 'ed-edit';
+        //     }
+        // },
         data () {
             return {
+                isEdit: false,
                 localCode: '',
                 localLang: '',
                 env: 'alins'
@@ -45,37 +55,60 @@
             this.initCode();
         },
         methods: {
-            initCode () {
+            getNext () {
                 const el = this.$refs.runner;
-                if (!el) return;
+                if (!el) return null;
                 const next = el.nextElementSibling;
+                if (!next) return null;
+                return next;
+            },
+            initCode () {
+                const next = this.getNext();
                 if (!next) return;
-
                 if (next.className.indexOf('language-js') !== -1) {
                     this.localLang = 'javascript';
                 } else if (next.className.indexOf('language-html') !== -1) {
                     this.localLang = 'html';
                 }
 
+                this.runBase(next);
+
+                if (this.result) {
+                    const pre = next.querySelector('pre');
+                    pre.setAttribute('contenteditable', 'true');
+                }
+            },
+            run () {
+                const next = this.getNext();
+                if (!next) return;
+                if (this.codeResultEl) this.codeResultEl.innerHTML = '';
+                this.runBase(next);
+            },
+            runBase (next) {
                 if (this.localLang) {
-                    this.localCode = this.transformCode(next.innerText);
+                    this.localCode = this.transformCode(next.querySelector('pre').innerText);
                 }
                 this.initResult(next);
-
             },
             initResult (next) {
                 if (!this.result) return;
 
-                const div = document.createElement('div');
-                next.appendChild(div);
-                div.className = 'code-result';
+                if (!this.codeResultEl) {
+                    const div = document.createElement('div');
+                    next.appendChild(div);
+                    div.className = 'code-result';
+                    this.codeResultEl = div;
+                }
 
-                const code = this.localCode.replace(/"#jx\-app"/g, 'dom')
-                    .replace(/document\.getElementById\('jx\-app'\)/g, 'dom');
-
-                new Function('dom', code)(div);
+                const code = this.localCode.replace(/"#jx\-app"/g, '__DOM__')
+                    .replace(/document\.getElementById\('jx\-app'\)/g, '__DOM__');
+                try {
+                    new Function('__DOM__', code)(this.codeResultEl);
+                } catch (err) {
+                    this.codeResultEl.innerHTML = `<span style="color: #f55">${err.toString()}</span>`;
+                }
             },
-            run () {
+            jsbox () {
                 jsbox.code(this.localCode, this.localLang, this.env);
             },
             copy () {

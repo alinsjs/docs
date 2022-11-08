@@ -3,13 +3,13 @@
  * @Date: 2022-11-05 10:51:00
  * @Description: Coding something
  * @LastEditors: chenzhongsheng
- * @LastEditTime: 2022-11-05 21:03:09
+ * @LastEditTime: 2022-11-07 21:44:28
 -->
 ## 1. 事件builder
 
 在 Alins 中，我们使用事件函数来构建一个事件builder，事件builder可以作为参数传给 dom-builder函数绑定到dom对象上
 
-如下是一个简单地 click 事件演示
+如下是一个简单的 click 事件演示
 
 <code-runner/>
 

@@ -3,10 +3,10 @@
  * @Date: 2022-11-04 20:16:21
  * @Description: Coding something
  * @LastEditors: chenzhongsheng
- * @LastEditTime: 2022-11-05 01:03:26
+ * @LastEditTime: 2022-11-07 21:46:19
 -->
 <template>
-    <el-button class='code-btn'
+    <el-button class='code-btn-w'
                :type='type'
                size='large'
                @click='run'>{{text}}</el-button>
@@ -59,7 +59,7 @@
 
 <style lang="less">
 
-.code-btn {
+.code-btn-w {
     margin: 0!important;
     span {
         font-size: 16px;
