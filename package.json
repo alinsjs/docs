@@ -1,7 +1,7 @@
 {
-    "name": "cnchar",
-    "version": "0.0.9",
-    "description": "功能全面、多端支持的汉字拼音笔画js库，支持多音字、繁体字、火星文",
+    "name": "alins",
+    "version": "0.0.10",
+    "description": "All-in-js Web UI Framework, No jsx/template/vdom/css/html",
     "main": "index.html",
     "author": "theajack <theajack@qq.com>",
     "license": "MIT",

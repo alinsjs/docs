@@ -3,7 +3,7 @@
  * @Date: 2022-10-30 02:42:04
  * @Description: Coding something
  * @LastEditors: chenzhongsheng
- * @LastEditTime: 2022-11-08 22:11:22
+ * @LastEditTime: 2022-11-09 22:15:36
 -->
 <template>
     <div v-show='localCode!==""' class='code-runner' ref='runner'>
@@ -86,8 +86,9 @@
                 pre.classList.add('edited');
                 const code = pre.children[0];
                 code.setAttribute('contenteditable', 'true');
+                code.setAttribute('style', '-webkit-user-modify: read-write-plaintext-only;');
                 code.setAttribute('spellcheck', 'false');
-                code.innerText = code.innerText;
+                code.textContent = code.innerText;
                 this.isEdit = true;
             },
             runBase (next) {
