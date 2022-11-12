@@ -3,7 +3,7 @@
  * @Date: 2022-11-07 08:09:07
  * @Description: Coding something
  * @LastEditors: chenzhongsheng
- * @LastEditTime: 2022-11-12 14:06:32
+ * @LastEditTime: 2022-11-12 17:04:39
 -->
 ## 1. Counter
 
@@ -67,12 +67,12 @@ function todoList () {
     const finishItem = (item) => { item.done = !item.done.value; };
     const clear = () => { list[value] = []; };
 
-    const itemStyle = (item) => {
+const itemStyle = (item) => {
         return style.textDecoration(() => item.done.value ? 'line-through' : 'none')
             .color(() => item.done.value ? '#888' : '#fff');
     }
 
-    return [
+return [
         input.model(edit),
         button('submit', click(addItem)),
         div('.todo-list',
@@ -103,7 +103,7 @@ function Style () {
     const num = $(30);
     const active = $(false);
 
-    css('.main')(
+css('.main')(
         style({
             color: '#888',
             marginLeft: num,
@@ -112,7 +112,7 @@ function Style () {
         ['.child', style.marginTop(num)]
     ).mount();
 
-    return div('parent.main',
+return div('parent.main',
         cls({active}),
         hover('color: #f44'),
         input.model(num, 'number'),

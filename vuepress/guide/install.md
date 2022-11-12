@@ -3,49 +3,49 @@
  * @Date: 2022-10-30 02:42:04
  * @Description: Coding something
  * @LastEditors: chenzhongsheng
- * @LastEditTime: 2022-11-05 20:56:40
+ * @LastEditTime: 2022-11-12 17:04:09
 -->
 
-## 1. npm安装
+## 1. npm installation
 
 ```
 npm i alins
 ```
 
-<code-runner title='只使用alins'></code-runner>
+<code-runner title='Use alins only' ></code-runner>
 
 ```js
 import {$, div, click} from 'alins';
 const mes = $('Hello World');
-div($`${mes}!`, click(()=>{mes.value+='!';})).mount();
+div($`${mes}!`, click(()=>{mes.value+='!'; })).mount();
 ```
 
-### 独立使用 alins-style
+### Use alins-style independently
 
 ```
 npm i alins-style
 ```
 
-<code-runner title='alins-style独立使用'></code-runner>
+<code-runner title='alins-style standalone'></code-runner>
 
 ```js
 import {$, style} from 'alins-style';
 const color = $('#fff');
 const div = document.createElement('div');
 div.innerText = 'Click to change color';
-div.onclick = () => {color.value = '#f44';};
+div.onclick = () => {color.value = '#f44'; };
 style({color}).mount(div);
 
 document.getElementById('jx-app').appendChild(div);
 ```
 
-### alins 和 alins-style 一起使用
+### Alins and alins-style are used together
 
 ```
 npm i alins alins-style
 ```
 
-<code-runner title='alins alins-style一起使用'></code-runner>
+<Code-runner title='alins alins-style together'></code-runner>
 
 ```js
 import {$, div, click} from 'alins';
@@ -55,15 +55,15 @@ const color = $('#fff');
 
 div($`Click to change color: ${color}`, 
   style({color}),
-  click(()=>{color.value = '#f44';}),
+  click(()=>{color.value = '#f44'; }),
 ).mount();
 ```
 
-## 2. CDN引用
+## 2. CDN reference
 
 ### alins
 
-<code-runner title='CDN 使用 alins' :result="false"></code-runner>
+<code-runner title='CDN uses alins' :result="false"></code-runner>
 
 ```html
 <script src="https://cdn.jsdelivr.net/npm/alins"></script>
@@ -74,7 +74,7 @@ div($`Click to change color: ${color}`,
 
 ### alins-style
 
-使用 cdn 方式引入alins-style，会默认包含alins代码，若只希望独立使用 style，请参考下面的 alins-style-standalone
+Using the CDN method to introduce alins-style will contain alins code by default, if you only want to use style independently, please refer to alins-style-standby below
 
 <code-runner title='CDN alins-style' :result="false"></code-runner>
 
@@ -87,7 +87,7 @@ div($`Click to change color: ${color}`,
 
 ### alins-style-standalone
 
-独立使用alins-style - alins-style.standalone.min.js
+Use alins-style - alins-style.standalone.min .js independently
 
 <code-runner title='CDN alins-style standalone' :result="false"></code-runner>
 

@@ -1,8 +1,15 @@
+<!--
+ * @Author: chenzhongsheng
+ * @Date: 2022-10-30 02:42:04
+ * @Description: Coding something
+ * @LastEditors: chenzhongsheng
+ * @LastEditTime: 2022-11-12 17:08:29
+-->
 ---
-sidebarDepth: 0  // 吐槽：这里设置0无效！只能设置1或2！
+sidebarDepth: 0 // Setting 0 here is invalid! Only 1 or 2 can be set!
 ---
 
-# 简介
+# Introduction
 
 --------------------
 
@@ -44,44 +51,43 @@ sidebarDepth: 0  // 吐槽：这里设置0无效！只能设置1或2！
 <code-btn type='text' text='Todo List' url='@todo-list'/> |
 <code-btn type='text' text='CSS-In-JS' url='@style'/> -->
 
-## 1. 前言
+## 1. preface
 
-Alins 是一个 All-in-js web ui 框架，支持单向数据流+双向绑定，无虚拟dom
+Alins is an all-in-js web UI framework that supports one-way data flow + two-way binding, no virtual dom
 
-在Alins应用中，状态变更会被监听，然后直接且精准的修改到dom/text节点、类名、属性。
+In Alins applications, state changes are listened for and then directly and precisely modified to dom/text nodes, class names, and attributes.
 
-在复杂状态被替换时，Alins可以复用dom节点，以减少dom销毁和创建的性能开销。
+When complex states are replaced, Alins can reuse dom nodes to reduce the performance overhead of dom destruction and creation.
 
-Alins 一切皆函数，让您可以以函数调用的方式拼接Web开发中的一切事物。所以 Alins 可以在任何浏览器环境中直接运行，无需编译。
+Alins Everything is a function, allowing you to stitch everything in web development together in the form of function calls. So Alins can be run directly in any browser environment without compiling.
 
-搭配 Alins-style 的 Css-In-JS方案，可以实现任何形式样式的响应式变更，包含内联样式、选择器样式、伪类、伪元素。并且 Alins-style 可以独立于 Alins 运行。
+With Alins-style's Css-In-JS scheme, you can realize responsive changes to any formal style, including inline styles, selector styles, pseudo-classes, pseudo-elements. And Alins-style can run independently of Alins.
 
-[反馈问题](https://github.com/alins/issues/new) 
+[Feedback Question] (https://github.com/alins/issues/new) 
 
-## 2. 特性
+## 2. characteristic
 
-1. 无vdom，监听数据精准修改到dom/textNode，dom节点复用
-2. alins-style css-in-js方案，原子属性/积木式组合/样式响应变更
-3. 良好的组件化支持
-4. 支持for,if,show,switch,model控制器
-5. 支持computed、watch
-6. 单向数据流 + 双向绑定
-7. 良好的ts支持
+1. No vdom, the listening data is accurately modified to dom/textNode, and the dom node is reused
+2. Alins-style CSS-in-JS scheme, atomic properties/building block combinations/style response changes
+3. Good componentization support
+4. Support for, if, show, switch, model controller
+5. Support computed and watch
+6. One-way data flow + two-way binding
+7. Good TS support
 
-## 3. 包结构
+## 3. Package structure
 
-|     名称     | 描述 |   功能   | 支持版本 |
+|     Name | Description |   Features | Version supported |
 | :----------: | :------------------------------: | :--------------------: | :--------------------: |
-|    alins    | alins主库 |  用于创建web应用程序   | 0.0.1 |
-|    alins-style    | css-in-js方案 |  不依赖于alins可以独立于alins使用  | 0.0.1 |
+|    alins    | Alins main library |  Used to create web application | 0.0.1 |
+|    alins-style    | CSS-in-JS schemes |  Not dependent on alins can be used independently of | 0.0.1 |
 
-除此之外 Alins还包含两个工具库，一般不需要开发者引入
+In addition, Alins also contains two tool libraries, which generally do not require developers to introduce them
 
-1. alins-reactive: alins 和 alins-style 共同依赖的响应式库
-2. alins-utils: 其他三个包依赖的工具库
+1. alins-reactive: A reactive library that alins and alins-style co-depend
+2. alins-utils: The repository that the other three packages depend on
 
 <div>
     <star></star>
 </div>
-
 

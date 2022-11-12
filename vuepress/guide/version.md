@@ -41,7 +41,7 @@
 
 
 ## 0.0.8
-1. fix: div('.class', 'text'). mount();  Bugs that text nodes do not render
+1. fix: div('.class', 'text').mount();  Bugs that text nodes do not render
 2. feat: mount can be mounted to other nodes or comps
 3. fee: access this dom in the event
 4. Fix: On function design error
