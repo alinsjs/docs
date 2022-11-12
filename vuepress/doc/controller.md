@@ -3,7 +3,7 @@
  * @Date: 2022-11-05 10:51:23
  * @Description: Coding something
  * @LastEditors: chenzhongsheng
- * @LastEditTime: 2022-11-12 16:14:59
+ * @LastEditTime: 2022-11-12 17:20:15
 -->
 
 ## 1. Controller overview
@@ -36,11 +36,11 @@ const list = $([
 ]);
 button('Add person', click(()=>{list.push({name: 'new', age: 10})})).mount();
 div.for(list)((person, index) => 
-    Returns a single element
+    // Returns a single element
     $`${index}: ${person.name} (age=${person.age})`
 ).mount();
 div('--------').mount();
-Returns multiple elements
+// Returns multiple elements
 div.for(list)((person, index) => [
     '.list-item',
     span($`${index}:`),
@@ -74,8 +74,8 @@ div(
     div.if(() => age.value<18)('I am not a adult')
         .elif(() => age.value === 18)('I am a adult(age=18)')
         .else($`/h3:I am a adult and age is ${age}`)
-        > Note: The tag of the DOM element can be changed here
-        else condition is not required
+        // Note: The tag of the DOM element can be changed here
+        // else condition is not required
 ).mount();
 ```
 
@@ -114,8 +114,8 @@ div(
         .case(18)('I am not a adult age only 18')
         .case(19)($`I am not a adult age = ${age}`)
         .default('/h3:I am not a adult age more then 19')
-        > Note: The tag of the DOM element can be changed here
-        The default branch is not required
+        // Note: The tag of the DOM element can be changed here
+        // The default branch is not required
 ).mount();
 ```
 
