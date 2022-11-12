@@ -1,10 +1,3 @@
-<!--
- * @Author: chenzhongsheng
- * @Date: 2022-10-30 02:42:04
- * @Description: Coding something
- * @LastEditors: chenzhongsheng
- * @LastEditTime: 2022-11-12 17:08:29
--->
 ---
 sidebarDepth: 0 // Setting 0 here is invalid! Only 1 or 2 can be set!
 ---
@@ -51,7 +44,7 @@ sidebarDepth: 0 // Setting 0 here is invalid! Only 1 or 2 can be set!
 <code-btn type='text' text='Todo List' url='@todo-list'/> |
 <code-btn type='text' text='CSS-In-JS' url='@style'/> -->
 
-## 1. preface
+## 1. Preface
 
 Alins is an all-in-js web UI framework that supports one-way data flow + two-way binding, no virtual dom
 
@@ -65,7 +58,7 @@ With Alins-style's Css-In-JS scheme, you can realize responsive changes to any f
 
 [Feedback Question] (https://github.com/alins/issues/new) 
 
-## 2. characteristic
+## 2. Features
 
 1. No vdom, the listening data is accurately modified to dom/textNode, and the dom node is reused
 2. Alins-style CSS-in-JS scheme, atomic properties/building block combinations/style response changes
