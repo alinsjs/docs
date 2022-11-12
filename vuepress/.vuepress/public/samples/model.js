@@ -23,7 +23,7 @@ function Count () {
         span('input count'),
         input.model(count, 'number'),
         dom('br')(),
-        comp(CountProps, prop({value: count})),
+        comp(CountProps)(prop({value: count})),
         button('add', click(() => {count.value++;})),
     ];
 };

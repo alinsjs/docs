@@ -3,7 +3,7 @@
  * @Date: 2022-11-07 08:09:07
  * @Description: Coding something
  * @LastEditors: chenzhongsheng
- * @LastEditTime: 2022-11-07 08:19:58
+ * @LastEditTime: 2022-11-12 14:06:32
 -->
 ## 1. Counter
 
@@ -36,7 +36,7 @@ function Count () {
         span('input count'),
         input.model(count, 'number'),
         br(),
-        comp(CountProps, prop({value: count})),
+        comp(CountProps)(prop({value: count})),
         button('add', click(() => {count.value++;})),
     ];
 };

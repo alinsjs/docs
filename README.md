@@ -44,6 +44,8 @@
 
 **[中文](https://github.com/alinsjs/alins/blob/master/README.cn.md) | [Docs](https://alinsjs.github.io/docs) | [VersionLog](https://github.com/alinsjs/alins/blob/master/helper/version.md) | [FeedBacl](https://github.com/alinsjs/alins/issues/new) | [Gitee](https://gitee.com/alinsjs/alins) | [MessageBoard](https://theajack.github.io/message-board/?app=alins)**
 
+**Documentation is under development [alins/docs](https://github.com/alinsjs/docs)**
+
 ## 0 Quick Start
 
 ### 0.1 npm
@@ -67,6 +69,8 @@ div('Hello World!').mount();
 ```
 
 ## 1. Features
+
+Alins is an All in js web ui framework, which is highly flexible. You can use js/ts code to combine your dom/css/state into a web application like building blocks. At the same time, Alins is highly responsive to both dom and css
 
 1. No vdom, the listening data is accurately modified to dom/textNode, and the dom node is reused
 2. Alins-style CSS-in-JS scheme, atomic properties/building block combinations/style response changes
@@ -108,7 +112,7 @@ export function Count () {
     return [
         span('input count'),
         input.model(count, 'number'),
-        comp(CountProps, prop({value: count})),
+        comp(CountProps)(prop({value: count})),
         button('add', click(() => {count.value++;})),
     ];
 };

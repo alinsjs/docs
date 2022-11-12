@@ -3,7 +3,7 @@
  * @Date: 2022-11-05 10:51:00
  * @Description: Coding something
  * @LastEditors: chenzhongsheng
- * @LastEditTime: 2022-11-07 21:44:28
+ * @LastEditTime: 2022-11-12 15:11:11
 -->
 ## 1. 事件builder
 
@@ -100,6 +100,23 @@ div('parent',
     div('child', click(onclick, 'stop').args('child'))
 ).mount();
 ```
+
+### 3.1 修饰符快捷用法
+
+对于 prevent 和 stop 修饰符，有时不需要其执行任何事件，只需要触发prevent或stop的效果就可以，那边可以通过 prevent 和 stop属性快捷使用
+
+<code-runner/>
+
+```js
+import {div, click} from 'alins';
+const onclick = (name)=>{ alert(`clicked ${name}`) }
+div('parent', 
+    click(onclick).args('parent'),
+    div('child', click.stop)
+).mount();
+```
+
+
 
 ## 4. event和this访问
 

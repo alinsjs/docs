@@ -3,7 +3,7 @@
  * @Date: 2022-11-05 10:51:06
  * @Description: Coding something
  * @LastEditors: chenzhongsheng
- * @LastEditTime: 2022-11-08 22:35:33
+ * @LastEditTime: 2022-11-12 14:04:16
 -->
 
 ## 1. comp-builder
@@ -16,7 +16,7 @@ Alins中，一个函数即为一个组件，通过 comp 函数包裹之后会生
 ```ts
 interface IComponentBuilder {
     type: 'comp';
-    exe(): TChild;
+    exe(): TElementChild;
     mount(parent?: IMountParent): void;
 }
 ```
@@ -33,10 +33,12 @@ comp(HelloWorld).mount();
 
 组件的返回值是一个 TElementChild ，该类型可以是 null（null会被跳过）、dom元素、dom-builder、comp-builder，还可以是后续章节中将会介绍到的对象，以及可以使他们的数组形式
 
+也可以是一个函数 来返回上述其他类型
+
 ```ts
 type TElementChild = null | HTMLElement | IElementBuilder | IComponentBuilder |
     IForBuilder | IIfBuilder<any> | IShowBuilder |
-    IModelBuilder | ISwitchBuilder<any, any> | TElementChild[];
+    IModelBuilder | ISwitchBuilder<any, any> | (()=>TElementChild) | TElementChild[];
 ```
 
 ## 2. prop函数
@@ -47,10 +49,10 @@ type TElementChild = null | HTMLElement | IElementBuilder | IComponentBuilder |
 
 ```js
 import {div, comp, prop} from 'alins';
-const Child = ({props}) => div(`Child ${props.name.value}`);
+const Child = comp(({props}) => div(`Child ${props.name.value}`));
 const Parent = () => [
-    comp(Child, prop({name: '1'})),
-    comp(Child, prop({name: '2'})),
+    Child(prop({name: '1'})),
+    Child(prop({name: '2'})),
 ]
 comp(Parent).mount();
 ```
@@ -65,9 +67,9 @@ comp(Parent).mount();
 
 ```js
 import {button, comp, click, event} from 'alins';
-const Child = ({events}) => button('Child', click(events.fromParent));
+const Child = comp(({events}) => button('Child', click(events.fromParent)));
 const Parent = () => [
-    comp(Child, event({
+    Child(event({
         fromParent: (e, dom) => {alert(`fromChild: ${dom.innerText}`)}
     })),
 ]
@@ -84,10 +86,10 @@ comp(Parent).mount();
 
 ```js
 import {div, comp, slot} from 'alins';
-const Child = ({slots}) => div('Child', slots);
+const Child = comp(({slots}) => div('Child', slots));
 const Parent = () => [
-    comp(Child, slot(div('I am a slot'))),
-    comp(Child, slot(() => div('I am a function slot'))), // function as slot
+    Child(slot(div('I am a slot'))),
+    Child(slot(() => div('I am a function slot'))), // function as slot
 ];
 comp(Parent).mount();
 ```
@@ -98,9 +100,9 @@ comp(Parent).mount();
 
 ```js
 import {div, comp, slot} from 'alins';
-const Child = ({slots}) => div('Child', slots.slotA, slots.slotB);
+const Child = comp(({slots}) => div('Child', slots.slotA, slots.slotB));
 const Parent = () => [
-    comp(Child, slot({
+    comp(Child)(slot({
         slotA: div('I am a slot'),
         slotB: () => div('I am a function slot'),
     })),
@@ -116,16 +118,16 @@ comp(Parent).mount();
 
 ```js
 import {comp, div, slot} from 'alins';
-const Child = ({slots}) => div('Child', slots);
+const Child = comp(({slots}) => div('Child', slots));
 const Parent = () => [
-    comp(Child, slot(div('I am a slot'))),
+    Child(slot(div('I am a slot'))),
     () => { // function as return
         const slotObj = slot(() => div('I am a function slot'))
-        return comp(Child, slotObj)
+        return Child(slotObj)
     },
     () => [ // function return array
-        comp(Child, slot(div('I am a slot:3'))),
-        comp(Child, slot(div('I am a slot:4'))),
+        Child(slot(div('I am a slot:3'))),
+        Child(slot(div('I am a slot:4'))),
     ],
 ];
 

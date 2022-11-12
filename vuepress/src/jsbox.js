@@ -1,6 +1,8 @@
 import event from './event';
 let jsbox = null;
 
+export const showCode = {visible: true};
+
 // dev: serve ./samples/
 // ssr 下获取不到 location 所以使用函数
 // const BASE_URL = () => (location.host.indexOf('localhost') !== -1) ? '/';

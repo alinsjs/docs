@@ -3,7 +3,7 @@
  * @Date: 2022-11-05 10:50:46
  * @Description: Coding something
  * @LastEditors: chenzhongsheng
- * @LastEditTime: 2022-11-08 22:31:19
+ * @LastEditTime: 2022-11-12 14:20:48
 -->
 ## 1. dom-builder
 
@@ -161,7 +161,28 @@ div('Parent',
 ).mount();
 ```
 
-### 2.3 html内容
+
+## 3. text & html 函数
+
+### 3.3 text函数
+
+当dom文本内容中含有特殊字符时，如 `.#/[]:` 时 就会与 2 中的 emment 风格写法产生冲突
+
+对于这种含有特殊字符的文本，我们可以使用 text 函数定义
+
+<code-runner title='text函数'></code-runner>
+
+```js
+import {div, text} from 'alins';
+div(
+    text('含有特殊字符的文本:[a=1.12]##//todo'),
+    '.text-content'
+).mount();
+```
+
+> 注： text 参数之后后续章节中会介绍到的所有响应式数据
+
+### 3.3 html内容
 
 如果要设置某dom元素的html内容，需要借助 html 函数
 
@@ -178,8 +199,9 @@ div(
 ).mount();
 ```
 
+> 注： html 参数之后后续章节中会介绍到的所有响应式数据
 
-## 3. mount函数
+## 4. mount函数
 
 dom-builder我们已经创建好了，接下来就是需要将其挂载真实的dom节点上渲染出来了
 
@@ -202,7 +224,7 @@ parent.mount();
 // >  注：挂载到其他domBuilder上时必须要保证改domBuilder还未被挂载
 ```
 
-## 4. 函数作为参数
+## 5. 函数作为参数
 
 支持使用函数作为builder的参数，这在一些复杂逻辑中可以使用闭包封装内部逻辑
 
@@ -226,7 +248,7 @@ div(
 ).mount();
 ```
 
-## 5. 总结示例
+## 6. 总结示例
 
 <code-runner />
 

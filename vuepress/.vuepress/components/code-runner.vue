@@ -3,7 +3,7 @@
  * @Date: 2022-10-30 02:42:04
  * @Description: Coding something
  * @LastEditors: chenzhongsheng
- * @LastEditTime: 2022-11-09 22:15:36
+ * @LastEditTime: 2022-11-12 15:22:31
 -->
 <template>
     <div v-show='localCode!==""' class='code-runner' ref='runner'>
@@ -11,13 +11,15 @@
         <span class='code-desc'>{{result ? desc: '点击右侧按钮在jsbox中运行该代码'}}</span>
         <i class='ei-play code-btn' @click='jsbox' title='打开jsbox'></i>
         <i class='ei-copy code-btn' @click='copy' title='复制代码'></i>
-        <i v-if='isEdit' class='ei-undo code-btn' @click='run' title='重新运行'></i>
-        <i v-show='result' v-else class='ei-code code-btn' @click='edit' title='开启编辑'></i>
+        <i class='ei-undo code-btn' @click='run' title='重新运行'></i>
+        <i class='code-btn' :class="{'ei-eye-close': showCode.visible, 'ei-eye-open': !showCode.visible}"
+           @click='toggleShowCode' :title='showCode.visible?"隐藏代码":"显示代码"'></i>
+        <i v-show='result && !isEdit' class='ei-code code-btn' @click='edit' title='开启编辑'></i>
     </div>
 </template>
 
 <script>
-    import initJSBox from '../../src/jsbox';
+    import initJSBox, {showCode} from '../../src/jsbox';
     import {copy} from '../../src/util';
     let jsbox = null;
     export default {
@@ -42,6 +44,7 @@
         // },
         data () {
             return {
+                showCode: showCode,
                 isEdit: false,
                 localCode: '',
                 localLang: '',
@@ -53,8 +56,21 @@
             this.next = this.getNext();
             jsbox = initJSBox();
             this.initCode();
+            console.log('mounted');
+        },
+        watch: {
+            'showCode.visible' () {
+                this.initCodeVisible();
+            }
         },
         methods: {
+            initCodeVisible () {
+                this.next.style.display = this.showCode.visible ? 'block' : 'none';
+            },
+            toggleShowCode () {
+                this.showCode.visible = !this.showCode.visible;
+                this.initCodeVisible();
+            },
             getNext () {
                 const el = this.$refs.runner;
                 if (!el) return null;
@@ -104,6 +120,11 @@
                     const div = document.createElement('div');
                     next.appendChild(div);
                     div.className = 'code-result';
+                    const run = document.createElement('i');
+                    run.className = 'ei-undo code-btn in-result';
+                    run.title = '重新运行';
+                    run.onclick = () => {this.run();};
+                    div.appendChild(run);
                     this.codeResultEl = div;
                 }
 
@@ -133,7 +154,7 @@
     };
 </script>
 
-<style lang="less" scoped>
+<style lang="less">
 .code-runner{
     margin-top: 15px;
     .code-title{
@@ -144,16 +165,20 @@
         font-size: 0.8rem;
         color: #aaa;
     }
-    .code-btn{
-        float: right;
-        color: #ec5c2f;
-        margin-left: 10px;
-        cursor: pointer;
-        transition: transform .3s ease;
-        margin-top: 5px;
-        &:hover{
-            transform: scale(1.2);
-        }
+}
+.code-btn{
+    float: right;
+    color: #ec5c2f;
+    margin-left: 10px;
+    cursor: pointer;
+    transition: transform .3s ease;
+    margin-top: 5px;
+    &:hover{
+        transform: scale(1.2);
+    }
+    &.in-result{
+        margin: 0;
+        font-size: 20px;
     }
 }
 </style>

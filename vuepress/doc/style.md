@@ -3,7 +3,7 @@
  * @Date: 2022-11-05 10:51:34
  * @Description: Coding something
  * @LastEditors: chenzhongsheng
- * @LastEditTime: 2022-11-09 01:38:46
+ * @LastEditTime: 2022-11-12 15:07:03
 -->
 ## 1. Alins-style 概述
 
@@ -14,6 +14,8 @@ alins-style 是一套css-in-js方案，可以对dom节点style、css样式表进
 alins-style也是一个独立的包，可以独立使用，并且独立支持响应式样式
 
 > 通过alins-style的样式和css组合，可以实现模块化、组件化、响应式的css样式书写，并且可以有效的避免css全局样式污染问题
+
+> alins-style 中的属性全部采用驼峰形式，且会自动添加样式兼容前缀
 
 ## 2. style函数
 
@@ -31,7 +33,7 @@ interface IStyleConstructor extends IStyleAtoms{
 
 ### 2.1 传入字符串
 
-传入字符串时表示静态样式, 一般不建议这样使用
+传入字符串时表示静态样式
 
 <code-runner/>
 
@@ -39,14 +41,12 @@ interface IStyleConstructor extends IStyleAtoms{
 import {div} from 'alins';
 import {style} from 'alins-style';
 
-div('Hello!', style(`color: #f44; font-size: 20px;`)).mount();
+div('Hello!', style(`color: #f44; fontSize: 20px;`)).mount();
 ```
 
 ### 2.2 传入json
 
 传入json对象时，既可以表示静态样式，也可以使用响应式数据
-
->  注：json形式 css属性采用驼峰形式
 
 这里的响应式数据支持 react数据、computed和函数
 
@@ -89,7 +89,7 @@ const Style = style({
 
 ### 2.3 传入模板字符串
 
-传入es6的模板字符串也可以使用响应式样式，但是css属性不支持驼峰形式
+传入es6的模板字符串也可以使用响应式样式，且也支持驼峰形式和自动补全兼容前缀
 
 <code-runner/>
 
@@ -104,9 +104,9 @@ const computedItem = computed(()=>num.value+10);
 
 const Style = style`
     color: ${color};
-    font-size: ${num}px;
-    margin-left: ${computedItem}px;
-    margin-top: ${()=>num.value+20}px;
+    fontSize: ${num}px;
+    marginLeft: ${computedItem}px;
+    marginTop: ${()=>num.value+20}px;
 `;
 div(
     span('修改颜色：'), input.model(color),
@@ -193,7 +193,7 @@ const hoverEle = hover(
     'color: #f44;', // 字符串
     style({fontSize: num}), // StyleBuiler
     style.paddingLeft(num).relative().left(num), // 原子样式
-    $`padding-top: ${num}px;` // 响应式字符串
+    $`paddingTop: ${num}px;` // 响应式字符串
 )
 
 const afterEle = after(style.content('"after element"').marginLeft(num).color('#4f4'))

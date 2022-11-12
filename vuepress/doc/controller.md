@@ -3,7 +3,7 @@
  * @Date: 2022-11-05 10:51:23
  * @Description: Coding something
  * @LastEditors: chenzhongsheng
- * @LastEditTime: 2022-11-08 21:46:11
+ * @LastEditTime: 2022-11-12 14:35:01
 -->
 
 ## 1. 控制器概述
@@ -161,5 +161,36 @@ const num = $(0)
 div(
     $`value=${num}`,
     input.model(num, 'number'), 
+).mount();
+```
+
+> 注：如果元素设置了 type=number 属性，则会默认开启 number修饰符
+
+## 7. 组件 + 控制器
+
+控制器也可以配合组件一起使用
+
+<code-runner title='组件 + 控制器'/>
+
+```js
+import {$, div, h4, input, comp, prop, button, click} from 'alins';
+
+const Child = comp(({props})=>div($`child value=${props.value}`))
+const num = $(-1);
+div(
+    button($`add num(${num})`, click(()=>{num.value++})),
+    h4('for sample'),
+    Child.for($([1,2,3]))((item) => prop({value: `for item=${item.value}`})),
+    h4('if sample'),
+    Child.if(() => num.value > 1)(prop({value: '>1'}))
+        .elif(() => num.value < 0)(prop({value: '<0'}))
+        .else(prop({value: ()=>`value=${num.value}`})),
+    h4('show sample'),
+    Child.show(() => num.value > 1)(prop({value: 'show!: value>1'})),
+    h4('switch sample'),
+    Child.switch(num)
+        .case(0)(prop({value: 'case num=0!'}))
+        .case(1)(prop({value: 'case num=1!'}))
+        .case(2)(prop({value: 'case num=2!'})),
 ).mount();
 ```

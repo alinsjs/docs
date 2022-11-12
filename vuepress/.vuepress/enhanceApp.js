@@ -56,7 +56,7 @@ export default ({
         if (!el) {
             el = document.createElement('div');
             el.setAttribute('id', id);
-            el.setAttribute('style', 'position: fixed;z-index: 10000;left: 50%;top: 50%;padding: 8px 10px;background-color: rgba(0,0,0,.7);color: #fff;border-radius: 3px;transform: translate(-50%, -50%);');
+            el.setAttribute('style', 'position: fixed;z-index: 10000;left: 50%;top: 50%;padding: 8px 10px;background-color: rgba(255,255,255,.8);color: #000;border-radius: 3px;transform: translate(-50%, -50%);');
             document.body.appendChild(el);
         }
 
