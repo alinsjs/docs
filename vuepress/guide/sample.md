@@ -3,11 +3,11 @@
  * @Date: 2022-11-07 08:09:07
  * @Description: Coding something
  * @LastEditors: chenzhongsheng
- * @LastEditTime: 2022-11-12 17:04:39
+ * @LastEditTime: 2022-11-12 17:12:56
 -->
 ## 1. Counter
 
-<code-runner title='计数器'/>
+<code-runner title='Counter'/>
 
 ```js
 import { button, comp, click, $, mount } from 'alins';
@@ -25,7 +25,7 @@ comp(Count).mount();
 
 ## 2. Component and Model
 
-<code-runner title='组件'/>
+<code-runner title='Component'/>
 
 ```js
 import { button, comp, prop, click, $, input, span, br } from 'alins';
@@ -50,7 +50,7 @@ comp(Count).mount()
 
 ## 3. Todo-List
 
-<code-runner title='待办'/>
+<code-runner title='Todo List'/>
 
 ```js
 import {comp, button, div, input, click, $, value} from 'alins';
