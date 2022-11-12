@@ -3,7 +3,7 @@
  * @Date: 2022-11-05 10:51:34
  * @Description: Coding something
  * @LastEditors: chenzhongsheng
- * @LastEditTime: 2022-11-12 16:22:09
+ * @LastEditTime: 2022-11-12 17:37:11
 -->
 ## 1. Overview of Alins-style
 
@@ -15,7 +15,7 @@ Alins-style is also a standalone package that can be used independently and supp
 
 > Through the combination of alins-style style and CSS, modular, componentized and responsive CSS style writing can be realized, and the problem of CSS global style pollution can be effectively avoided
 
-Attributes in > alins-style are all humped and automatically prefixed with style compatibility
+> Attributes in alins-style are all humped and automatically prefixed with style compatibility
 
 ## 2. style function
 
@@ -27,6 +27,7 @@ The style function is declared as follows
 interface IStyleConstructor extends IStyleAtoms{
     (json: TStyleJsonValue): IStyleBuilder;
     (ts: TemplateStringsArray, ... reactions: TReactionItem[]): IStyleBuilder;
+    (item: IReactBuilder): IStyleBuilder;
     (style: string): IStyleBuilder;
 }
 ```
