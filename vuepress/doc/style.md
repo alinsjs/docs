@@ -3,37 +3,37 @@
  * @Date: 2022-11-05 10:51:34
  * @Description: Coding something
  * @LastEditors: chenzhongsheng
- * @LastEditTime: 2022-11-12 15:07:03
+ * @LastEditTime: 2022-11-12 16:22:09
 -->
-## 1. Alins-style 概述
+## 1. Overview of Alins-style
 
-alins-style 是一套css-in-js方案，可以对dom节点style、css样式表进行响应式变更，支持原子样式和伪类伪元素，并且对一些需要兼容性的样式做了兼容性处理
+Alins-style is a set of css-in-js scheme, which can make responsive changes to DOM node style and CSS style sheets, support atomic styles and pseudo-class pseudo-elements, and make compatibility processing for some styles that require compatibility
 
-搭配js的灵活性和 alins 的所有功能，让开发者可以想使用积木一样组合式的构建样式，并且做到实时的响应式变更
+Combined with the flexibility of JS and all the features of Alins, developers can want to use a brick-like composite build style and make responsive changes in real time
 
-alins-style也是一个独立的包，可以独立使用，并且独立支持响应式样式
+Alins-style is also a standalone package that can be used independently and supports responsive styling independently
 
-> 通过alins-style的样式和css组合，可以实现模块化、组件化、响应式的css样式书写，并且可以有效的避免css全局样式污染问题
+> Through the combination of alins-style style and CSS, modular, componentized and responsive CSS style writing can be realized, and the problem of CSS global style pollution can be effectively avoided
 
-> alins-style 中的属性全部采用驼峰形式，且会自动添加样式兼容前缀
+Attributes in > alins-style are all humped and automatically prefixed with style compatibility
 
-## 2. style函数
+## 2. style function
 
-style 函数用于声明一套样式，可以用于单个dom，也可以使用在css函数组作为一部分构建
+The style function is used to declare a set of styles, either for a single DOM or built as part of a CSS function group
 
-style函数声明如下
+The style function is declared as follows
 
 ```js
 interface IStyleConstructor extends IStyleAtoms{
     (json: TStyleJsonValue): IStyleBuilder;
-    (ts: TemplateStringsArray, ...reactions: TReactionItem[]): IStyleBuilder;
+    (ts: TemplateStringsArray, ... reactions: TReactionItem[]): IStyleBuilder;
     (style: string): IStyleBuilder;
 }
 ```
 
-### 2.1 传入字符串
+### 2.1 Pass in the string
 
-传入字符串时表示静态样式
+Represents a static style when a string is passed in
 
 <code-runner/>
 
@@ -41,14 +41,14 @@ interface IStyleConstructor extends IStyleAtoms{
 import {div} from 'alins';
 import {style} from 'alins-style';
 
-div('Hello!', style(`color: #f44; fontSize: 20px;`)).mount();
+div('Hello!', style(`color: #f44; fontSize: 20px; `)).mount();
 ```
 
-### 2.2 传入json
+### 2.2 Pass in json
 
-传入json对象时，既可以表示静态样式，也可以使用响应式数据
+When passing in a JSON object, you can either represent static styles or use responsive data
 
-这里的响应式数据支持 react数据、computed和函数
+The reactive data here supports react data, computed, and functions
 
 <code-runner/>
 
@@ -63,33 +63,33 @@ const computedItem = computed(()=>num.value+10);
 
 const Style = style({
     color,
-    fontSize: num, // react数据
+    fontSize: num, // react data
     marginLeft: computedItem,
     marginTop: ()=>num.value+20,
 });
 div(
-    span('修改颜色：'), input.model(color),
+    span('Modify color:'), input.model(color),
     br(),
-    span('修改num：'), input.model(num, 'number'),
+    span('modify num:'), input.model(num, 'number'),
     div('Hello!', Style),
 ).mount()
 ```
 
-> 注：类似fontSize之类的数字类型css属性 可以忽略单位，默认使用单位是px，如需手动添加单位，可以像这样写
+> Note: css properties of numeric types like fontSize can ignore units, the default unit is px, if you need to add units manually, you can write like this
 
 ```js
 const computedItem = computed(()=>`${num.value+10}rem`);
 const Style = style({
     color: '#f44',
-    fontSize: $`${num}rem`, // react数据
+    fontSize: $`${num}rem`, // react data
     marginLeft: computedItem,
     marginTop: ()=> `${num.value+20}rem`,
 });
 ```
 
-### 2.3 传入模板字符串
+### 2.3 Pass in the template string
 
-传入es6的模板字符串也可以使用响应式样式，且也支持驼峰形式和自动补全兼容前缀
+Template strings passed into ES6 can also be used in responsive styling, and camel form and auto-completion compatible prefixes are also supported
 
 <code-runner/>
 
@@ -109,24 +109,24 @@ const Style = style`
     marginTop: ${()=>num.value+20}px;
 `;
 div(
-    span('修改颜色：'), input.model(color),
+    span('Modify color:'), input.model(color),
     br(),
-    span('修改num：'), input.model(num, 'number'),
+    span('modify num:'), input.model(num, 'number'),
     div('Hello with string template!', Style),
 ).mount()
 ```
 
-## 3. 原子样式
+## 3. Atomic style
 
-通过style函数上定义的原子样式方法，可以使用alins-style的原子样式功能，可以实现更加灵活地样式书写
+Through the atomic style method defined on the style function, you can use the atomic style function of alins-style, which can achieve more flexible style writing
 
-原子样式分为 `预设样式`、`组合样式` 和 `单属性样式`
+Atomic styles are divided into 'Preset Styles', 'Combined Styles' and 'Single Attribute Styles'
 
-1. 预设样式：指一个或多个不同的属性固定搭配组合起来的样式，属于静态样式，不接受参数
-2. 组合样式：指接受传参的预设样式，属于动态样式
-3. 单属性样式：指一个原子样式控制一个css属性，传参接受静态数据或响应式数据，具体又可以分为数字类型、字符串类型、枚举类型等
+1. Preset style: refers to one or more different attributes fixed and combined styles, which belong to static styles and do not accept parameters
+2. Composition style: refers to the preset style that accepts the parameters, which belongs to the dynamic style
+3. Single-attribute style: refers to an atomic style to control a CSS property, and the parameters accept static data or responsive data, which can be divided into numeric types, string types, enumeration types, etc
 
-由于原子样式数量很多，不便在文档中全部贴出，具体可以使用原子样式函数请参考 [style.d.ts](https://github.com/alinsjs/alins/blob/master/packages/utils/src/types/style.d.ts)
+Due to the large number of atomic styles, it is not convenient to post them all in the document, please refer to [style.d.ts](https://github.com/alinsjs/alins/blob/master/packages/utils/src/types/style.d.ts) for specific atomic style functions.
 
 <code-runner/>
 
@@ -140,48 +140,48 @@ const cursorType = () => num.value === 14 ? 'pointer': 'text';
 
 const computedItem = computed(()=>num.value+10);
 
-const Style = style.borderBox() // 预设样式
-    .cursorUrl('https://xxx.com/xxx.png', cursorType) // 组合样式
-    .fontSize(num) // 单属性样式
+const Style = style.borderBox() // Preset style
+    .cursorUrl('https://x.com/xxx.png', cursorType) // Combine styles
+    .fontSize(num) // Single-attribute style
     .color(color)
     .marginTop(computedItem)
     .marginLeft(()=>num.value+20);
 
 div(
-    span('修改颜色：'), input.model(color),
+    span('Modify color:'), input.model(color),
     br(),
-    span('修改num：'), input.model(num, 'number'),
+    span('modify num:'), input.model(num, 'number'),
     div('Hello with string atom styles!', Style),
 ).mount()
 ```
 
-## 4. 伪类伪元素
+## 4. Pseudo-class pseudo-elements
 
-### 4.1 基本使用
+### 4.1 Basic Use
 
-alins-style 暴露了一些伪类伪元素函数用于声明 css 伪类和伪元素函数，暴露出来的如下
+alins-style exposes some pseudo-class pseudo-element functions for declaring CSS pseudo-classes and pseudo-element functions, which are exposed as follows
 
 ```js
 import {hover, active, before, after} from 'alins-style';
 ```
 
-以下是伪类函数的类型声明
+The following is the type declaration of a pseudo-class function
 
 ```ts
 type ICssBase = string | IStyleBuilder | IStyleAtoms | IReactBuilder;
 
-type IPseudoClass = (...args: ICssBase[]) => IPseudoBuilder;
+type IPseudoClass = (... args: ICssBase[]) => IPseudoBuilder;
 
 interface IPseudoConstructor {
   (name: TPseudoName, arg?: TReactionValue<string|number>): IPseudoClass;
 }
 ```
 
-hover, active 等都为 `IPseudoClass`, 支持传入字符串、StyleBuiler、原子样式和响应式字符串
+hover, active, etc. are all 'IPseudoClass' and support incoming strings, StyleBuiler, atomic styles, and responsive strings
 
-下面一个例子一一演示一下
+The following example demonstrates them one by one
 
-<code-runner title='伪类使用示例'/>
+<code-runner title='pseudo-class usage example'/>
 
 ```js
 import {div, $, input, span} from 'alins';
@@ -190,26 +190,26 @@ import {hover, after, style} from 'alins-style';
 const num = $(30);
 
 const hoverEle = hover(
-    'color: #f44;', // 字符串
+    'color: #f44; ', // string
     style({fontSize: num}), // StyleBuiler
-    style.paddingLeft(num).relative().left(num), // 原子样式
-    $`paddingTop: ${num}px;` // 响应式字符串
+    style.paddingLeft(num).relative().left(num), // atomic style
+    $`paddingTop: ${num}px;` // responsive string
 )
 
 const afterEle = after(style.content('"after element"').marginLeft(num).color('#4f4'))
 
 div(
-    span('修改num: '),
+    span('modify num: '),
     input.model(num, 'number'),
     div('Mouse hover me', hoverEle, afterEle),
 ).mount();
 ```
 
-### 4.2 pseudo函数
+### 4.2 pseudo function
 
-对于其他的伪类伪元素可以使用 `pseudo` 函数访问， `pseudo("hover") 等价于 hover`
+For other pseudo-class pseudo-elements can be accessed using the 'pseudo' function, 'pseudo('hover') is equivalent to hover'
 
-<code-runner title='pseudo函数使用示例'/>
+<code-runner title='pseudo function usage example'/>
 
 ```js
 import {input} from 'alins';
@@ -219,18 +219,18 @@ const focus = pseudo('focus');
 input(focus(style.height(40))).mount();
 ```
 
-对于需要传参的伪类，可以在 `pseudo` 函数的第二个参数传入参数，支持`静态数据`和`响应式数据`
+For pseudo-classes that need to pass parameters, you can pass in the second parameter of the 'pseudo' function, supporting 'static data' and 'reactive data'
 
 ```js
 import {pseudo} from 'alins-style';
 const nthChild = pseudo('nth-child', 2);
 ```
 
-## 5. css函数
+## 5. CSS functions
 
-style函数只是用于生成单个css样式，对于css样式表的生成需要使用css函数，css函数中可以将style对象作为构件使用
+The style function is only used to generate a single CSS style, and CSS functions are required for the generation of CSS style sheets, and the style object can be used as a component in the CSS function
 
-基本使用语法如下
+The basic usage syntax is as follows
 
 ```ts
 type ICssBase = string | IStyleBuilder | IStyleAtoms | IReactBuilder;
@@ -238,7 +238,7 @@ type ICssBase = string | IStyleBuilder | IStyleAtoms | IReactBuilder;
 type ICssCBArg = ICssBase | ICssCBArg[];
 
 interface ICssCallback {
-    (...args: ICssCBArg[]): {
+    (... args: ICssCBArg[]): {
         reactiveStyle(setStyle: (v:string) => void): void;
         mount(selector?: string | HTMLElement): void;
     };
@@ -257,25 +257,25 @@ css('#app')(
 )
 ```
 
-### 5.1 使用示例
+### 5.1 Usage examples
 
-css函数支持使用嵌套语法，可以有效的避免全局样式污染
+CSS functions support nesting syntax, which can effectively avoid global style pollution
 
-css函数执行完成之后需要会生成个一段响应式的css样式表，需要通过mount函数插入文档
+After the CSS function is executed, a reactive CSS style sheet needs to be generated, and the document needs to be inserted through the mount function
 
-#### 5.1.1 mount函数
+#### 5.1.1 mount function
 
-先讲解一下mount函数
+Let's talk about the mount function first
 
-mount函数支持传入字符串或者dom元素，一般不需要传入任何参数，为空时会默认使用 CSSStyleSheet插入 adoptedStyleSheets 中，如果不支持会插入到head中
+The mount function supports passing in strings or dom elements, generally does not need to pass in any parameters, and will use CSSStyleSheet to insert adoptedStyleSheets by default when empty, and will be inserted into the head if it is not supported
 
 ```js
-css()('style').mount(); // 默认插入 adoptedStyleSheets 中
-css()('style').mount(document.head); // 传入dom节点
-css()('style').mount('#app'); // 传入选择器
+css()('style').mount(); By default, it is inserted into adoptedStyleSheets
+css()('style').mount(document.head); Pass in the DOM node
+css()('style').mount('#app'); Pass in the selector
 ```
 
-#### 5.1.2 传入选择器
+#### 5.1.2 Pass in selectors
 
 <code-runner/>
 
@@ -302,13 +302,13 @@ input.model(num, 'number').mount();
 div('.parent:Parent', div('.child:Child')).mount();
 ```
 
-> 嵌套使用数组定义子css样式，& 符号表示应用在当前父元素上
+> nesting uses arrays to define child CSS styles, and the & symbol is applied to the current parent element
 
-> 参数传入接受 支持传入字符串、StyleBuiler、原子样式和响应式字符串，与伪类一致
+> Parameter Incoming Acceptance supports incoming strings, StyleBuiler, atomic styles, and responsive strings, consistent with pseudo-classes
 
-#### 5.1.3 不传入选择器
+#### 5.1.3 Do not pass in selectors
 
-不传入选择器表示一个全局样式
+Do not pass in selectors to represent a global style
 
 ```js
 const simpleStyle = style({
@@ -322,11 +322,11 @@ css()(
 ).mount();
 ```
 
-### 5.2 reactiveStyle 函数
+### 5.2 reactiveStyle function
 
-css Object除了可以mount到文档中外，还可以自行传入一个函数监听style元素的改变，在这个监听中可以由开发者决定后续的处理逻辑
+In addition to mounting to the document, css object can also pass in a function to listen for changes in the style element, and in this listener, the developer can decide the subsequent processing logic
 
-reactiveStyle 函数就是用于接受这个监听函数
+The reactiveStyle function is used to accept this listener function
 
 <code-runner/>
 
@@ -347,10 +347,9 @@ css('#app')(
 })
 ```
 
+## 6. Use independently
 
-## 6. 独立使用
-
-alins-style 支持独立于 alins 使用，搭配原生dom，也可以支持响应式样式变更
+Alins-style supports independent use of alins, with native DOMs, and can also support responsive style changes
 
 <code-runner/>
 

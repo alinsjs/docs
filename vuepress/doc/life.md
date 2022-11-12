@@ -3,21 +3,21 @@
  * @Date: 2022-11-05 10:51:30
  * @Description: Coding something
  * @LastEditors: chenzhongsheng
- * @LastEditTime: 2022-11-08 23:15:14
+ * @LastEditTime: 2022-11-12 16:15:17
 -->
-## 1. 生命周期概述
+## 1. Lifecycle overview
 
-在alins中，一个dom节点拥有一下五个生命周期函数
+In alins, a DOM node has the following five lifecycle functions
 
-1. created: 节点被创建还未添加到文档上
-2. appended: 节点被append到了父元素上, 但是不一定被挂载到了文档上
-3. mounted: 节点被挂载到了文档上
-4. updated: 节点响应数据更新
-5. removed: 节点被移除
+1. created: The node has not been added to the document since it was created
+2. appended: The node is appended to the parent element, but not necessarily mounted to the document
+3. mounted: The node is mounted on the document
+4. updated: The node responds to data updates
+5. removed: The node is removed
 
 ## 2. created
 
-以下为created函数的回调函数类型，接受一个dom元素作为回调参数
+The following is the callback function type of the created function, which accepts a DOM element as a callback parameter
 
 ```ts
 type ILifeCallbackCommon = (dom:HTMLElement)=>void;
@@ -35,7 +35,7 @@ button('Add a div', click(()=>{
 
 ## 3. appended
 
-appended 回调函数同 created
+The appended callback function is the same as created
 
 <code-runner/>
 
@@ -47,10 +47,9 @@ button('Add a div', click(()=>{
 })).mount();
 ```
 
-
 ## 4. mounted
 
-mounted 回调函数同 created
+The mounted callback function is the same as created
 
 <code-runner/>
 
@@ -62,15 +61,14 @@ button('Add a div', click(()=>{
 })).mount();
 ```
 
-
 ## 5. updated
 
-updated 回调函数如下
+The updated callback function is as follows
 
 ```ts
-type TUpdatedType = 'value' | 'text' | 'className' | 'attribute-key' |  'attribute-value' |'id';
+type TUpdatedType = 'value' | 'text' | 'className' | 'attribute-key' |  'attribute-value' |' id';
 type IUpdatedCallback = (data: {
-    node: Node | HTMLElement, // 当前节点
+    node: Node | HTMLElement, // The current node
     type: TUpdatedType,
     value: any,
     prevValue: any,
@@ -99,7 +97,7 @@ div.for(result)(item => div(item)).mount();
 
 ## 6. removed
 
-mounted 回调函数同 created
+The mounted callback function is the same as created
 
 <code-runner/>
 
@@ -114,7 +112,7 @@ const onremoved = removed((dom) => {result.push('removed:'+dom.tagName)});
 
 const num = $(0);
 
-button('Add num', click(()=>{num.value += 1;})).mount();
+button('Add num', click(()=>{num.value += 1; })).mount();
 
 div.switch(num)
     .case(1)(
@@ -127,11 +125,11 @@ div.switch(num)
 div.for(result)(item => div(item)).mount();
 ```
 
-## 7. life 函数
+## 7. life function
 
-life函数也可以声明一个生命周期对象
+The life function can also declare a lifecycle object
 
-`life('created') 等价于 created`
+'life('created') is equivalent to created'
 
 <code-runner/>
 
@@ -147,11 +145,11 @@ div('Hello!', oncreated).mount();
 div.for(result)(item => div(item)).mount();
 ```
 
-## 8. 组件生命周期
+## 8. Component lifecycle
 
-alins组件不支持生命周期函数，因为alins组件本质只是一些普通节点的集合
+The alins component does not support lifecycle functions because the alins component is essentially just a collection of ordinary nodes
 
-如果要在组件上使用，可以是组件只返回一个dom-builder，然后对该builder使用
+If you want to use it on a component, you can just return a dom-builder and then use it for that builder
 
 <code-runner/>
 

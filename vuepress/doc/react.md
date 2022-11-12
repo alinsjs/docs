@@ -3,31 +3,31 @@
  * @Date: 2022-11-05 10:51:15
  * @Description: Coding something
  * @LastEditors: chenzhongsheng
- * @LastEditTime: 2022-11-08 23:46:54
+ * @LastEditTime: 2022-11-12 16:20:48
 -->
-## 1. 响应式概述
+## 1. Responsive overview
 
-Alins 使用 react函数 声明一个响应式数据，为了书写方便，Alins 导出了 $ 作为 react 的别名
+Alins uses the react function to declare a reactive data, and for writing convenience, Alins exports $ as an alias for react
 
-响应式数据分为值类型和对象类型，都可以使用 $ 函数定义，对象类型在Alins内部使用 createProxy 方法定义，Alins也导出了这个方法
+Reactive data is divided into value types and object types, which can be defined using the $ function, which is defined internally by Alins using the createProxy method, which Alins also derives
 
-响应式数据可以应用在Alins应用的很多场景，包括文本、html、类名、属性名、id、控制器、组件、alins-style等，后续我们会一一介绍
+Responsive data can be applied to many scenarios of Alins applications, including text, html, class names, property names, ids, controllers, components, alins-style, etc., which we will introduce one by one later
 
-## 2. react函数
+## 2. React function
 
-我们使用 react函数 创建一个响应式数据, 如果需要手动对响应式数据监听变更，我们可以使用 subscribe 方法，该方法名是一个 sybmol
+We use the React function to create a reactive data, and if we need to manually listen for changes to the reactive data, we can use the subscribe method, which is called sybmol
 
-如果需要对 响应式数据 赋值我们需要使用value属性，该属性在响应式值类型中是一个字符串，在对象类型中是一个symbol，其中对象类型赋值也可以不借助 value属性，而是直接访问属性名
+If we need to assign a value to reactive data we need to use the value property, which is a string in the reactive value type and a symbol in the object type, where the object type assignment can also be accessed directly without the help of the value property
 
-后续我们会通过示例来演示一下，
+We will demonstrate it with an example later,
 
-值类型数据
+Value type data
 
-<code-runner title='react 函数值类型示例'/>
+<code-runner title='react function value type example'/>
 
 ```js
 import {$, subscribe, div, click, button} from 'alins';
-const num = $(1); // 我们使用别名
+const num = $(1); // We use aliases
 
 num[subscribe]((newValue, old)=>{
     alert(`subscribe: ${newValue} ${old}`)
@@ -36,13 +36,13 @@ num[subscribe]((newValue, old)=>{
 button('Add num', click(() => {num.value++})).mount();
 ```
 
->  注：一般开发应用过程我们不需要主动监听变更，这里只是演示一下 react 函数如何独立使用
+> Note: We don't need to actively listen for changes during general application development, here is just a demonstration of how to use React functions independently
 
-通过使用 forceUpdate 方法可以主动触发响应式数据绑定的响应回调
+By using the forceUpdate method, you can proactively trigger response callbacks for reactive data binding
 
-通过 getListeners 方法可以查看绑定的响应回调函数队列
+The getListeners method allows you to view the bound response callback function queue
 
-通过 json 方法可以查看原始数据（一般用于响应式对象）
+Raw data can be viewed via JSON methods (typically used for responsive objects)
 
 ```js
 import {$, subscribe, forceUpdate, getListeners, json} from 'alins';
@@ -57,15 +57,15 @@ num[getListeners]();
 num[json]();
 ```
 
-## 3. 响应式对象
+## 3. Responsive objects
 
-react函数识别到一个对象之后会自动使用 createProxy 函数对其进行监听，使用方法基本与值类型对象一致
+After the react function recognizes an object, it will automatically use the createProxy function to listen to it, and the method used is basically the same as that of the value type object
 
-<code-runner title='react 函数值类型示例'/>
+<code-runner title='react function value type example'/>
 
 ```js
 import {$, subscribe, div, click, button, value} from 'alins';
-const obj = $({a: 1, b: [1, 2]}); // 我们使用别名
+const obj = $({a: 1, b: [1, 2]}); // We use aliases
 
 obj[subscribe]((newValue, old) => {
     alert(`subscribe: ${JSON.stringify(newValue)} ${JSON.stringify(old)}`);
@@ -76,11 +76,11 @@ button('Mod object', click(() => {
 })).mount();
 ```
 
-## 4. computed函数
+## 4. computed functions
 
-使用computed函数可以对一个响应式数据生成一个 computed 对象，支持进行 get、set运算
+Use the computed function to generate a computed object on a reactive data, supporting get and set operations
 
-当传入函数默认为只使用get
+When passing in the function defaults to only use get
 
 <code-runner/>
 
@@ -97,7 +97,7 @@ numComputed[subscribe]((v)=>{
 button('Mod num', click(() => { num.value ++; })).mount();
 ```
 
-如果要使用 set 可以传入一个对象
+If you want to use set, you can pass in an object
 
 <code-runner/>
 
@@ -117,11 +117,11 @@ button('Mod num', click(() => { num.value ++; })).mount();
 button('Mod numComputed', click(() => { numComputed.value ++; })).mount();
 ```
 
-## 5. watch函数
+## 5. watch function
 
-使用 watch 函数可以监听 react数据或者computed数据的变更，实际作用与 subscribe 函数一致
+Use the watch function to listen for changes to react data or computed data, and the actual effect is the same as that of the subscribe function
 
-watch函数也可以直接传入一个函数，监听函数内所有依赖的值的变更
+The watch function can also be passed directly into a function to listen for changes in all dependent values in the function
 
 <code-runner/>
 
@@ -143,49 +143,49 @@ watch(()=>{
 button('Mod num', click(() => { num.value ++; })).mount();
 ```
 
-## 6. 响应式绑定
+## 6. Responsive binding
 
-响应式数据可以应用在Alins应用的很多场景，包括文本、html、类名、属性名、id、控制器、组件、alins-style等
+Reactive data can be applied to many scenarios of Alins applications, including text, html, class names, property names, ids, controllers, components, alins-style, etc
 
-这里的响应式数据包含 react数据和computed数据
+The reactive data here contains react data and computed data
 
-本小节我们介绍响应式数据的绑定用法与文本、html、类名、属性名、id的绑定，其他类型会在后续相应章节中介绍
+In this section, we introduce the binding usage of responsive data and the binding of text, html, class names, attribute names, and ids, and other types will be introduced in the corresponding sections later
 
-后续的演示示例可以借助响应式绑定来完成结果输出，而不需要依赖alert函数了
+Subsequent demo examples can use reactive binding to output results without relying on the alert function
 
-响应式数据按照使用场景分类可以分为 `模板使用` 和 `传参使用`
+Reactive data can be categorized according to usage scenarios can be divided into 'template usage' and 'parameter transfer use'
 
-> 模板使用 指将响应式数据内嵌在模板字符串中，通过react函数调用 如: $\`Hello ${msg}\`
+> Template usage Refers to embedding responsive data in the template string, called via the React function such as: $\`Hello ${msg}\`
 
-> 传参使用 指将响应式数据作为参数，在支持响应式的函数中传入使用 如: html(msg)
+> Parameter Usage Refers to taking reactive data as a parameter and passing in a function that supports reactive use such as: html(msg)
 
-按照使用方式分类可以分为 `直接使用` 和 `函数引用使用`
+According to the way of use, it can be divided into 'direct use' and 'function reference use'
 
-> 直接使用 如: $\`Hello ${msg}\` 、 html(msg)
+> Direct use such as: $\`Hello ${msg}\` 、 html(msg)
 
-> 函数引用使用 指通过函数包裹使用 如：$\`Hello ${()=>msg.value+"!"}\` 、 html(()=>msg.value+"!")
+> Function reference usage Refers to wrapping use through functions such as: $\`Hello ${()=>msg.value+"!"}\` 、 html(()=>msg.value+"!")
 
-模板使用示例
+Example template usage
 
 <code-runner/>
 
 ```js
 import {$, click, button, br, computed, div, html} from 'alins';
 const num = $(0);
-const addNum = click(()=>{num.value++})
-const computedNum = computed(() => `<strong>Add strong num: ${num.value}</strong>`);
+const addNum = click(()=>{num.value++});
+const computedNum = computed(() => `<strong>Add strong num ${num.value}</strong>`);
 div(
-    button($`Add num: ${num}`, addNum), // 模板使用 + 直接使用
-    button($`Add num: ${()=>num.value+3}`, addNum), // 模板使用 + 函数使用
+    button($`Add num ${num}`, addNum), // template use + use directly
+    button($`Add num ${()=>num.value+3}`, addNum), // template use + function
     br(),
-    button(html(computedNum), addNum), // 传参使用 + 直接使用
-    button(html(()=> computedNum.value + '!'), addNum), // 传参使用 + 函数使用
-).mount()
+    button(html(computedNum), addNum), // Pass parameters + use directly
+    button(html(()=> computedNum.value + '!'), addNum), // parameter use + function use
+).mount();
 ```
 
-> 注：后续所有的绑定使用基本也都是这四种组合的使用
+> Note: All subsequent binding uses are basically the use of these four combinations
 
-对于dom文本的绑定也可以直接使用 react对象作为参数
+Binding to DOM literals can also directly use the React object as a parameter
 
 <code-runner/>
 
@@ -194,5 +194,3 @@ import {$, div} from 'alins';
 const msg = $('Hello World!');
 div(msg).mount()
 ```
-
-

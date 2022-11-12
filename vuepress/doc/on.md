@@ -3,13 +3,13 @@
  * @Date: 2022-11-05 10:51:00
  * @Description: Coding something
  * @LastEditors: chenzhongsheng
- * @LastEditTime: 2022-11-12 15:11:11
+ * @LastEditTime: 2022-11-12 16:10:56
 -->
-## 1. 事件builder
+## 1. Event builder
 
-在 Alins 中，我们使用事件函数来构建一个事件builder，事件builder可以作为参数传给 dom-builder函数绑定到dom对象上
+In Alins, we use event functions to build an event builder that can be passed as a parameter to the dom-builder function to bind to the dom object
 
-如下是一个简单的 click 事件演示
+The following is a simple click event demonstration
 
 <code-runner/>
 
@@ -19,9 +19,9 @@ const onclick = ()=>{ alert('clicked!') }
 button('click me', click(onclick)).mount();
 ```
 
-### 1.1 默认导出事件
+### 1.1 Export events by default
 
-以下是 alins 中默认导出的常用事件builder
+The following are common event builders that are exported by default in alins
 
 ```js
 const MainEventNames = [
@@ -30,13 +30,13 @@ const MainEventNames = [
 ]
 ```
 
->  注：input事件由于与 input标签命名冲突，导出时的变量名为 $input，使用 events 访问时不受影响
+> Note: Due to the naming conflict with the input tag, the variable named $input when exporting is not affected when accessed using events
 
-对于没有默认导出的事件有以下两种使用方式
+There are two ways to use events that do not have a default export
 
 ### 1.2 events
 
-使用events对象可以访问绝大多数事件
+The vast majority of events can be accessed using the events object
 
 <code-runner/>
 
@@ -46,9 +46,9 @@ const onclick = ()=>{ alert('mouse enter') }
 button('mouse enter', events.mouseenter(onclick)).mount();
 ```
 
-### 1.2 自定义事件名
+### 1.2 Custom event name
 
-使用 on 函数可以创建一个事件builder函数
+Use the on function to create an event builder function
 
 <code-runner/>
 
@@ -58,11 +58,11 @@ const onclick = ()=>{ alert('clicked!') }
 button('click me', on('click')(onclick)).mount();
 ```
 
->  注： `on('click') 等价与 click`
+> Note: 'on('click') is equivalent to click'
 
-## 2. 事件传参
+## 2. Event parameters
 
-可以使用 event builder的 args 函数来进行传参
+You can use Event Builder's args function to pass parameters
 
 <code-runner/>
 
@@ -74,21 +74,21 @@ button('click me',
 ).mount();
 ```
 
-## 3. 事件修饰符
+## 3. Event modifiers
 
-event builder函数可以传入事件修饰符，以下是可选的事件修饰符
+Event Builder functions can pass in event modifiers, and the following are optional event modifiers
 
 ```ts
 type TEventDecorator = 'prevent' | 'stop' | 'capture' | 'once' | 'self';
 ```
 
-1. prevent：阻止默认事件（常用）；
-2. stop：阻止事件冒泡（常用）；
-3. once：事件只触发一次（常用）；
-4. capture：使用事件的捕获模式；
-5. self：只有event.target是当前操作的元素时才触发事件；
+1. prevent: block default events (commonly used);
+2. stop: stop event bubbling (commonly used);
+3. once: the event is triggered only once (commonly used);
+4. capture: Use the capture mode of events;
+5. self: The event is triggered only if event.target is an element of the current operation;
 
-看一个例子
+Look at an example
 
 <code-runner/>
 
@@ -101,9 +101,9 @@ div('parent',
 ).mount();
 ```
 
-### 3.1 修饰符快捷用法
+### 3.1 Modifier shortcuts
 
-对于 prevent 和 stop 修饰符，有时不需要其执行任何事件，只需要触发prevent或stop的效果就可以，那边可以通过 prevent 和 stop属性快捷使用
+For the prevent and stop modifiers, sometimes they do not need to perform any events, just trigger the effect of prevent or stop, which can be used quickly through the prevent and stop properties
 
 <code-runner/>
 
@@ -116,11 +116,9 @@ div('parent',
 ).mount();
 ```
 
+## 4. Event and this access
 
-
-## 4. event和this访问
-
-如果要访问事件的原生的event和this对象(绑定事件的dom) ，只需要访问 listener 倒数第二个和倒数第一个回调参数即可
+If you want to access the event's native event and this object (the dom of the bound event), you only need to access the listener penultimate and penultimate callback parameters
 
 <code-runner/>
 

@@ -3,15 +3,14 @@
  * @Date: 2022-11-05 10:51:06
  * @Description: Coding something
  * @LastEditors: chenzhongsheng
- * @LastEditTime: 2022-11-12 14:04:16
+ * @LastEditTime: 2022-11-12 16:14:44
 -->
 
 ## 1. comp-builder
 
-Alins中，一个函数即为一个组件，通过 comp 函数包裹之后会生成一个 comp-builder，通过将其挂载到dom节点、dom-builder、comp-builder 对象上，就可以实现将这个 comp-builder 对象渲染到文档上
+In Alins, a function is a component, wrapped through the comp function will generate a comp-builder, by mounting it to the dom node, dom-builder, comp-builder object, you can achieve this comp-builder object to the document
 
-
-以下是一个 comp-builder对象的结构
+The following is the structure of a comp-builder object
 
 ```ts
 interface IComponentBuilder {
@@ -21,9 +20,9 @@ interface IComponentBuilder {
 }
 ```
 
-我们通过一下代码将一个 hello world的组件挂载到body节点上
+Let's mount a hello world component to the body node with the following code
 
-<code-runner title='dom示例'/>
+<code-runner title='dom example'/>
 
 ```js
 import {div, comp} from 'alins';
@@ -31,9 +30,9 @@ const HelloWorld = () => div('Hello World!');
 comp(HelloWorld).mount();
 ```
 
-组件的返回值是一个 TElementChild ，该类型可以是 null（null会被跳过）、dom元素、dom-builder、comp-builder，还可以是后续章节中将会介绍到的对象，以及可以使他们的数组形式
+The return value of the component is a TElementChild of null (null is skipped), dom elements, dom-builder, comp-builder, and objects that will be described in subsequent chapters, as well as arrays that can be used
 
-也可以是一个函数 来返回上述其他类型
+It can also be a function to return the other types mentioned above
 
 ```ts
 type TElementChild = null | HTMLElement | IElementBuilder | IComponentBuilder |
@@ -41,11 +40,11 @@ type TElementChild = null | HTMLElement | IElementBuilder | IComponentBuilder |
     IModelBuilder | ISwitchBuilder<any, any> | (()=>TElementChild) | TElementChild[];
 ```
 
-## 2. prop函数
+## 2. prop function
 
-父子组件之间传参使用 prop 函数进行，在组件中通过 props 参数使用传入的参数
+Parameters passed between parent-child components are made using the prop function, and the parameters passed in are used in the component through props parameters
 
-<code-runner title='父子组件传参示例'/>
+<code-runner title='Parent-child component parameter example'/>
 
 ```js
 import {div, comp, prop} from 'alins';
@@ -57,13 +56,13 @@ const Parent = () => [
 comp(Parent).mount();
 ```
 
->  注：props 中的属性都经过了响应式处理，普通取值需要使用 .value 访问。详见后续 响应式数据
+> Note: The properties in props are reactive, and normal values need to be accessed using .value. See Responsive data later
 
-## 3. event函数
+## 3. event function
 
-父子组件之间的事件传递使用 event 函数进行，在组件中通过 events 参数使用传入的事件
+Event passing between parent-child components occurs using the event function, and incoming events are used in the component via the events parameter
 
-<code-runner title='父子事件示例'/>
+<code-runner title='parent-child event example'/>
 
 ```js
 import {button, comp, click, event} from 'alins';
@@ -76,13 +75,13 @@ const Parent = () => [
 comp(Parent).mount();
 ```
 
-## 3. slot函数（插槽）
+## 3. Slot function (slot)
 
-父组件可以通过使用插槽将dom元素注入子组件中，插槽使用slot函数定义，在子组件中可以通过 slots参数插入子组件内部
+The parent component can inject DOM elements into the child component by using slots, which are defined using slot functions, and inserted inside the child component via slot parameters
 
-单个插槽使用
+Single slot used
 
-<code-runner title='插槽示例'/>
+<code-runner title='slot example'/>
 
 ```js
 import {div, comp, slot} from 'alins';
@@ -94,9 +93,9 @@ const Parent = () => [
 comp(Parent).mount();
 ```
 
-多个插槽使用
+Multiple slots are used
 
-<code-runner title='多个插槽示例'/>
+<code-runner title='Multiple slot examples'/>
 
 ```js
 import {div, comp, slot} from 'alins';
@@ -110,11 +109,11 @@ const Parent = () => [
 comp(Parent).mount();
 ```
 
-## 4. 函数作为组件返回值
+## 4. The function returns the value as a component
 
-支持使用函数作为组件的返回值
+Support for using functions as return values for components
 
-<code-runner title='函数作为组件返回值'></code-runner>
+<code-runner title='function returns as component value' ></code-runner>
 
 ```js
 import {comp, div, slot} from 'alins';

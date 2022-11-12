@@ -3,18 +3,18 @@
  * @Date: 2022-10-30 02:42:04
  * @Description: Coding something
  * @LastEditors: chenzhongsheng
- * @LastEditTime: 2022-11-12 15:22:31
+ * @LastEditTime: 2022-11-12 16:14:07
 -->
 <template>
     <div v-show='localCode!==""' class='code-runner' ref='runner'>
         <span class='code-title'>{{title}}</span>
-        <span class='code-desc'>{{result ? desc: '点击右侧按钮在jsbox中运行该代码'}}</span>
-        <i class='ei-play code-btn' @click='jsbox' title='打开jsbox'></i>
-        <i class='ei-copy code-btn' @click='copy' title='复制代码'></i>
-        <i class='ei-undo code-btn' @click='run' title='重新运行'></i>
+        <span class='code-desc'>{{result ? desc: 'Click the button on the right to run the code in jsbox'}}</span>
+        <i class='ei-play code-btn' @click='jsbox' title='Open jsbox'></i>
+        <i class='ei-copy code-btn' @click='copy' title='Copy code'></i>
+        <i class='ei-undo code-btn' @click='run' title='Refresh'></i>
         <i class='code-btn' :class="{'ei-eye-close': showCode.visible, 'ei-eye-open': !showCode.visible}"
-           @click='toggleShowCode' :title='showCode.visible?"隐藏代码":"显示代码"'></i>
-        <i v-show='result && !isEdit' class='ei-code code-btn' @click='edit' title='开启编辑'></i>
+           @click='toggleShowCode' :title='showCode.visible?"Hide code":"Show code"'></i>
+        <i v-show='result && !isEdit' class='ei-code code-btn' @click='edit' title='Turn on Editing'></i>
     </div>
 </template>
 
@@ -26,11 +26,11 @@
         props: {
             title: {
                 type: String,
-                default: '演示程序'
+                default: 'Demo program'
             },
             desc: {
                 type: String,
-                default: '右侧按钮可以开启编辑|在线运行'
+                default: 'The button on the right can turn on editing | run online'
             },
             result: {
                 type: Boolean,
@@ -94,7 +94,7 @@
                 if (!next) return;
                 if (this.codeResultEl) this.codeResultEl.innerHTML = '';
                 this.runBase(next);
-                this.$toast('重新运行成功');
+                this.$toast('Refresh Success');
             },
             edit () {
                 const next = this.next;
@@ -122,7 +122,7 @@
                     div.className = 'code-result';
                     const run = document.createElement('i');
                     run.className = 'ei-undo code-btn in-result';
-                    run.title = '重新运行';
+                    run.title = 'Refresh';
                     run.onclick = () => {this.run();};
                     div.appendChild(run);
                     this.codeResultEl = div;
@@ -140,7 +140,7 @@
                 jsbox.code(this.localCode, this.localLang, this.env);
             },
             copy () {
-                this.$toast(copy(this.next.querySelector('code').innerText) ? '复制成功' : '复制失败');
+                this.$toast(copy(this.next.querySelector('code').innerText) ? 'Copy Success' : 'Copy Fail');
             },
             transformCode (code) {
                 this.env = /from *['"]alins\-style['"]/.test(code) ? 'alins-style' : 'alins';

@@ -3,13 +3,13 @@
  * @Date: 2022-11-05 10:50:46
  * @Description: Coding something
  * @LastEditors: chenzhongsheng
- * @LastEditTime: 2022-11-12 14:20:48
+ * @LastEditTime: 2022-11-12 16:09:48
 -->
 ## 1. dom-builder
 
-在 Alins中，我们使用函数来构造的 dom-builder 对象，通过将其挂载到dom节点、dom-builder、comp-builder 对象上，就可以实现将这个 dom-builder 对象渲染到文档上
+In Alins, we use functions to construct a dom-builder object that can be rendered to a document by mounting it to a dom node, dom-builder, and comp-builder object
 
-以下是一个 dom-builder对象的结构
+The following is the structure of a dom-builder object
 
 ```ts
 interface IElementBuilder {
@@ -19,28 +19,28 @@ interface IElementBuilder {
 }
 ```
 
-### 1.1. Hello World 示例
+### 1.1. Hello World example
 
-我们通过一下代码将一个 hello world的div挂载到body节点上
+Let's mount a Hello World div to the body node with the following code
 
-<code-runner title='dom示例'></code-runner>
+<code-runner title='dom example' ></code-runner>
 
 ```js
 import {div} from 'alins';
 div('Hello World!').mount();
 ```
 
-### 1.2. 构建dom-builder对象
+### 1.2. Build the dom-builder object
 
-#### 1.2.1 默认导出的dom对象
+#### 1.2.1 The DOM object is exported by default
 
-通过从alins默认导出的builder函数，我们可以创建几乎所有的dom对象
+With the builder function exported from alins by default, we can create almost any DOM object
 
 ```js
 import {div, span, a, i, img, input, button ...} from 'alins';
 ```
 
-以下是默认导出的builder函数
+The following are the builder functions exported by default
 
 ```js
 const MainDomNames = [
@@ -49,9 +49,9 @@ const MainDomNames = [
 ]
 ```
 
-#### 1.2.2 其他dom对象
+#### 1.2.2 Other DOM objects
 
-可以看到上面只包含一小部分常用的dom元素，对于其他的没有导出的我们可以通过 doms对象来使用
+You can see that the above only contains a small number of commonly used DOM elements, and for others that are not exported, we can use them through DOMS objects
 
 <code-runner/>
 
@@ -61,7 +61,7 @@ doms.header('header').mount();
 doms.section('section').mount();
 ```
 
-那么如果需要自定义dom标签内，我们可以使用dom函数
+Then if we need to customize the DOM tag, we can use the DOM function
 
 <code-runner/>
 
@@ -70,35 +70,35 @@ import {dom} from 'alins';
 dom('my-element')('Hello!').mount();
 ```
 
-dom() 函数 会返回一个dom builder，所以 `dom('div') 等价与 div`
+The dom() function returns a dom builder, so 'dom('div') is equivalent to div'
 
-## 2. 属性和内容
+## 2. Properties and content
 
-builder函数通过传参来填充dom的一切内容，包含文本、html、样式、类、属性、孩子节点、事件、响应式数据、控制器、生命周期、等等
+The builder function populates everything in the DOM by passing parameters, including text, html, styles, classes, attributes, child nodes, events, responsive data, controllers, lifecycles, and so on
 
-本章节我先介绍 文本、html、类、属性、孩子节点。 其他 build 参数在后面具体章节进行详细介绍
+In this chapter, I will first introduce text, html, classes, attributes, and child nodes. Other build parameters are described in detail in later sections
 
-我们直接使用参数进行传入所有build参数，语法如下
+We directly use parameters to pass in all build parameters, the syntax is as follows
 
 ```ts
-builder(...BuildArgs: TBuildArgs[]);
+builder(... BuildArgs: TBuildArgs[]);
 ```
 
-### 2.0 空的dom节点
+### 2.0 Empty dom node
 
-不传入任何参数表示构造一个空的dom节点
+Passing in no parameters means constructing an empty DOM node
 
 ```js
 div();
 ```
 
-### 2.1 文本、类、属性
+### 2.1 Text, classes, attributes
 
-这三种属性我们都可以直接使用字符串传参，alins使用emment风格解析字符串
+We can directly use string parameters for these three attributes, and alins uses the emment style to parse strings
 
-#### 2.1.1 传入文本
+#### 2.1.1 Incoming text
 
-<code-runner title='文本'></code-runner>
+<code-runner title='text' ></code-runner>
 
 ```js
 import {div} from 'alins';
@@ -106,51 +106,51 @@ div('Hello World!').mount();
 div(':Hello World!').mount();
 ```
 
-冒号表示后面是文本内容，如果是单独传入文本内容则可以忽略
+The colon indicates that the text content is followed and can be ignored if the text content is passed in separately
 
-#### 2.1.2 类、属性和id
+#### 2.1.2 Classes, properties, and IDs
 
-使用 `.` 表示类 `[]` 表示属性 `#` 表示id
+Use '.' to indicate class '[]' for attribute '#' for id
 
 <code-runner/>
 
 ```js
 import {div} from 'alins';
-div('类实例', '.class1.class2').mount();
-div('属性实例', '[disabled][title=属性实例]').mount();
-div('id实例', '#idDemo').mount();
-div('组合使用', '#idDemo.class1.class2[title=组合]').mount();
+div('class instance', '.class1.class2').mount();
+div('property instance', '[disabled][title=property instance]').mount();
+div('id instance', '#idDemo').mount();
+div('combination', '#idDemo.class1.class2[title=combination]').mount();
 ```
 
-#### 2.1.1 改变dom标签
+#### 2.1.1 Change the DOM tag
 
-可以使用 `/` 表示改变 当前dom-builder的标签，这在if和switch控制器场景中会有一定作用
+You can use '/' to change the current dom-builder tag, which will be useful in if and switch controller scenarios
 
 <code-runner />
 
 ```js
 import {div} from 'alins';
-div('/button:我现在变成了一个button').mount();
+div('/button: I now become a button').mount();
 ```
 
-#### 2.1.1 组合使用
+#### 2.1.1 Combination
 
 <code-runner />
 
 ```js
 import {div} from 'alins';
-div('#domDemo.dom-class.dom-class2[title=domDemo2]:组合使用').mount();
-div('/h3#domDemo2.dom-class[title=domDemo2]:组合使用且改变标签').mount();
-div('组合分离使用', '.dom-class', '[title=domDemo3]').mount();
+div('#domDemo.dom-class.dom-class2[title=domDemo2]: use in combination').mount();
+div('/h3#domDemo2.dom-class[title=domDemo2]: combine and change the label').mount();
+div('Combinatorial separation use', '.dom-class', '[title=domDemo3]').mount();
 ```
 
-### 2.2 孩子节点
+### 2.2 Child nodes
 
-将builder作为参数传递给另一个builder，那么这个builder就成为另一个builder的孩子节点
+Pass the builder as an argument to another builder, and that builder becomes a child node of another builder
 
-也支持以builder数组作为参数
+Builder arrays are also supported as arguments
 
-<code-runner title='文本'></code-runner>
+<code-runner title='text' ></code-runner>
 
 ```js
 import {div} from 'alins';
@@ -161,57 +161,55 @@ div('Parent',
 ).mount();
 ```
 
+## 3. Text & html functions
 
-## 3. text & html 函数
+### 3.3 Text function
 
-### 3.3 text函数
+When the DOM text content contains special characters, such as '.#/[]:' it will conflict with the emment style in 2
 
-当dom文本内容中含有特殊字符时，如 `.#/[]:` 时 就会与 2 中的 emment 风格写法产生冲突
+For such text with special characters, we can use the text function definition
 
-对于这种含有特殊字符的文本，我们可以使用 text 函数定义
-
-<code-runner title='text函数'></code-runner>
+<code-runner title='text function'></code-runner>
 
 ```js
 import {div, text} from 'alins';
 div(
-    text('含有特殊字符的文本:[a=1.12]##//todo'),
+    text('Text with special characters: [a=1.12]##//todo'),
     '.text-content'
 ).mount();
 ```
 
-> 注： text 参数之后后续章节中会介绍到的所有响应式数据
+> Note: All the responsive data described in subsequent sections after the text parameter
 
-### 3.3 html内容
+### 3.3 HTML content
 
-如果要设置某dom元素的html内容，需要借助 html 函数
+If you want to set the HTML content of a DOM element, you need to use HTML functions
 
->  注：使用了html函数之后，所有的子元素、子builder都会不生效
+> Note: After using HTML functions, all child elements and child builders will not take effect
 
-
-<code-runner title='html函数'></code-runner>
+<code-runner title='html function' ></code-runner>
 
 ```js
 import {div, html} from 'alins';
 div(
-    html('<b>html内容</b>'),
+    html('<b>html content</b>'),
     '.html-content'
 ).mount();
 ```
 
-> 注： html 参数之后后续章节中会介绍到的所有响应式数据
+> Note: All the responsive data described in subsequent sections after the html parameter
 
-## 4. mount函数
+## 4. mount function
 
-dom-builder我们已经创建好了，接下来就是需要将其挂载真实的dom节点上渲染出来了
+Now that we have created the dom-builder, the next step is to render it on the real dom node
 
-我们需要使用 dom-builder 的mount函数
+We need to use the dom-builder's mount function
 
 ```ts
 mount(parent?: string | HTMLElement | IComponentBuilder | IElementBuilder): void;
 ```
 
-该函数支持传入选择器、dom元素、domBuilder 或者是组件, 不传入默认值是 'body'
+The function supports passing in selectors, dom elements, domBuilder, or components, without passing in the default value is 'body'
 
 ```js
 div().mount(document.getElementById('app'));
@@ -221,34 +219,34 @@ div().mount();
 const parent = div();
 div().mount(parent); 
 parent.mount(); 
-// >  注：挂载到其他domBuilder上时必须要保证改domBuilder还未被挂载
+> Note: When mounting to another domBuilder, you must ensure that the domBuilder is not mounted
 ```
 
-## 5. 函数作为参数
+## 5. function as a parameter
 
-支持使用函数作为builder的参数，这在一些复杂逻辑中可以使用闭包封装内部逻辑
+Support for using functions as parameters to builders, which in some complex logics can be used to wrap the internal logic using closures
 
-当然如果这种场景过于复杂，一般建议使用组件
+Of course, if this scenario is too complex, it is generally recommended to use components
 
-<code-runner title='函数作为参数'></code-runner>
+<code-runner title='function as argument' ></code-runner>
 
 ```js
 import {div} from 'alins';
 div(
     () => '.class-name[title=func]:text',
-    () => div('单个元素'),
+    () => div('single element'),
     () => [
-        div('数组类型元素'),
-        div('数组类型元素')
+        div('array type element'),
+        div('array type element')
     ],
     () => {
         console.log('do something')
-        return div('逻辑处理')
+        return div ('logical processing')
     }
 ).mount();
 ```
 
-## 6. 总结示例
+## 6. Summarize the example
 
 <code-runner />
 

@@ -3,30 +3,30 @@
  * @Date: 2022-11-05 10:51:23
  * @Description: Coding something
  * @LastEditors: chenzhongsheng
- * @LastEditTime: 2022-11-12 14:35:01
+ * @LastEditTime: 2022-11-12 16:14:59
 -->
 
-## 1. 控制器概述
+## 1. Controller overview
 
-控制器用于对dom或组件进行逻辑控制，如根据数据重复渲染元素，根据响应数据控制显示哪一个元素等
+The controller is used to logically control the DOM or components, such as repeatedly rendering elements based on data, controlling which element is displayed based on response data, etc
 
-alins中控制器有 for，if，show，switch，model
+Alins controllers are for, if, show, switch, model
 
-他们都是在dom或者组件中的方法，控制器使用语法如下
+They are all methods in the DOM or component, and the controller uses the following syntax
 
 ```ts
-builder.controller(react响应式数据)(控制器逻辑);
+builder.controller (react responsive data) (controller logic);
 ```
 
 ## 2. for
 
-for控制器用于根据数组类型响应式数据循环渲染dom或者组件
+The for controller is used to loop through the DOM or component based on the array type of responsive data
 
-for 控制器逻辑 部分是一个函数，第一个参数为数组元素的响应式数据，第二个参数为数组下边的响应式数据
+The for controller logic section is a function with the first argument being the responsive data of the array elements and the second argument being the reactive data below the array
 
-该函数可以返回单个元素，也可以返回一个数组，数组内为dom-builder的参数，会传给for控制器的调用者执行
+The function can return a single element or an array with dom-builder parameters passed to the caller of the for controller to execute
 
-<code-runner title="dom节点for示例"/>
+<code-runner title="DOM node for example"/>
 
 ```js
 import {$, div, span, button, click} from 'alins';
@@ -36,24 +36,24 @@ const list = $([
 ]);
 button('Add person', click(()=>{list.push({name: 'new', age: 10})})).mount();
 div.for(list)((person, index) => 
-    // 返回单个元素
+    Returns a single element
     $`${index}: ${person.name} (age=${person.age})`
 ).mount();
 div('--------').mount();
-// 返回多个元素
+Returns multiple elements
 div.for(list)((person, index) => [
     '.list-item',
     span($`${index}:`),
-    span($`name=${person.name};`),
-    span($`age=${person.age};`),
+    span($`name=${person.name}; `),
+    span($`age=${person.age}; `),
 ]).mount();
 ```
 
 ## 3. if
 
-if 控制器用来根据条件控制元素渲染的内容，可以支持配合 elif，else使用
+The if controller is used to control the content rendered by elements according to conditions, and can be used with elif, else
 
-<code-runner title="配合布尔值单个if使用"/>
+<code-runner title="Use with Boolean single if"/>
 
 ```js
 import {$, div, button, click} from 'alins';
@@ -64,7 +64,7 @@ div(
 ).mount();
 ```
 
-<code-runner title="配合其他类型组合elif和else使用"/>
+<code-runner title="Use with other types to combine EIF and else"/>
 
 ```js
 import {$, div, button, click} from 'alins';
@@ -74,20 +74,20 @@ div(
     div.if(() => age.value<18)('I am not a adult')
         .elif(() => age.value === 18)('I am a adult(age=18)')
         .else($`/h3:I am a adult and age is ${age}`)
-        // >  注：此处可以改变dom元素的标签
-        // else 条件非必须
+        > Note: The tag of the DOM element can be changed here
+        else condition is not required
 ).mount();
 ```
 
->  注：if elif else 传入的判断条件必须要是响应式布尔类型 （React数据、computed数据或者函数）
+> Note: If elif else The judgment condition passed in must be a reactive Boolean type (React data, computed data, or function)
 
 ## 4. show
 
-show 控制器用来根据条件控制元素是否隐藏
+The show controller is used to control whether an element is hidden based on conditions
 
-与if 不同，show控制器的元素不会从dom节点中移除，只是添加了display-none样式
+Unlike if, the elements of the show controller are not removed from the DOM node, just the display-none style is added
 
-<code-runner title="shou控制器示例"/>
+<code-runner title="shou controller example"/>
 
 ```js
 import {$, div, span, button, click} from 'alins';
@@ -100,7 +100,7 @@ div(
 
 ## 5. switch
 
-switch 元素作用于 if 类似，用于根据不同的条件对元素渲染不同的内容，区别在于swicth接受的判断条件为值 而不是必须传入响应式布尔类型数据
+The switch element acts like if and is used to render different content to the element based on different conditions, except that swicth accepts a value instead of having to pass in responsive Boolean type data
 
 <code-runner title="switch"/>
 
@@ -114,16 +114,16 @@ div(
         .case(18)('I am not a adult age only 18')
         .case(19)($`I am not a adult age = ${age}`)
         .default('/h3:I am not a adult age more then 19')
-        // >  注：此处可以改变dom元素的标签
-        // default 分支非必须
+        > Note: The tag of the DOM element can be changed here
+        The default branch is not required
 ).mount();
 ```
 
-## 6. model 双向绑定
+## 6. model two-way binding
 
-model控制器用于对输入框或者 contenteditable元素进行数据双向绑定
+The model controller is used to bind data to input boxes or contenteditable elements in both directions
 
-<code-runner title='number修饰符示例'/>
+<code-runner title='number modifier example'/>
 
 ```js
 import {$, input, div} from 'alins';
@@ -132,12 +132,11 @@ div($`msg=${msg}`).mount();
 input.model(msg).mount(); 
 ```
 
+> Note: The syntactic call with the last parenthesis is mandatory, but alins does the processing, and if the input content is empty, the builder call can be omitted
 
->  注：按照语法最后一个括号调用是必须的，但是alins做了处理，如果input内容为空，可以省略builder调用
+If you want to add content to the input element, you can add it
 
-如果要对input元素增加内容，则可以加上
-
-<code-runner title='number修饰符示例'/>
+<code-runner title='number modifier example'/>
 
 ```js
 import {$, input, div} from 'alins';
@@ -146,14 +145,14 @@ div($`msg=${msg}`).mount();
 input.model(msg)('.input-item[title=input something]').mount();
 ```
 
-### 6.1 model修饰符
+### 6.1 model modifier
 
-model修饰符用于修饰绑定的数据类型，修饰符有以下两个
+The model modifier is used to decorate the bound data type, and there are two modifiers
 
-1. 'number': 返回number类型
-2. 'camel': 对返回值小写处理
+1. 'number': Returns the number type
+2. 'camel': lowercase treatment of return values
 
-<code-runner title='number修饰符示例'/>
+<code-runner title='number modifier example'/>
 
 ```js
 import {$, div, input} from 'alins';
@@ -164,13 +163,13 @@ div(
 ).mount();
 ```
 
-> 注：如果元素设置了 type=number 属性，则会默认开启 number修饰符
+> Note: If the element has the type=number attribute set, the number modifier will be turned on by default
 
-## 7. 组件 + 控制器
+## 7. Component + controller
 
-控制器也可以配合组件一起使用
+Controllers can also be used with components
 
-<code-runner title='组件 + 控制器'/>
+<code-runner title='component + controller'/>
 
 ```js
 import {$, div, h4, input, comp, prop, button, click} from 'alins';
@@ -186,7 +185,7 @@ div(
         .elif(() => num.value < 0)(prop({value: '<0'}))
         .else(prop({value: ()=>`value=${num.value}`})),
     h4('show sample'),
-    Child.show(() => num.value > 1)(prop({value: 'show!: value>1'})),
+    Child.show(() => num.value > 1)(prop({value: 'show!: value> 1'})),
     h4('switch sample'),
     Child.switch(num)
         .case(0)(prop({value: 'case num=0!'}))
