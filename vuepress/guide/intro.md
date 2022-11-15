@@ -56,7 +56,7 @@ Alins Everything is a function, allowing you to stitch everything in web develop
 
 With Alins-style's Css-In-JS scheme, you can realize responsive changes to any formal style, including inline styles, selector styles, pseudo-classes, pseudo-elements. And Alins-style can run independently of Alins.
 
-[Feedback Question] (https://github.com/alins/issues/new) 
+[Feedback Question](https://github.com/alins/issues/new) 
 
 ## 2. Features
 
