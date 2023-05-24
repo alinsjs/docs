@@ -9,4 +9,4 @@ Open source maintenance is not easy. If the project is helpful to you and you ha
 
 If you donate, please leave a note to leave your github personal address, which will be displayed on this page later.
 
-<img src='https://shiyix.cn/wx-pay.png' width='300'/>
+<img src='https://shiyix.cn/images/wx-pay.png' width='300'/>

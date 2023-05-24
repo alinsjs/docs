@@ -36,7 +36,7 @@ module.exports = {
     base: '/docs/', // gh-pages分支这里需要改成 / 因为 cncha\r.js.org的配置
     // 注入到当前页面的 HTML <head> 中的标签
     head: [
-        ['link', {rel: 'icon', href: 'https://shiyix.cn/alins.ico'}], // 增加一个自定义的 favicon
+        ['link', {rel: 'icon', href: 'https://shiyix.cn/images/alins.ico'}], // 增加一个自定义的 favicon
         ['script', {src: `https://cdn.jsdelivr.net/npm/alins@${version}`}],
         ['script', {src: `https://cdn.jsdelivr.net/npm/alins-style@${version}`}],
         // dev use

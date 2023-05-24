@@ -1,7 +1,7 @@
 <template>
     <div class='home-wrapper'>
         <div class='title'>
-            <img src='https://shiyix.cn/alins.png' alt=''>
+            <img src='https://shiyix.cn/images/alins.png' alt=''>
         </div>
         <div class='desc'><span>Al</span>l-<span>in</span>-j<span>s</span> Web UI <span class='sub-desc'>Framework</span></div>
         
