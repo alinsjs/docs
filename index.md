@@ -1,7 +1,5 @@
 ---
-# https://vitepress.dev/reference/default-theme-home-page
 layout: home
-# 化繁为简 极致纯粹
 hero:
   name: Alins
   text: Less is More
@@ -28,7 +26,7 @@ features:
     details: Fine-grained reactive support that makes everything responsive without introducing additional reactive APIs
   - icon: ⚡️
     title: Decent performance
-    Details: Without VDOM, data changes are directly updated to the DOM at the most granular level, bringing good performance
+    details: Without VDOM, data changes are directly updated to the DOM at the most granular level, bringing good performance
   - icon: 📦
     title: Complete basic settings
     details: Support all mainstream packaging tools, supporting state management, routing, UI tool libraries
@@ -37,6 +35,6 @@ features:
     details: Fully developed with TS with very friendly type support.
   - icon: 🔩
     title: Custom renderer
-    Details: Support for custom renderers for cross-platform functionality.
+    details: Support for custom renderers for cross-platform functionality.
 ---
 

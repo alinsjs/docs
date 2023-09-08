@@ -1,9 +1,9 @@
 
 export async function compileCode(code: string){
-    return (await getCompiler())(code);
+    return (await getCompiler())(code, { useImport: true });
 }
 
-function getCompiler(): Promise<(code:string)=>string> {
+function getCompiler(): Promise<(code:string, opt: any)=>string> {
     return new Promise(resolve=>{
         checkAlinsCompiler(resolve);
     })
