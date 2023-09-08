@@ -1,67 +1,31 @@
 {
-    "name": "alins",
-    "version": "0.0.12",
-    "description": "All-in-js Web UI Framework, No jsx/template/vdom/css/html",
-    "main": "index.html",
-    "author": "theajack <theajack@qq.com>",
-    "license": "MIT",
-    "keywords": [
-        "cnchar",
-        "chinese-character",
-        "chinese-pinyin",
-        "chinese-character-strokes",
-        "traditional-chinese",
-        "chinese-character-tools",
-        "汉字拼音",
-        "汉字笔画",
-        "汉字笔顺",
-        "繁体字",
-        "汉字工具"
-    ],
-    "scripts": {
-        "lint": "eslint src --ext js",
-        "jest": "jest",
-        "dev": "vuepress dev vuepress",
-        "build": "vuepress build vuepress",
-        "purge": "node ./scripts/purge-cdn.js",
-        "count": "count-code-line",
-        "release": "node ./scripts/push-release.js",
-        "fix": "eslint --fix **/*.vue"
-    },
-    "devDependencies": {
-        "@babel/core": "^7.5.5",
-        "@babel/preset-env": "^7.5.5",
-        "@commitlint/cli": "^8.2.0",
-        "@commitlint/config-conventional": "^8.2.0",
-        "@vuepress/plugin-back-to-top": "^1.0.0-rc.1",
-        "@vuepress/plugin-medium-zoom": "^1.0.0-rc.1",
-        "babel-eslint": "^10.0.3",
-        "babel-loader": "^8.0.6",
-        "core-js": "2.6.12",
-        "easy-icon": "^1.0.2",
-        "easy-test-lib": "^1.0.2",
-        "element-ui": "^2.10.1",
-        "eslint": "^6.7.2",
-        "eslint-loader": "^3.0.3",
-        "eslint-plugin-html": "^6.0.0",
-        "eslint-plugin-jest": "^24.4.0",
-        "eslint-plugin-vue": "^7.2.0",
-        "gulp": "^4.0.2",
-        "gulp-babel": "^8.0.0",
-        "gulp-markdown-toc": "^1.1.0",
-        "gulp-rename": "^1.4.0",
-        "highlight.js": "^9.15.8",
-        "husky": "^3.1.0",
-        "less": "^3.9.0",
-        "less-loader": "^5.0.0",
-        "vue": "^2.5.2",
-        "vue-highlight.js": "^2.2.0",
-        "vuepress": "^1.0.2",
-        "vuepress-plugin-tc-comment": "0.1.0"
-    },
-    "husky": {
-        "hooks": {
-            "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
-        }
-    }
+  "name": "alins-docs-cn",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "vitepress dev",
+    "build": "vitepress build",
+    "preview": "vitepress preview"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alinsjs/docs-cn.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alinsjs/docs-cn/issues"
+  },
+  "homepage": "https://github.com/alinsjs/docs-cn#readme",
+  "devDependencies": {
+    "eveit": "^0.0.1",
+    "highlight.js": "^11.8.0",
+    "less": "^4.2.0",
+    "lz-string": "^1.5.0",
+    "vitepress": "1.0.0-rc.4",
+    "vue": "^3.3.4"
+  }
 }

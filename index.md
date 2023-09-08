@@ -1,0 +1,42 @@
+---
+# https://vitepress.dev/reference/default-theme-home-page
+layout: home
+# 化繁为简 极致纯粹
+hero:
+  name: Alins
+  text: Less is More
+  tagline: The purest and most elegant web UI framework
+  image:
+    src: /alins.png
+    alt: Alins
+  actions:
+    - theme: brand
+      text: Get Started
+      link: /guide/intro
+    - theme: alt
+      text: Why Alins?
+      link: /guide/compare
+    - theme: alt
+      text: View on GitHub
+      link: https://github.com/alinsjs/alins
+features:
+  - icon: 💡
+    title: The purest development experience
+    details: Adhering to the development concept of 0-API, we can reduce the mental burden of developers as much as possible
+  - icon: 🛠️
+    title: Highly responsive
+    details: Fine-grained reactive support that makes everything responsive without introducing additional reactive APIs
+  - icon: ⚡️
+    title: Decent performance
+    Details: Without VDOM, data changes are directly updated to the DOM at the most granular level, bringing good performance
+  - icon: 📦
+    title: Complete basic settings
+    details: Support all mainstream packaging tools, supporting state management, routing, UI tool libraries
+  - icon: 🔑
+    title: Friendly type support
+    details: Fully developed with TS with very friendly type support.
+  - icon: 🔩
+    title: Custom renderer
+    Details: Support for custom renderers for cross-platform functionality.
+---
+

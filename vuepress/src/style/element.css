@@ -1,8 +1,0 @@
-.el-button--primary{
-    background-color: #ec5c2f;
-    border-color: #ec5c2f;
-}
-.el-button--primary:focus, .el-button--primary:hover {
-    background-color: #ef744e;
-    border-color: #ef744e;
-}
