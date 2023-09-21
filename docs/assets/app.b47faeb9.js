@@ -13,7 +13,7 @@ https://github.com/highlightjs/highlight.js/issues/2277`),B=u,R=h),m===void 0&&(
         For official use, please refer to https://alinsjs.github.io/docs/
     -->
     <div id="App"></div>
-    <script type="text/alins">
+    <script type="text/alins" ts>
 ${t}
     <\/script>
 </body>

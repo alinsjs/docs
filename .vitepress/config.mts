@@ -9,7 +9,7 @@ import { defineConfig } from 'vitepress'
 
 const isProd = true;
 
-const version = '0.0.33'
+const version = '0.0.34'
 
 export default defineConfig({
   title: `Alins Docs(v${version})`,

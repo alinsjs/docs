@@ -58,7 +58,7 @@ function createAlinsHTML (name: string, code: string) {
         For official use, please refer to https://alinsjs.github.io/docs/
     -->
     <div id="App"></div>
-    <script type="text/alins">
+    <script type="text/alins" ts>
 ${code}
     </script>
 </body>
