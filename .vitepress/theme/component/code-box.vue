@@ -17,6 +17,7 @@ let codeSize = ref('');
 let compileCodeSize = ref('');
 let iframeSrc = ref('');
 let iframeRef = ref();
+let id = ref('');
 
 const props = defineProps<{
     iframe?: boolean,
@@ -55,8 +56,6 @@ function setInfo(text: string) {
     }, 2000)
 }
 
-const id = `id_${Math.random().toString().substring(2)}`;
-
 let runCode = ()=>{};
 
 function downloadHtml(){
@@ -70,7 +69,6 @@ function copyCode(){
 }
 
 function openInPlayground(){
-    // console.log(code.value);
     eveit.emit('playground-code', {code: code.value, iframe: props.iframe})
 }
 
@@ -83,6 +81,8 @@ function initIFrame(){
 }
 
 onMounted(async ()=>{
+
+    id.value = `id_${Math.random().toString().substring(2)}`;
 
     initIFrame();
 
@@ -105,27 +105,26 @@ onMounted(async ()=>{
         compileCodeResult = await compileCode(code.value);
         resultCode = compileCodeResult.replace(/import *\{(.*?)\} *from *['"]alins['"]/g, 'const {$1} = window.Alins');
     }
-// console.log(resultCode);
     const fn = props.iframe ? 
         null :
-        new Function('console', resultCode.replace(/#App/g, `#${id}`).replace(/\.getElementById\(['"]App['"]\)/i, `.getElementById('${id}')`));
+        new Function('console', resultCode.replace(/#App/g, `#${id.value}`).replace(/\.getElementById\(['"]App['"]\)/i, `.getElementById('${id.value}')`));
 
     runCode = () => {
         mockConsole.clear();
         if(props.iframe){
             iframeRef.value.contentWindow?.location.reload();
         } else {
-            document.getElementById(id)!.innerHTML = '';
+            document.getElementById(id.value)!.innerHTML = '';
             fn?.(mockConsole);
         }
         setInfo('Refresh successfully!');
     }
 
     if(props.iframe){
-        iframeSrc.value = createIFrameSrc(resultCode, id, props.html);
+        iframeSrc.value = createIFrameSrc(resultCode, id.value, props.html);
         window.addEventListener('message', (e)=>{
             const data = e.data;
-            if(data.id !== id) return;
+            if(data.id !== id.value) return;
             if(data.type === 'iframe_log'){
                 mockConsole.log(...data.data);
             }else if(data.type === 'iframe_clear_log'){
