@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import {onMounted, ref} from 'vue';
-import {compileCode, download, copy} from '../utils/alins-compiler';
+import {createApp, onMounted, ref} from 'vue';
+import {compileCode, download, copy, countCodeSize, createIFrameSrc} from '../utils/alins-compiler';
 import eveit from 'eveit'
+import Playground from './playground.vue'
 
 import hljs from 'highlight.js/lib/core';
 
@@ -12,6 +13,34 @@ const compileRef = ref();
 let code = ref('');
 let name = ref('Result');
 let info = ref('');
+let codeSize = ref('');
+let compileCodeSize = ref('');
+let iframeSrc = ref('');
+let iframeRef = ref();
+
+const props = defineProps<{
+    iframe?: boolean,
+    height?: number,
+    html?: boolean,
+}>();
+
+let logs = ref([] as {msg: string, type: 'log'|'warn'}[]);
+
+const pushLog = (args: any[], type: 'log'|'warn' = 'log')=>{
+    logs.value.push({
+        msg: args.map((item)=>{
+            return typeof item === 'object' ? JSON.stringify(item): item
+        }).join(' '),
+        type,
+    });
+}
+
+const mockConsole = {
+    log(...args: any[]){pushLog(args);},
+    clear(){logs.value = []},
+    warn(...args: any[]){pushLog(args, 'warn')},
+    info(...args: any[]){console.info(...args)},
+}
 
 let showCompileResult = ref(false);
 
@@ -32,20 +61,31 @@ let runCode = ()=>{};
 
 function downloadHtml(){
     download(code.value);
-    setInfo('Download succeed!');
+    setInfo('Download successfully!');
 }
 
 function copyCode(){
     copy(code.value);
-    setInfo('Copy succeed!');
+    setInfo('Copied successfully!');
 }
 
 function openInPlayground(){
-    console.log(code.value);
-    eveit.emit('playground-code', {code: code.value})
+    // console.log(code.value);
+    eveit.emit('playground-code', {code: code.value, iframe: props.iframe})
+}
+
+function initIFrame(){
+    if(document.getElementById('PlayGround')) return;
+    const iframe = document.createElement('div');
+    iframe.id = 'PlayGround';
+    document.body.appendChild(iframe);
+    createApp(Playground).mount('#PlayGround');
 }
 
 onMounted(async ()=>{
+
+    initIFrame();
+
     const codeEle = blockRef.value.nextSibling;
     const codeDom = codeEle.querySelector('code');
 
@@ -54,50 +94,90 @@ onMounted(async ()=>{
     code.value = codeDom.textContent;
 
     codeRef.value.appendChild(codeEle);
+    codeSize.value = countCodeSize(code.value);
+
+    let compileCodeResult = '', resultCode = '';
+
+    if(props.html){
+        compileCodeResult = resultCode = code.value
+    } else {
     // @ts-ignore
-    // @ts-ignore
-    const compileCodeResult = await compileCode(code.value);
+        compileCodeResult = await compileCode(code.value);
+        resultCode = compileCodeResult.replace(/import *\{(.*?)\} *from *['"]alins['"]/g, 'const {$1} = window.Alins');
+    }
+// console.log(resultCode);
+    const fn = props.iframe ? 
+        null :
+        new Function('console', resultCode.replace(/#App/g, `#${id}`).replace(/\.getElementById\(['"]App['"]\)/i, `.getElementById('${id}')`));
 
-    const resultCode = compileCodeResult.replace(/import *\{(.*?)\} *from *['"]alins['"]/g, 'const {$1} = window.Alins');
-
-
-    const fn = new Function(resultCode
-        .replace('#App', `#${id}`).replace(/\.getElementById\(['"]App['"]\)/i, `.getElementById('${id}')`));
-
-    runCode = ()=>{
-        document.getElementById(id)!.innerHTML = '';
-        fn();
-        setInfo('Refresh succeed!');
+    runCode = () => {
+        mockConsole.clear();
+        if(props.iframe){
+            iframeRef.value.contentWindow?.location.reload();
+        } else {
+            document.getElementById(id)!.innerHTML = '';
+            fn?.(mockConsole);
+        }
+        setInfo('Refresh successfully!');
     }
 
-    fn();
+    if(props.iframe){
+        iframeSrc.value = createIFrameSrc(resultCode, id, props.html);
+        window.addEventListener('message', (e)=>{
+            const data = e.data;
+            if(data.id !== id) return;
+            if(data.type === 'iframe_log'){
+                mockConsole.log(...data.data);
+            }else if(data.type === 'iframe_clear_log'){
+                mockConsole.clear();
+            }else if(data.type === 'iframe_loaded'){
+                // console.warn('1111111111')
+            }
+        });
+    } else {
+        fn?.(mockConsole);
+    }
 
     const highlightedCode = hljs.highlight(
         compileCodeResult,
         { language: 'javascript' }
     );
+    compileCodeSize.value = countCodeSize(compileCodeResult);
     compileRef.value.innerHTML = highlightedCode.value;
 })
 </script>
 
 <template>
     <div class="code-block" ref="blockRef">
-        <div ref="codeRef"></div>
+        <div style="position: relative;">
+            <div ref="codeRef"></div>
+            <span class="code-size">{{codeSize}}</span>
+        </div>
         <div class="code-title">
             <span style="font-weight: bold;">{{ name }} 
                 <span @click="showCompileResult=!showCompileResult"
-                     class="compiler-toggle">{{showCompileResult ? 'Hide':'Show'}} Compile Result</span>
+                     class="compiler-toggle">{{showCompileResult ? 'Hide':'Show'}} compile output</span>
             </span>
             <span style="color:#4c4">{{ info }}</span>
             <span class='editor-btns'>
-                <i @click="openInPlayground" title="Open in Playground" class="ei-code"></i>
-                <i @click="copyCode" title="Copy" class="ei-copy"></i>
-                <i @click="downloadHtml" title='Download' class="ei-download-alt"></i>
-                <i @click="runCode" title='Refresh' class="ei-refresh"></i>
+                <i v-show="!props.html" @click="openInPlayground" title="Open in Playground" class="ei-code"></i>
+                <i @click="copyCode" title="Copy Code" class="ei-copy"></i>
+                <i @click="downloadHtml" title='Download Sample' class="ei-download-alt"></i>
+                <i @click="runCode" title='Refresh Result' class="ei-refresh"></i>
             </span>
         </div>
-        <div ref="resultRef" class="result-box" :id="id"></div>
-        <pre v-show="showCompileResult" ref="compileRef" class="result-box compile-result" :id="id"></pre>
+        <div v-if="!iframe" ref="resultRef" class="result-box" :id="id"></div>
+        <div v-else class="result-box">
+            <iframe :style="{height: (props.height || 100)+'px' }" ref="iframeRef" :src="iframeSrc" frameborder="0"></iframe>
+        </div>
+        <div v-show="logs.length > 0" class="result-box console-result">
+            <i title='Clear Console' class="ei-times" @click="logs=[]"></i>
+            <div :class="'console-item '+item.type" v-for="item in logs">{{ item.msg }}</div>
+        </div>
+        <div style="position: relative;" v-show="showCompileResult">
+            <pre ref="compileRef" class="result-box compile-result"></pre>
+            <span class="code-size">{{compileCodeSize}}</span>
+        </div>
     </div>
 </template>
 
@@ -106,6 +186,9 @@ onMounted(async ()=>{
     border-top: 1px solid #333;
     border-bottom: 1px solid #333;
     padding-bottom: 15px;
+    .code-size{
+        right: 5px;
+    }
     .code-title{
         display: flex;
         justify-content: space-between;
@@ -137,17 +220,16 @@ onMounted(async ()=>{
     }
 }
 .result-box{
+    position: relative;
     padding: 15px;
     background-color: #171717;
-    button, input, select{
-        // margin: 5px;
-        // padding: 3px 5px;
-        // background-color: #eee;
-        // border: none;
-        // border-radius: 1px;
-        // outline: none;
-        // color: #222;
-
+    overflow: auto;
+    color: #eee;
+    iframe{
+        width: 100%;
+        background-color: #171717;
+    }
+    button, input, select, textarea{
         margin: 5px;
         padding: 4px 8px;
         background-color: #222;
@@ -167,11 +249,40 @@ onMounted(async ()=>{
     button:active{
         background-color: #444;
     }
-    &.compile-result{
+    &.compile-result, &.console-result{
         font-size: 14px;
         margin-top: 0;
         margin-bottom: 0;
         border-top: 1px solid #333;
+    }
+    &.console-result{
+        position: relative;
+        padding: 5px 0px;
+        white-space: pre;
+        .ei-times{
+            font-size: 18px;
+            position: absolute;
+            cursor: pointer;
+            top: 5px;
+            right: 5px;
+            &:hover{
+                color: #f44;
+            }
+        }
+        .console-item{
+            font-size: 13px;
+            line-height: 15px;
+            color: #ccc;
+            padding: 3px 15px;
+            border-bottom: 1px solid #333;
+            word-break: break-all;
+            &:last-child{
+                border-color: transparent;
+            }
+            &.warn{
+                background-color: #322b08;
+            }
+        }
     }
 }
 </style>

@@ -1,0 +1,1 @@
+import{_ as e,o as r,c as a,S as t}from"./chunks/framework.cd7b584e.js";const p=JSON.parse('{"title":"Tool Link","description":"","frontmatter":{},"headers":[],"relativePath":"guide/libs.md","filePath":"guide/libs.md"}'),l={name:"guide/libs.md"},i=t("",3),n=[i];function s(o,c,h,d,m,_){return r(),a("div",null,n)}const b=e(l,[["render",s]]);export{p as __pageData,b as default};

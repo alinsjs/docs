@@ -3,7 +3,7 @@ layout: home
 hero:
   name: Alins
   text: Less is More
-  tagline: The purest and most elegant web UI framework
+  tagline: The Purest and Most Elegant Web UI Framework
   image:
     src: /alins.png
     alt: Alins
@@ -25,16 +25,16 @@ features:
     title: Highly responsive
     details: Fine-grained reactive support that makes everything responsive without introducing additional reactive APIs
   - icon: ⚡️
-    title: Decent performance
-    details: Without VDOM, data changes are directly updated to the DOM at the most granular level, bringing good performance
+    title: Ultimate performance
+    details: vdom is not used, data changes are directly updated to the dom at the most granular level, bringing the ultimate performance experience
   - icon: 📦
     title: Complete basic settings
     details: Support all mainstream packaging tools, supporting state management, routing, UI tool libraries
   - icon: 🔑
     title: Friendly type support
-    details: Fully developed with TS with very friendly type support.
+    details: Fully developed with TS with very friendly type support
   - icon: 🔩
     title: Custom renderer
-    details: Support for custom renderers for cross-platform functionality.
+    details: Support for custom renderers for cross-platform functionality
 ---
 

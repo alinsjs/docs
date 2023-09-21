@@ -1,13 +1,23 @@
+<!--
+ * @Author: chenzhongsheng
+ * @Date: 2023-09-17 16:33:22
+ * @Description: Coding something
+-->
 <script setup lang="ts">
-import eveit from 'eveit'
-import {computed, ref} from 'vue';
+import eveit from 'eveit';
+import {computed, onMounted, ref} from 'vue';
+import {IS_DEV} from '../utils/alins-compiler';
 import pkg from 'lz-string';
 const { compressToEncodedURIComponent } = pkg;
 
 let nameRef = ref('');
 let codeRef = ref('');
 
-eveit.on('playground-code', ({name = 'Custom Code', code})=>{
+let isIframe = ref(false)
+
+let loading = ref(true);
+
+eveit.on('playground-code', ({name = 'Custom Code', code, iframe})=>{
     if(!code) {
         close();
     }else if(code === 'PLAYGROUND'){
@@ -18,15 +28,26 @@ eveit.on('playground-code', ({name = 'Custom Code', code})=>{
         codeRef.value = compressToEncodedURIComponent(code);
         document.body.style.overflow = 'hidden'
     }
+    isIframe.value = iframe || false;
 });
+
+onMounted(()=>{
+    window.addEventListener('message', (e)=>{
+        if(e.data.type === 'playground_loaded'){
+            loading.value = false;
+        }
+    });
+})
 
 let src = computed(() => {
     if(!codeRef.value){
         return ''
     }
-    const search = codeRef.value !== 'PLAYGROUND' ? `?name=${nameRef.value}&code=${codeRef.value}`: '';
-    return `https://alinsjs.github.io/playground/${search}`;
+    loading.value = true;
+    const search = codeRef.value !== 'PLAYGROUND' ? `?name=${nameRef.value}&code=${codeRef.value}&iframe=${isIframe.value?1:0}`: '';
+    return IS_DEV() ? `http://localhost:5174/${search}`: `https://${location.hostname}/playground/${search}`;
 });
+
 
 function openStandalone(){
     window.open(src.value);
@@ -41,6 +62,7 @@ function close(){
 
 <template>
     <div v-show="codeRef !== ''" class="iframe-block">
+        <i v-show="loading" class="ei-spinner-snake ei-spin"></i>
         <div class="iframe-title">
             <span @click="close"><i class="ei-times"></i> Close</span>
             <span @click="openStandalone"><i class="ei-window-alt"></i> Open Standalone</span>
@@ -58,6 +80,13 @@ function close(){
     width: 100%;
     height: 100%;
     background-color: #222;
+    .ei-spinner-snake{
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 30px;
+    }
     .iframe-title{
         position: absolute;
         font-family: var(--font);

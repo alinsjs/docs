@@ -82,17 +82,6 @@ function toggleFullScreen(){
             color: #ccc;
             margin-top: 5px;;
         }
-        .code-size{
-            position: absolute;
-            color: #eee;
-            font-size: 12px;
-            bottom: 5px;
-            right: 0px;
-            z-index: 100;
-            padding: 0 5px;
-            background-color: #111c;
-            border-radius: 2px;
-        }
     }
     &.fullscreen{
         position: fixed;

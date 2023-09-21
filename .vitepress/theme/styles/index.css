@@ -127,3 +127,20 @@ max-width: 124px;
 .VPButton.brand{
     background-color: var(--vp-c-brand);
 }
+
+strong{
+    color: var(--vp-c-brand-light);
+}
+
+.code-size{
+    position: absolute;
+    color: #eee;
+    font-size: 12px;
+    bottom: 5px;
+    right: 0px;
+    z-index: 1;
+    padding: 0 5px;
+    background-color: #111c;
+    border-radius: 2px;
+    font-family: Monaco, "Courier New", monospace;
+}

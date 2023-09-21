@@ -9,8 +9,10 @@ import { defineConfig } from 'vitepress'
 
 const isProd = true;
 
+const version = '0.0.33'
+
 export default defineConfig({
-  title: "Alins Docs",
+  title: `Alins Docs(v${version})`,
   description: "The most elegant and concise WebUI framework",
   base: isProd ? '/docs/': '/',
   outDir: './docs',
@@ -25,14 +27,14 @@ export default defineConfig({
     ['meta', { name: 'twitter:site', content: '@alins_js' }],
     ['meta', { name: 'theme-color', content: '#646cff' }],
     [
-      // 'script', { src: },
+      // 'script', {src: `https://unpkg.com/alins-compiler-web@${version}`}
       'script', { 
-        src: isProd ? 'https://cdn.jsdelivr.net/npm/alins-compiler-web'
+        src: isProd ? `https://unpkg.com/alins-compiler-web@${version}`
           : `/alins-compiler-web.iife.min.js`
       },
     ],
     ['link', { rel: 'stylesheet', href: isProd 
-      ? 'https://cdn.jsdelivr.net/gh/theajack/easy-icon/dist/easy-icon.css'
+      ? 'https://unpkg.com/easy-icon@1.1.0/offline/css/easy-icon.css'
       : `/easy-icon.offline.css` 
     }],
     
@@ -57,10 +59,8 @@ export default defineConfig({
     nav: [
       { text: 'Home', link: '/' },
       { text: 'Guide', link: '/guide/intro' },
-      { text: 'API', link: '/api/' },
       { text: 'Ecosystem', link: '/ecosystem/plugin' },
       { text: 'Playground', link: 'https://alinsjs.github.io/playground' },
-      { text: 'Github', link: 'https://github.com/alinsjs/alins' },
     ],
 
     sidebar: {
@@ -80,19 +80,87 @@ export default defineConfig({
               text: 'Quick Start',
               link: '/guide/quick-start',
             },
-          ]
-        }
-      ],
-      '/api/': [
-        {
-          text: 'API',
-          items: [
             {
-              text: 'Overview',
-              link: '/api/index',
+              text: 'Concept',
+              link: '/guide/concept',
             },
           ]
-        }
+        },
+        {
+          text: 'User Manual',
+          items: [
+            {
+              text: 'JSX Extension',
+              link: '/guide/jsx',
+            },
+            {
+              text: 'Event',
+              link: '/guide/event',
+            },
+            {
+              text: 'Class',
+              link: '/guide/class',
+            },
+            {
+              text: 'Style',
+              link: '/guide/style',
+            },
+            {
+              text: 'Life Cycle',
+              link: '/guide/lifecycle',
+            },
+            {
+              text: 'Reactive Data',
+              link: '/guide/reactive',
+            },
+            {
+              text: 'Computed Data',
+              link: '/guide/computed',
+            },
+            {
+              text: 'Binding',
+              link: '/guide/binding',
+            },
+            {
+              text: 'Component And Flow',
+              link: '/guide/component',
+            },
+            {
+              text: 'Logic Block',
+              link: '/guide/logic',
+            },
+            {
+              text: 'Compilation Rules',
+              link: '/guide/rule',
+            },
+            // ! 暂时不暴露api需要考虑编译器兼容
+            // {
+            //   text: 'API',
+            //   link: '/guide/api',
+            // },
+            {
+              text: 'Store',
+              link: '/guide/store',
+            },
+            {
+              text: 'Custom Renderer',
+              link: '/guide/render',
+            },
+          ]
+        },
+        {
+          text: 'Appendix',
+          items: [
+            {
+              text: 'Query Manual',
+              link: '/guide/quick',
+            },
+            {
+              text: 'Libs',
+              link: '/guide/libs',
+            },
+          ]
+        },
       ],
       '/ecosystem/': [
         {
@@ -101,6 +169,18 @@ export default defineConfig({
             {
               text: 'Plugins',
               link: '/ecosystem/plugin',
+            },
+            {
+              text: 'Web Compiler',
+              link: '/ecosystem/web-compiler',
+            },
+            {
+              text: 'Alins Standalone',
+              link: '/ecosystem/standalone',
+            },
+            {
+              text: 'Libs',
+              link: '/ecosystem/lib',
             },
           ]
         }
