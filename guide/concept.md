@@ -48,7 +48,7 @@ function increaseCount(e){
      count++;
      console.log(e.target.outerHTML);
 }
-<button $$App
+<button $mount='#App'
      onclick={increaseCount}
      count-attr={count}
      class={`count-${count}`}
@@ -57,7 +57,7 @@ function increaseCount(e){
 </button>;
 ```
 
-Note: $$App means mounting the element to the element with the ID #App, which will be introduced in subsequent chapters.
+Note: $mount='#App' means mounting the element to the element with the ID App, which will be introduced in subsequent chapters.
 
 ### Two-way binding
 
@@ -70,7 +70,7 @@ let count = 0;
 function increaseCount(e){
      count++;
 }
-<div $$App>
+<div $mount='#App'>
      <input value={count} />
      <button onclick={increaseCount}>
          Count is {count}
@@ -83,7 +83,7 @@ function increaseCount(e){
 
 The use of the Alins component is basically the same as that of the JSX component. The component itself is a function that returns a JSX object, so the component returns native DOM elements. The first parameter of the component is the attribute, and the second parameter is the element within the component.
 
-The code inside the component will only be executed once, changes to the binding data will only cause fine-grained element updates, and the entire component will not be re-rendered.
+The code inside the component will only be executed once, changes to the binding data will only cause fine-grained element updates, and the entire component will not be re-rendered. Components only serve as an organizational form for UI logic.
 
 Here is a basic example of a component:
 
@@ -95,7 +95,7 @@ function Component(props, children){
          {children} {props.msg}!
      </span>;
 }
-<Component msg='World' $$App>
+<Component msg='World' $mount='#App'>
      <span>Hello</span>
 </Component>
 ```
@@ -122,7 +122,7 @@ let msg = 'Hello';
 function modifyMsg(){
      msg += '!';
 }
-<Component msg={msg} modifyMsg={modifyMsg} $$App>
+<Component msg={msg} modifyMsg={modifyMsg} $mount='#App'>
      <button onclick={msg += '!'}>Parent component modifies msg</button>
 </Component>
 ```

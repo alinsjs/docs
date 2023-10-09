@@ -47,7 +47,7 @@ const useStore = createStore({
 
 const store = useStore();
 
-<div $$App>
+<div $mount='#App'>
      <div>Count = {store.count}</div>
      <div>countAdd2 = {store.countAdd2}</div>
      <div>countAddX = {store.countAddX(4)}</div>
@@ -95,7 +95,7 @@ store.$watch('countAdd2', (newValue, oldValue) => {
 store.$watch(() => store.countAddX(4), (newValue, oldValue) => {
      console.log('store.countAddX(4) change', newValue, oldValue);
 });
-<div $$App>
+<div $mount='#App'>
      <div>Count = {store.count}</div>
      <div>countAdd2 = {store.countAdd2}</div>
      <div>countAddX = {store.countAddX(4)}</div>
@@ -127,7 +127,7 @@ const store = useStore();
 store.$watch('person.age', (newValue, oldValue) => {
      console.log('person.age change', newValue, oldValue);
 });
-<div $$App>
+<div $mount='#App'>
      <div>Age = {store.person.age}</div>
      <button onclick={store.increase}>Increase Age</button>
 </div>;

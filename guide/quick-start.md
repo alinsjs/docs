@@ -1,3 +1,8 @@
+<!--
+ * @Author: chenzhongsheng
+ * @Date: 2023-09-21 11:17:44
+ * @Description: Coding something
+-->
 # Quick Start
 
 ## 1.1 Command line creation
@@ -18,11 +23,13 @@ You can also directly clone [template code repository](https://github.com/alinsj
 
 ## 1.2 Using the Web Compiler
 
+<CodeBox :iframe='true' :height='60' :html='true' :pure='true'/>
+
 ```html
 <script src='https://unpkg.com/alins-compiler-web'></script>
 <script type='text/alins'>
      let count = 1;
-     <button onclick={count++} $$body>
+     <button onclick={count++} $mount='body'>
          count is {count}
      </button>;
 </script>

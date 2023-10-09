@@ -9,7 +9,7 @@ export async function compileCode(code: string){
     return (await getCompiler())(code, { importType: 'esm', ts: true });
 }
 
-function getCompiler(): Promise<(code:string, opt: any)=>string> {
+export function getCompiler(): Promise<(code:string, opt: any)=>string> {
     return new Promise(resolve=>{
         checkAlinsCompiler(resolve);
     })
@@ -29,7 +29,7 @@ function checkAlinsCompiler(resolve: any){
 
 let downloadLink: any;
 
-export function download (code: string, name = 'Alins Demo') {
+export function download (code: string, standalone = false, name = 'Alins Demo') {
     // store
     if (!downloadLink) {
         downloadLink = document.createElement('a');
@@ -37,13 +37,27 @@ export function download (code: string, name = 'Alins Demo') {
         document.body.appendChild(downloadLink);
     }
     downloadLink.setAttribute('download', `${name.replace(/ /g, '-')}.alins.html`);
-    const blob = new Blob([ createAlinsHTML(name, code) ], { type: 'text/html' });
+    const blob = new Blob([ createAlinsHTML(name, code, standalone) ], { type: 'text/html' });
     const url = URL.createObjectURL(blob);
     downloadLink.href = url;
     downloadLink.click();
 }
 
-function createAlinsHTML (name: string, code: string) {
+function createAlinsHTML (name: string, code: string, standalone: boolean = false) {
+    if(standalone){
+        return `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${name}</title>
+</head>
+<body>
+    <div id="App"></div>
+    ${createStandaloneHTML(code)}
+</body>
+</html>`
+    }
     return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -98,10 +112,46 @@ export function countCodeSize(code: string){
     return size+' byte';
 }
 
-export function createIFrameSrc (code: string, id: string, isHtml: boolean) {
+const StyleText = `
+<style>
+body, html{color: #fff;background-color:#171717;}
+body, body * {box-sizing: border-box;}
+button, input, select{
+    margin: 5px;
+    padding: 6px 10px;
+    background-color: #222;
+    border: none;
+    border-radius: 1px;
+    outline: none;
+    color: #ccc;
+    border: 1px solid #666;
+    border-radius: 5px;
+}
+button, select{
+    cursor: pointer;
+}
+button: hover, select: hover{
+    background-color: #333;
+}
+button:active{
+    background-color: #555;
+}
+</style>`;
+
+function createStandaloneHTML(code: string){
+    return `<script src='${IS_DEV() ? `${location.origin}/alins-standalone.iife.min.js` : 'https://unpkg.com/alins-standalone'}'></script>
+<script>
+${code}
+</script>`;
+}
+
+export function createIFrameSrc (code: string, id: string, isHtml: boolean, standalone: boolean): string {
     let html = '';
     if(isHtml){
-        html = code;
+        if(standalone) {
+            code = createStandaloneHTML(code)
+        }
+        html = `<head>${StyleText}<head><body><div id='App'></div>${code}</body>`;
     } else {
         const alinsSrc = IS_DEV() ? `${location.origin}/alins.iife.min.js`: `https://unpkg.com/alins`;
         html = `<!DOCTYPE html>
@@ -111,30 +161,7 @@ export function createIFrameSrc (code: string, id: string, isHtml: boolean) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>iframe runner</title>
     <script src="${alinsSrc}"></script>
-    <style>
-    body, html{color: #fff;background-color:#171717;}
-    body, body * {box-sizing: border-box;}
-    button, input, select{
-        margin: 5px;
-        padding: 6px 10px;
-        background-color: #222;
-        border: none;
-        border-radius: 1px;
-        outline: none;
-        color: #ccc;
-        border: 1px solid #666;
-        border-radius: 5px;
-    }
-    button, select{
-        cursor: pointer;
-    }
-    button: hover, select: hover{
-        background-color: #333;
-    }
-    button:active{
-        background-color: #555;
-    }
-    </style>
+    ${StyleText}
 </head>
 <body>
     <div id="App"></div>
@@ -159,6 +186,10 @@ ${code}
 </body>
 </html>`;
     }
+    return createHTMLPureSrc(html);
+}
+
+export function createHTMLPureSrc(html: string){
     const blob = new Blob([ html ], { type: 'text/html' });
     return URL.createObjectURL(blob);
 }

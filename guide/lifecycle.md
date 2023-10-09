@@ -1,3 +1,8 @@
+<!--
+ * @Author: chenzhongsheng
+ * @Date: 2023-09-21 11:17:44
+ * @Description: Coding something
+-->
 # Lifecycle
 
 The Alins element has the following four life cycle attributes, $created, $appended, $mounted, and $removed. Lifecycle attribute values only accept functions.
@@ -12,7 +17,7 @@ $created means that the dom element has just been created, and the attributes of
 function created(dom) {
      console.log(dom.outerHTML, `parent=${dom.parentElement}`);
 }
-<div $created={created} name='hello' $$App>Hello</div>;
+<div $created={created} name='hello' $mount='#App'>Hello</div>;
 ```
 
 ## 2. $appended
@@ -29,7 +34,7 @@ function appended(dom) {
          `parent.parent=${dom.parentElement.parentElement}`
      );
 }
-<div $$App>
+<div $mount='#App'>
      <div $appended={appended} name='hello'>Hello</div>
 </div>
 ```
@@ -48,7 +53,7 @@ function mounted(dom) {
          `parent.parent=${dom.parentElement.parentElement.tagName}`
      );
 }
-<div $$App>
+<div $mount='#App'>
      <div $mounted={mounted} name='hello'>Hello</div>
 </div>
 ```
@@ -69,7 +74,7 @@ function mounted(dom) {
      );
      return dom => {console.log(`Removed: ${dom.innerHTML}`)}
 }
-<div $$App>
+<div $mount='#App'>
      <div $ref={ref} $mounted={mounted} name='hello'>Hello</div>
      <button onclick={ref.remove()}>Remove Hello</button>
 </div>
@@ -86,8 +91,12 @@ let ref;
 function removed(dom) {
      console.log(`Removed: ${dom.innerHTML}`);
 }
-<div $$App>
+<div $mount='#App'>
      <div $ref={ref} $removed={removed} name='hello'>Hello</div>
      <button onclick={ref.remove()}>Remove Hello</button>
 </div>
 ```
+
+## 5. Use within components
+
+In the component, you can use compilation rules to separate from JSX attributes and declare life cycle functions in js logic. For specific usage, please refer to Section 7 of Chapter [Compilation Rules] (./rule.html)

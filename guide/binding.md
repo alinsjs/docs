@@ -18,7 +18,7 @@ Here are some examples
 
 ```jsx
 let value = 'Hello';
-<div $$App>
+<div $mount='#App'>
      <input value={value} /><br/>
      <textarea value={value}></textarea>
      <div>Content = "{value}"</div>
@@ -33,7 +33,7 @@ When the variable is of numeric type, Alins will automatically set the two-way b
 
 ```jsx
 let a = 1, b = 2;
-<div $$App>
+<div $mount='#App'>
      <div>
          <input type='number' value={a}/>
          <input type='range' value={a}/>
@@ -52,7 +52,7 @@ let a = 1, b = 2;
 
 ```jsx
 let selected = 'Apple';
-<div $$App>
+<div $mount='#App'>
      <select value={selected}>
          <option>Apple</option>
          <option>Banana</option>
@@ -70,7 +70,7 @@ Like the automatic conversion of numeric types introduced in 1.3, the two-way bi
 
 ```jsx
 let selected = true;
-<div $$App>
+<div $mount='#App'>
      <select value={selected}>
          <option>true</option>
          <option>false</option>
@@ -87,7 +87,7 @@ For input elements of checkbox type, Alins will use the `checked` attribute as t
 
 ```js
 let checked = false;
-<div $$App>
+<div $mount='#App'>
      <input type='checkbox' checked={checked} />
      <div> checked = {checked}; type = {typeof checked}</div>
 </div>
@@ -105,7 +105,7 @@ So what if the initial type of the variable is not the expected data type? At th
 
 ```jsx
 let a = 1, b = '';
-<div $$App>
+<div $mount='#App'>
      <input value={a}/>
      <input value:number={b}/>
      <div> a + b = {a + b}</div>
@@ -118,7 +118,7 @@ let a = 1, b = '';
 
 ```jsx
 let selected = 'true';
-<div $$App>
+<div $mount='#App'>
      <select value:boolean={selected}>
          <option>true</option>
          <option>false</option>

@@ -15,7 +15,7 @@ The judgment condition of the If component is passed in using the data attribute
 ```jsx
 let count: number = 0;
 const add = () => {count++};
-<div $$App>
+<div $mount='#App'>
      <If data={count > 3}>
          <div>Now count > 3</div>
      </If>
@@ -37,7 +37,7 @@ You can use $if, $elseif, $else attributes to complete the implementation of If 
 ```jsx
 let count: number = 0;
 const add = () => {count++};
-<div $$App>
+<div $mount='#App'>
      <div $if={count>3}>Now count > 3</div>
      <button $elseif={count > 2} onclick:add>continue[count>2]</button>
      <button $else onclick:add>count={count}</button>
@@ -51,7 +51,7 @@ Note: If logic attributes and components can be mixed at will:
 ```jsx
 let count: number = 0;
 const add = () => {count++};
-<div $$App>
+<div $mount='#App'>
      <div $if={count>3}>Now count > 3</div>
      <ElseIf data={count > 2}>
          <button onclick:add>continue[count>2]</button>
@@ -78,7 +78,7 @@ function Main () {
      }
      return <button onclick:add>count={count}</button>
 }
-<Main $$App/>;
+<Main $mount='#App'/>;
 ```
 
 ## 2. Switch logic
@@ -112,7 +112,7 @@ function Main () {
          </Default>
      </Switch>;
 }
-<Main $$App/>;
+<Main $mount='#App'/>;
 ```
 
 At the same time, the Case component supports the break attribute, which is used to indicate whether to jump out of the Switch logic immediately. The default value is true.
@@ -135,12 +135,29 @@ function Main () {
          </Default>
      </Switch>;
 }
-<Main $$App/>;
+<Main $mount='#App'/>;
 ```
 
 ### 3.2 Properties
 
-You can use $switch, $case, $default attributes to complete the implementation of If logic:
+You can use $switch, $case, $default attributes to complete the implementation of Switch logic:
+
+<CodeBox/>
+
+```jsx
+function Main () {
+     let count = 0;
+     const add = () => {count++;};
+     return <div $switch={count}>
+         <button $case={1} $break={false} onclick={add}>Count is 1</button>
+         <button $case={2} onclick={add}>Count is 1 or 2:{count}</button>
+         <button $default onclick={add}>Other Count:{count}</button>
+     </div>;
+}
+<Main $mount='#App'/>;
+```
+
+Note: The properties and components of switch logic can be mixed at will:
 
 <CodeBox/>
 
@@ -158,24 +175,7 @@ function Main () {
          </Default>
      </div>;
 }
-<Main $$App/>;
-```
-
-Note: The properties and components of switch logic can be mixed at will:
-
-<CodeBox/>
-
-```jsx
-function Main () {
-     let count = 0;
-     const add = () => {count++;};
-     return <div $switch={count}>
-         <button $case={1} $break={false} onclick={add}>Count is 1</button>
-         <button $case={2} onclick={add}>Count is 1 or 2:{count}</button>
-         <button $default onclick={add}>Other Count:{count}</button>
-     </div>;
-}
-<Main $$App/>;
+<Main $mount='#App'/>;
 ```
 
 ### 3.3 Statement
@@ -197,7 +197,7 @@ function Main () {
      }
      return <button onclick={add}>Other Count:{count}</button>;
 }
-<Main $$App/>;
+<Main $mount='#App'/>;
 ```
 
 ## 4. For logic
@@ -213,7 +213,7 @@ The For component uses the data attribute to pass in the array as follows:
 ```jsx
 const list = [{name: 'Bob', age: 10}, {name: 'Alice', age: 11}]
 let age = 10;
-<div $$App>
+<div $mount='#App'>
      <button onclick={
          list.unshift({name: 'Tom', age: age++})
      }>Add Person</button>
@@ -240,7 +240,7 @@ For logic can also be expressed using the $for attribute:
 ```jsx
 const list = [{name: 'Bob', age: 10}, {name: 'Alice', age: 11}]
 let age = 10;
-<div $$App>
+<div $mount='#App'>
      <button onclick={
          list.unshift({name: 'Tom', age: age++})
      }>Add Person</button>
@@ -265,7 +265,7 @@ The map function that comes with the array has the same effect as the For compon
 ```jsx
 const list = [{name: 'Bob', age: 10}, {name: 'Alice', age: 11}]
 let age = 10;
-<div $$App>
+<div $mount='#App'>
      <button onclick={
          list.unshift({name: 'Tom', age: age++})
      }>Add Person</button>
@@ -301,7 +301,7 @@ function Component(){
      </Async>;
 }
 
-<button onclick={<Component $$App/>} $$App>
+<button onclick={<Component $mount='#App'/>} $mount='#App'>
      Mount Async Component
 </button>
 ```
@@ -335,7 +335,7 @@ function Component(){
      </div>;
 }
 
-<button onclick={<Component $$App/>} $$App>
+<button onclick={<Component $mount='#App'/>} $mount='#App'>
      Mount Async Component
 </button>
 ```
@@ -358,7 +358,7 @@ Show logic is used to control whether the UI is displayed. The difference from I
 
 ```jsx
 let show: boolean = false;
-<div $$App>
+<div $mount='#App'>
      <button onclick={show = !show}>Toggle Show</button>
      <Show data={show}>
          <div>Show Element</div>
@@ -374,8 +374,8 @@ The same effect as the Show component can also be achieved through the $show att
 
 ```jsx
 let show: boolean = false;
-<div $$App>
+<div $mount='#App'>
      <button onclick={show = !show}>Toggle Show</button>
-     <div $show:show>Show Element 2</div>
+    <div $show={show}>Show Element 2</div>
 </div>
 ```

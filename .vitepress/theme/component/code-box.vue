@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import {createApp, onMounted, ref} from 'vue';
-import {compileCode, download, copy, countCodeSize, createIFrameSrc} from '../utils/alins-compiler';
+import {
+    compileCode, download, copy, countCodeSize, 
+    createIFrameSrc, createHTMLPureSrc, getCompiler
+} from '../utils/alins-compiler';
 import eveit from 'eveit'
 import Playground from './playground.vue'
 
@@ -19,10 +22,16 @@ let iframeSrc = ref('');
 let iframeRef = ref();
 let id = ref('');
 
+
+let compileCodeResult = '', resultCode = '';
+
 const props = defineProps<{
     iframe?: boolean,
     height?: number,
     html?: boolean,
+    noCompile?: boolean,
+    standalone?: boolean,
+    pure?: boolean,
 }>();
 
 let logs = ref([] as {msg: string, type: 'log'|'warn'}[]);
@@ -59,7 +68,11 @@ function setInfo(text: string) {
 let runCode = ()=>{};
 
 function downloadHtml(){
-    download(code.value);
+    if(props.standalone){
+        download(resultCode, true);
+    }else{
+        download(code.value);
+    }
     setInfo('Download successfully!');
 }
 
@@ -95,16 +108,22 @@ onMounted(async ()=>{
 
     codeRef.value.appendChild(codeEle);
     codeSize.value = countCodeSize(code.value);
-
-    let compileCodeResult = '', resultCode = '';
-
     if(props.html){
-        compileCodeResult = resultCode = code.value
+        compileCodeResult = resultCode = code.value;
+        if(props.standalone){
+            resultCode = resultCode.replace(/import *\{(.*?)\} *from *['"]alins-standalone['"]/g, 'const {$1} = window.Alins');
+        }
     } else {
-    // @ts-ignore
-        compileCodeResult = await compileCode(code.value);
-        resultCode = compileCodeResult.replace(/import *\{(.*?)\} *from *['"]alins['"]/g, 'const {$1} = window.Alins');
+        if(!props.noCompile) {
+            compileCodeResult = await compileCode(code.value);
+        }else{
+            compileCodeResult = code.value;
+            await getCompiler();
+        }
+        resultCode = compileCodeResult.replace(/import *\{(.*?)\} *from *['"]alins((\-reactive)|(\-standalone))?['"]/g, 'const {$1} = window.Alins');
     }
+    // console.log(resultCode)
+// console.log(resultCode);
     const fn = props.iframe ? 
         null :
         new Function('console', resultCode.replace(/#App/g, `#${id.value}`).replace(/\.getElementById\(['"]App['"]\)/i, `.getElementById('${id.value}')`));
@@ -121,7 +140,9 @@ onMounted(async ()=>{
     }
 
     if(props.iframe){
-        iframeSrc.value = createIFrameSrc(resultCode, id.value, props.html);
+        iframeSrc.value = props.pure ? 
+            createHTMLPureSrc(resultCode):
+            createIFrameSrc(resultCode, id.value, props.html, props.standalone);
         window.addEventListener('message', (e)=>{
             const data = e.data;
             if(data.id !== id.value) return;
@@ -154,7 +175,7 @@ onMounted(async ()=>{
         </div>
         <div class="code-title">
             <span style="font-weight: bold;">{{ name }} 
-                <span @click="showCompileResult=!showCompileResult"
+                <span v-show="props.noCompile || !props.html" @click="showCompileResult=!showCompileResult"
                      class="compiler-toggle">{{showCompileResult ? 'Hide':'Show'}} compile output</span>
             </span>
             <span style="color:#4c4">{{ info }}</span>

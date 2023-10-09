@@ -30,17 +30,38 @@ Based on Alins' powerful compiler functions and runtime responsive design, devel
 
 In addition, Alins does not use vdom. In addition, thanks to the fine-grained responsive binding, alins can reference the dom elements of the responsive data in the most fine-grained changes at the smallest cost.
 
-In the above example, if you don't like the `$mount` attribute, you can also use appendChild to complete the mounting of the node, but you will need to write a little more code:
+## 2. Pure JS and JSX
+
+In the above example, if you don't like the `$mount` and `{count ++}` properties, you can also use appendChild to complete the mounting of the node and use the function as the value of the event, but you will write a little more code:
 
 <CodeBox />
 
 ```js
 let count = 1;
 document.getElementById('App').appendChild(
-   <button onclick={count++}>
+   <button onclick={()=>count++}>
        count is {count}
    </button>
 );
+```
+
+## 3. Run directly without compilation
+
+Alins ecology provides [alins-standalone](../ecosystem/standalone) to directly use the core runtime functions of Alins in the browser environment. Through some API calls, complete Alins application functions can be realized, but jsx cannot be used. grammar.
+
+Unlike Alins [Web Compiler](../ecosystem/web-compiler), alins-standalone can be used directly in production environments,
+
+<CodeBox :iframe='true' :height='60' :html='true' :standalone='true'/>
+
+```js
+import { ref, computed, Dom, join } from 'alins-standalone';
+
+const count = ref(1);
+const countAdd1 = computed(() => count.v + 1);
+Dom.button({
+     $mount: '#App',
+     onclick: () => count.v++,
+}, join`count is ${count}; countAdd1 is ${countAdd1}`);
 ```
 
 ::: tip

@@ -7,9 +7,9 @@ import { defineConfig } from 'vitepress'
 
 // https://vitepress.dev/reference/site-config
 
-const isProd = true;
+const isProd = process.env.NODE_ENV === 'production';
 
-const version = '0.0.34'
+const version = '0.0.35'
 
 export default defineConfig({
   title: `Alins Docs(v${version})`,
@@ -177,6 +177,10 @@ export default defineConfig({
             {
               text: 'Alins Standalone',
               link: '/ecosystem/standalone',
+            },
+            {
+              text: 'Alins Reactive',
+              link: '/ecosystem/reactive',
             },
             {
               text: 'Libs',

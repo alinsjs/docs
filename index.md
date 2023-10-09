@@ -3,7 +3,7 @@ layout: home
 hero:
   name: Alins
   text: Less is More
-  tagline: The Purest and Most Elegant Web UI Framework
+  tagline: The Most Pure And Elegant JS Framework
   image:
     src: /alins.png
     alt: Alins

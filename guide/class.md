@@ -9,7 +9,7 @@ The use of HTML class names in Alins is somewhat different from that of ordinary
 
 ## 1. Use strings
 
-When using strings as class attribute values, there is not much difference in removing ordinary attribute values:
+When using a string as the class attribute value, it is not much different from the normal attribute value:
 
 <CodeBox/>
 
@@ -18,7 +18,7 @@ function logClass(e){
      console.log(e.target.className);
 }
 let className = 'v1 v2';
-<div $$App>
+<div $mount='#App'>
      <button class='a b' onclick={logClass}>static string</button>
      <button class={className} onclick={logClass}>String variable</button>
      <button class={`a ${className}`} onclick={logClass}>String template</button>
@@ -40,7 +40,7 @@ const classObject = {
 function logClass(e){
      console.log(e.target.className);
 }
-<button $$App
+<button $mount='#App'
      class={classObject}
      onclick={logClass}>
      Log Class
@@ -59,7 +59,7 @@ let a2Count = 2;
 function logClass(e){
      console.log(e.target.className);
 }
-<button $$App
+<button $mount='#App'
      class={{
          a: true,
          a1: a1Flag,
@@ -80,7 +80,7 @@ The attribute prefixed with `class:` represents a single-attribute class name. T
 function logClass(e){
      console.log(e.target.className);
 }
-<button $$App
+<button $mount='#App'
      class='a1 a2'
      class:a3={true}
      class:a4={2 < 1}

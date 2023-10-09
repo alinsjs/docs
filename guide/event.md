@@ -14,7 +14,7 @@ Let's look at it through an example
 function logClient(event){
      console.log('Position is', event.clientX, event.clientY);
 }
-<button $$App
+<button $mount='#App'
      onclick={logClient}
      onmouseleave={console.log('Mouse Leave!')}
 >Click Me</button>;
@@ -27,7 +27,7 @@ When using an expression as an event function, you can use the `$e` variable to 
 <CodeBox/>
 
 ```jsx
-<button $$App
+<button $mount='#App'
      onclick={console.log('ClientX = ', $e.clientX)}
 >Click Me</button>;
 ```
@@ -46,9 +46,9 @@ prevent is used to prevent the default behavior of events, event.preventDefault 
 function click(){
      console.log('Prevent checkbox checked!');
 }
-<div $$App>
+<div $mount='#App'>
      Normal: <input type='checkbox'/><br/>
-     Prevent And Alert: <input onclick:prevent={click} type='checkbox'/><br/>
+     Prevent And Log: <input onclick:prevent={click} type='checkbox'/><br/>
      Only Prevent: <input onclick:prevent type='checkbox'/>
 </div>
 ```
@@ -63,13 +63,13 @@ stop is used to prevent event bubbling, event.stopPropagation is called internal
 function click(from: string){
      console.log(`Click from ${from}!`);
 }
-<div $$App>
+<div $mount='#App'>
      <div onclick={click('parent')}>
          Normal:
          <button onclick={click('child')}>Click Me!</button>
      </div>
      <div onclick={click('parent')}>
-         StopPropagation With Alert:
+         StopPropagation With Log:
          <button onclick:stop={click('child')}>Click Me!</button>
      </div>
      <div onclick={click('parent')}>
@@ -89,7 +89,7 @@ capture is used to enable event capture. When carried, the useCapture of the eve
 function click(from: string){
      console.log(`Click from ${from}!`);
 }
-<div $$App>
+<div $mount='#App'>
      <div onclick={click('parent')}>
          Normal: <button onclick={click('child')}>Click Me!</button>
      </div>
@@ -109,7 +109,7 @@ once means that the event is only triggered once
 function click(){
      console.log('Clicked, try again!');
 }
-<div $$App>
+<div $mount='#App'>
      <div>
          Normal: <button onclick={click}>Click Me!</button>
      </div>
@@ -129,7 +129,7 @@ self means that it is only triggered when event.target is the current dom elemen
 function click(from: string){
      console.log(`Click from ${from}!`);
 }
-<div $$App>
+<div $mount='#App'>
      <div onclick={click('parent')}>
          Normal:
          <button onclick={click('child')}>Click Me!</button>
@@ -156,7 +156,7 @@ function click(from: string){
          console.log(`Click from ${from}!`);
      }
 }
-<div $$App>
+<div $mount='#App'>
      <div>
          Normal [Won't Log Click From]:
          <button onclick={click('child1')}>Click Me!</button>

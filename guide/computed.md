@@ -17,7 +17,7 @@ let countAdd3 = countAdd2 + 1;
 function countMultiply2 () {
      return count * 2
 }
-<div $$App>
+<div $mount='#App'>
      <button onclick={count++}>
          click:{count}
      </button>
@@ -44,7 +44,7 @@ const object1 = {
 const object2 = {
      countAdd3: object1.countAdd2 + 1
 };
-<div $$App>
+<div $mount='#App'>
      <button onclick={count++}>
          click:{count}
      </button>

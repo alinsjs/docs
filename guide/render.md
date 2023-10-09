@@ -8,7 +8,7 @@ The rendering function can be customized through the useRenderer function provid
 
 Here is an example of using console.log to print the UI abstraction layer:
 
-<CodeBox :iframe='true' :height='50'></CodeBox>
+<CodeBox :iframe='true' :height='60'></CodeBox>
 
 ```jsx
 import { useRenderer, CustomElement } from 'alins';
@@ -35,7 +35,7 @@ function start(){
      }
      loopRender();
 }
-<button onclick={start} $$App>Start</button>
+<button onclick={start} $mount='#App'>Start</button>
 ```
 
 ## 2. Use canvas as container
@@ -53,7 +53,7 @@ function start(e){
      let msg = 'Hello World';
     
      let canvas;
-     <div $$App>
+     <div $mount='#App'>
          <canvas $ref={canvas} style='border: 1px solid #666;'></canvas>
          <div>msg = {msg}</div>
          <button onclick={msg += '!'}>Click Me </button>
@@ -63,11 +63,11 @@ function start(e){
 
      const root = useRenderer({
          render (element: CustomElement) {
-             const _parent = element.parentElement || { deep: 0 };
-             if (!_parent.textLeft) _parent.textLeft = 10;
-             ctx.fillText(element.textContent, _parent.textLeft, (_parent.deep - 1) * 15 + 10);
-             _parent.textLeft += (ctx.measureText(element.textContent).width);
-             return el => {el.textLeft = 0;};
+            const parent = element.parentElement || { deep: 0 }; // @static
+            if (!parent.textLeft) parent.textLeft = 10;
+            ctx.fillText(element.textContent, parent.textLeft, (parent.deep - 1)  * 15 + 10);
+            parent.textLeft += (ctx.measureText(element.textContent).width);
+            return el => {el.textLeft = 0;};
          },
      });
 
@@ -83,7 +83,7 @@ function start(e){
      }
 }
 
-<button onclick={start} $$App>Start</button>
+<button onclick={start} $mount='#App'>Start</button>
 
 function initCanvasCtx (canvas, size = 300) {
      const scale = window.devicePixelRatio;
@@ -102,7 +102,7 @@ function initCanvasCtx (canvas, size = 300) {
 
 Developers can customize the abstraction layer through the interface provided by Alins, first by implementing the IElement interface to customize the UI element class, and then by calling the `defineRenderer` method to customize the abstraction layer and renderer.
 
-<CodeBox :iframe='true' :height='50'></CodeBox>
+<CodeBox :iframe='true' :height='60'></CodeBox>
 
 ```jsx
 import { IElement, defineRenderer, ILifeListener } from 'alins';
@@ -226,7 +226,7 @@ function start(){
     let v = 0;
     const v2 = v * 2;
 
-    <div $$Root>
+    <div $mount='#Root'>
         value = {v}
         <div>value * 2 = {v2}</div>
     </div>;
@@ -241,7 +241,7 @@ function start(){
     loopRender();
 }
 
-<button onclick={start} $$App>Start</button>
+<button onclick={start} $mount='#App'>Start</button>
 ```
 
 ## 4. Used in Nodejs

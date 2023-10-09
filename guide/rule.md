@@ -12,10 +12,9 @@ This chapter introduces some grammatical rules in Alins.
 
 Properties in Alins can be abbreviated in the following situations:
 
-1. For the $mount attribute, when the value is the id selector, it can be abbreviated to $$ID. For example, `$mount='#App'` can be abbreviated to `$$App`
-2. For the $mount attribute, when the value is document.body, it can be abbreviated to $$body. For example, `$mount={document.body}` can be abbreviated to `$$body`
-3. For ordinary attributes, when the attribute value is a variable, you can use : to abbreviate it, such as `name={userName}` can be abbreviated as `name:userName`
-4. For ordinary attributes, when the attribute name is consistent with the variable name, you can prefix the attribute name with $ and then omit the attribute value. For example, `src={src}` can be abbreviated to `$src`
+1. For ordinary attributes, when the attribute value is a variable, you can use : to abbreviate it, such as `name={userName}` can be abbreviated as `name:userName`
+2. For ordinary attributes, when the attribute name is consistent with the variable name, you can prefix the attribute name with $ and then omit the attribute value. For example, `src={src}` can be abbreviated to `$src`
+3. Use the ID selector for the $mount attribute, such as `$mount='#App'`, which can be abbreviated as `$:App`
    
 Here is an example of a summary:
 
@@ -28,7 +27,7 @@ function modifyMsg(e){
      console.log(e.target.outerHTML);
 }
 <button
-     $$App
+     $mount='#App'
      $msg
      msg2:msg
      onclick:modifyMsg>
@@ -45,7 +44,7 @@ Calculated data in Alins also supports the set method, which can be specified us
 ```jsx
 let a = 1;
 let b = a + 1; set: v => a = v + 1;
-<div $$App>
+<div $mount='#App'>
      <button onclick={b++}>Modify B</button>
      <div>a={a}; b={b}</div>
 </div>;
@@ -80,36 +79,16 @@ watch: c, (newValue, oldValue, prop) => {
      console.log('c changed:', newValue, oldValue, prop);
 };
 
-<button $$App onclick={a++}>Modify A</button>;
+<button $mount='#App' onclick={a++}>Modify A</button>;
 ```
 
 ## 4. Static and dynamic data
 
-Alins will judge static data and dynamic data by default, but if you need to manually specify the type, you can also do it through variable naming, comments or labels. Which writing method to use can be decided according to personal preference.
+Alins will judge static data and dynamic data by default, but if you need to manually specify the type, you can also do it through annotations or tags. Which writing method to use can be decided according to personal preference.
 
-### 4.1 Variable naming
+### 4.1 Comments
 
-Variables whose first character is `_` will be forcibly marked as static data, and data starting with `$` will be forcibly marked as reactive data.
-
-<CodeBox/>
-
-```jsx
-let _name = 1;
-_name++;
-// Variables starting with _ are compiled as static data even if the value changes
-
-let $name = 2;
-// Variables starting with $ are compiled into reactive data even if the value does not change
-
-const $$shallowReactive = {a:1};
-// Variables starting with $$ are compiled into shallow reactive data
-
-<div $$App>Click output to view the compilation product</div>
-```
-
-### 4.2 Comments
-
-Variables modified with the `@static` annotation will be forced to be marked as static data, and variables modified with the `@reactive` annotation will be forced to be marked as reactive data.
+Variables modified with the `@static` annotation will be forced to be marked as static data, and variables modified with the `@reactive` annotation will be forced to be marked as reactive data. Variables modified with the `@shallow` annotation will be forced to be marked as shallow responsive data
 
 When modifying multiple variable declarations, you can add parentheses to indicate which variables are selected.
 
@@ -131,10 +110,10 @@ let d = 1,e = 1,f = 1; // @reactive(d)
 const shallowReactive = {a:1}; // @shallow
 // shallow comment mark a variable as shallow reactive data
 
-<div $$App>Click output to view the compilation product</div>
+<div $mount='#App'>Click output to view the compilation product</div>
 ```
 
-Annotations can also be defined before variables, such as:
+Comments can also be written before variables, such as:
 
 ```jsx
 // @static
@@ -148,9 +127,9 @@ Comments can also be used to modify import statements
 import {data} from './data';
 ```
 
-### 4.3 Tags
+### 4.2 Label
 
-You can also force the declaration of static data or reactive data through the `_` and `$` tags, which has the same effect as let
+You can also force the declaration of static data and reactive data respectively through the `_` and `$` label, which have the same effect as let
 
 <CodeBox/>
 
@@ -160,7 +139,24 @@ name1++;
 
 $: name2 = 2;
 
-<div $$App>Click output to view the compilation product</div>
+<div $mount='#App'>Click output to view the compilation product</div>
+```
+
+### 4.3 Shallow responsive data
+
+[Shallow responsive data](./reactive.html) is only valid for object types, indicating that only the first layer of properties will be monitored responsively.
+
+Shallow responsive data can be marked in two ways: comments and js label.
+
+<CodeBox/>
+
+```jsx
+const data1 = {a:{b:1}}; // @shallow
+
+shallow: data2 = {a:{b:1}};
+$$: data3 = {a:{b:1}};
+
+<div $mount='#App'>Click output to view the compilation product</div>
 ```
 
 ## 5. Static domain
@@ -206,25 +202,7 @@ test: () => {
      let name = '';
      name++;
 };
-<div $$App>Click output to view the compilation product</div>;
-```
-
-### 5.2 Function naming declaration
-
-You can also declare a static scope by naming a function starting with an underscore.
-
-<CodeBox/>
-
-```jsx
-function _foo(){
-     let name = '';
-     name++;
-}
-const _foo2 = () => {
-     let name = '';
-     name++;
-}
-<div $$App>Click output to view the compilation product</div>;
+<div $mount='#App'>Click output to view the compilation product</div>;
 ```
 
 ### 5.2 Label declaration
@@ -242,5 +220,62 @@ static_scope: if(true){
      let name = '';
      name++;
 }
-<div $$App>Click output to view the compilation product</div>;
+<div $mount='#App'>Click output to view the compilation product</div>;
+```
+
+## 6. Responsive logic blocks
+
+Alins does not compile all if and switch statements into If or Switch logic blocks. Logical block compilation is only performed when there are JSX assignment statements or JSX return statements in the branches of the if or switch statements. However, Since js syntax is very flexible and cannot cover all scenarios during the compilation phase, compilation rules for responsive logic blocks have been added to allow developers to decide whether they need to force logic block compilation to be turned on.
+
+Reactive logic blocks can be marked with the `@reactive` annotation or marked with the `$:` tag as follows:
+
+<CodeBox/>
+
+```jsx
+function fnJSX (content, toggle) {
+     return <button onclick={toggle}>{content}</button>
+}
+
+let flag = false;
+const toggle = () => flag = !flag;
+
+function Main () {
+     // @reactive
+     if (flag) return fnJSX('flag = true', toggle);
+     return fnJSX('flag = false', toggle);
+}
+function Main2 () {
+     $: if (flag) return fnJSX('flag = true', toggle);
+     return fnJSX('flag = false', toggle);
+}
+<Main $mount='#App'/>;
+<Main2 $mount='#App'/>;
+```
+
+## 7. Lifecycle tags
+
+In addition to using life cycle attributes in components, you can also use life cycle tags to define life cycle functions. The usage is as follows:
+
+<CodeBox/>
+
+```jsx
+functionComponent(){
+     let ref;
+     created: dom => {
+         console.log('created', dom.className);
+     };
+     appended: dom => {
+         console.log('appended', dom.className);
+     };
+     mounted: dom => {
+         console.log('mounted', dom.className);
+     };
+     removed: dom => {
+         console.log('removed', dom.className);
+     };
+     return <div $ref={ref} class='component-dom'>
+         <button onclick={ref.remove()}>Remove Component</button>
+     </div>
+}
+<Component $mount='#App'/>
 ```
