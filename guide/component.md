@@ -124,7 +124,7 @@ async function Component(){
 
 ## 5. One-way data flow
 
-Alins follows the one-way data flow principle. The data passed from the parent component to the child component is also responsive, but cannot be changed in the child component. If you need to modify the parent component data in the child component, you can modify it through the transfer method, or you can use The state sharing scheme introduced in subsequent chapters.
+Alins follows the one-way data flow principle. The data passed from the parent component to the child component is also reactive, but cannot be changed in the child component. If you need to modify the parent component data in the child component, you can modify it through the transfer method, or you can use The state sharing scheme introduced in subsequent chapters.
 
 <CodeBox/>
 

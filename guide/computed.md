@@ -2,7 +2,7 @@
 
 Variables that rely on reactive data will be marked as calculated data. Calculated data is read-only by default. You can also set the assignment behavior of calculated data through the set syntax, which will be introduced in detail in subsequent chapters.
 
-Calculated data is also responsive data. When the responsive data on which the calculated data depends changes, the calculated data will also trigger updates and trigger updates for other elements that depend on it.
+Calculated data is also reactive data. When the reactive data on which the calculated data depends changes, the calculated data will also trigger updates and trigger updates for other elements that depend on it.
 
 The definition form of calculated properties is very flexible and can be js expressions, functions, objects, etc. At the same time, calculated properties are very easy to understand and are completely consistent with the use of js.
 

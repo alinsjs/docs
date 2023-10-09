@@ -52,7 +52,7 @@ let b = a + 1; set: v => a = v + 1;
 
 ## 3. Watch tag
 
-Alins supports monitoring changes in responsive data, which can be achieved through the watch tag:
+Alins supports monitoring changes in reactive data, which can be achieved through the watch tag:
 
 <CodeBox/>
 
@@ -88,7 +88,7 @@ Alins will judge static data and dynamic data by default, but if you need to man
 
 ### 4.1 Comments
 
-Variables modified with the `@static` annotation will be forced to be marked as static data, and variables modified with the `@reactive` annotation will be forced to be marked as reactive data. Variables modified with the `@shallow` annotation will be forced to be marked as shallow responsive data
+Variables modified with the `@static` annotation will be forced to be marked as static data, and variables modified with the `@reactive` annotation will be forced to be marked as reactive data. Variables modified with the `@shallow` annotation will be forced to be marked as shallow reactive data
 
 When modifying multiple variable declarations, you can add parentheses to indicate which variables are selected.
 
@@ -142,11 +142,11 @@ $: name2 = 2;
 <div $mount='#App'>Click output to view the compilation product</div>
 ```
 
-### 4.3 Shallow responsive data
+### 4.3 Shallow reactive data
 
-[Shallow responsive data](./reactive.html) is only valid for object types, indicating that only the first layer of properties will be monitored responsively.
+[Shallow reactive data](./reactive.html) is only valid for object types, indicating that only the first layer of properties will be monitored responsively.
 
-Shallow responsive data can be marked in two ways: comments and js label.
+Shallow reactive data can be marked in two ways: comments and js label.
 
 <CodeBox/>
 
@@ -161,7 +161,7 @@ $$: data3 = {a:{b:1}};
 
 ## 5. Static domain
 
-All variables declared in the static domain will be forcibly marked as static data, and all variables, calculated data, and logical statements will be skipped by the compiler. JSX and mandatory tagging of responsive data in static fields will not be affected. Static domain objects can be functions, if statements, switch statements, for statements, block scopes, and labels.
+All variables declared in the static domain will be forcibly marked as static data, and all variables, calculated data, and logical statements will be skipped by the compiler. JSX and mandatory tagging of reactive data in static fields will not be affected. Static domain objects can be functions, if statements, switch statements, for statements, block scopes, and labels.
 
 ### 5.1 Comment Statement
 
@@ -223,9 +223,9 @@ static_scope: if(true){
 <div $mount='#App'>Click output to view the compilation product</div>;
 ```
 
-## 6. Responsive logic blocks
+## 6. Reactive logic blocks
 
-Alins does not compile all if and switch statements into If or Switch logic blocks. Logical block compilation is only performed when there are JSX assignment statements or JSX return statements in the branches of the if or switch statements. However, Since js syntax is very flexible and cannot cover all scenarios during the compilation phase, compilation rules for responsive logic blocks have been added to allow developers to decide whether they need to force logic block compilation to be turned on.
+Alins does not compile all if and switch statements into If or Switch logic blocks. Logical block compilation is only performed when there are JSX assignment statements or JSX return statements in the branches of the if or switch statements. However, Since js syntax is very flexible and cannot cover all scenarios during the compilation phase, compilation rules for reactive logic blocks have been added to allow developers to decide whether they need to force logic block compilation to be turned on.
 
 Reactive logic blocks can be marked with the `@reactive` annotation or marked with the `$:` tag as follows:
 

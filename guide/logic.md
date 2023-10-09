@@ -202,7 +202,7 @@ function Main () {
 
 ## 4. For logic
 
-For logic is used to render arrays and supports responsive support for addition, deletion and modification operations of arrays. For logic can be expressed in three forms: components, attributes, and map functions.
+For logic is used to render arrays and supports reactive support for addition, deletion and modification operations of arrays. For logic can be expressed in three forms: components, attributes, and map functions.
 
 ### 4.1 For component
 

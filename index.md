@@ -22,8 +22,8 @@ features:
     title: The purest development experience
     details: Adhering to the development concept of 0-API, we can reduce the mental burden of developers as much as possible
   - icon: 🛠️
-    title: Highly responsive
-    details: Fine-grained reactive support that makes everything responsive without introducing additional reactive APIs
+    title: Highly reactive
+    details: Fine-grained reactive support that makes everything reactive without introducing additional reactive APIs
   - icon: ⚡️
     title: Ultimate performance
     details: vdom is not used, data changes are directly updated to the dom at the most granular level, bringing the ultimate performance experience

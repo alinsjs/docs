@@ -39,11 +39,11 @@ The web compiler can recognize three types, 'text/alins', 'text/babel', 'text/js
 
 ## 3. import property
 
-You can use the import attribute to top the import statement introduction method, and the optional values are:
+You can use the import attribute to specify how alins is introduced. Optional values are:
 
 1. esm: Indicates the introduction of alins using the import statement
-2. CJS: Indicates the introduction of Alins using the require method
-3. iife means from window. Alins introduced alins, which defaults to iife
+2. cjs: Indicates the introduction of Alins using the require method
+3. iife means from `window.Alins` introduced alins, which defaults to iife
 
 The usage method is as follows
 

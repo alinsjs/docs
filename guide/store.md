@@ -13,7 +13,7 @@ You can use `createStore` to create a data warehouse and accept a json type para
 
 1. state: This parameter is a function, and the return value represents the initial data of the data warehouse.
 2. getters: used to define some calculated properties.
-3. Actions: equivalent to the data warehouse method, which can be used to modify the data in the data warehouse, and can also be used to represent responsive data through the return value.
+3. Actions: equivalent to the data warehouse method, which can be used to modify the data in the data warehouse, and can also be used to represent reactive data through the return value.
 
 The return value of createStore is a function, and the function return value is a Store instance. The data warehouse is used by calling this function.
 

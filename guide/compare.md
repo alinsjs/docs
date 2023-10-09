@@ -1,6 +1,6 @@
 # Compared
 
-Alins adheres to the development philosophy of 0-Api and Less-Is-More and uses jsx to describe UI. It can have strong responsive capabilities without introducing any additional APIs, which can greatly improve the development efficiency of developers. , Reduce the cost of understanding the code.
+Alins adheres to the development philosophy of 0-Api and Less-Is-More and uses jsx to describe UI. It can have strong reactive capabilities without introducing any additional APIs, which can greatly improve the development efficiency of developers. , Reduce the cost of understanding the code.
 
 At the same time, Alins also has a very small runtime size and packaging size, and has good performance.
 

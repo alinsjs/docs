@@ -5,7 +5,7 @@
 -->
 # Build Tool Plugin
 
-Alins currently supports the following mainstream build tools
+When using the build tool plugin, Alins will compile files named with `jsx` and `tsx` suffixes by default. Alins currently supports the following mainstream build tools
 
 The following tool names are all npm package names, and the installation methods are as follows:
 

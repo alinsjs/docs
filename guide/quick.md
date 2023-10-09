@@ -26,6 +26,6 @@ This chapter briefly summarizes the core jsx attributes and syntax rules in Alin
 15. [watch syntax sugar](./rule): monitor data changes, such as: `watch: a, (...args)=>{console.log(args)}`
 16. [Attribute abbreviation](./rule): `name={name}` is equivalent to `name:name` and is equivalent to `$name`
 17. [Annotation](./rule): `@reactive, @static, @shallow, @static-scope`, where @reactive and @static can carry parameters
-18. [Tag](./rule): $: can declare responsive data, _: can declare static data, static_scope: can declare static scope
+18. [Tag](./rule): $: can declare reactive data, _: can declare static data, static_scope: can declare static scope
 19. [State sharing](./store): `createStore` API
 20. [Custom renderer](./render): `useRenderer`, `defineRenderer` API

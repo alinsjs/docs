@@ -1,6 +1,6 @@
 # Data Binding
 
-All objects that reference responsive data will have responsive capabilities, such as DOM elements, attributes, styles, etc. All responsive elements will trigger updates at the most granular level. For example, changes in text content will only update the bound TextNode. Responsive styles will only update a single style, etc.
+All objects that reference reactive data will have reactive capabilities, such as DOM elements, attributes, styles, etc. All reactive elements will trigger updates at the most granular level. For example, changes in text content will only update the bound TextNode. Reactive styles will only update a single style, etc.
 
 We have introduced the basic usage of reactive data binding in more detail in the above two chapters.
 
@@ -8,7 +8,7 @@ This chapter mainly introduces two-way data binding.
 
 ## 1. value attribute
 
-For input type DOM elements using the value attribute, if the value attribute value is a variable, then the variable will be directly marked as responsive data and bidirectionally bound to the input element. When the variable is updated, the DOM element will be updated. When the DOM element input changes, the value of the variable will also be modified.
+For input type DOM elements using the value attribute, if the value attribute value is a variable, then the variable will be directly marked as reactive data and bidirectionally bound to the input element. When the variable is updated, the DOM element will be updated. When the DOM element input changes, the value of the variable will also be modified.
 
 Here are some examples
 
@@ -81,7 +81,7 @@ let selected = true;
 
 ## 2. checked attribute
 
-For input elements of checkbox type, Alins will use the `checked` attribute as the binding target. When the value of the checked attribute is a variable, the change will be marked as a responsive variable and bidirectionally bound to the input element.
+For input elements of checkbox type, Alins will use the `checked` attribute as the binding target. When the value of the checked attribute is a variable, the change will be marked as a reactive variable and bidirectionally bound to the input element.
 
 <CodeBox/>
 

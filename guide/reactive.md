@@ -20,7 +20,7 @@ let msg = 'Alins';
 </button>
 ```
 
-In this example, we use the direct use of js expressions as events introduced in the previous chapter to modify the value of msg, so msg will be marked as responsive data during the compilation phase, and the text content of the `Button` element will also be marked as responsive data. It will become a responsive object, and when msg is modified, it will automatically be updated at the most granular level.
+In this example, we use the direct use of js expressions as events introduced in the previous chapter to modify the value of msg, so msg will be marked as reactive data during the compilation phase, and the text content of the `Button` element will also be marked as reactive data. It will become a reactive object, and when msg is modified, it will automatically be updated at the most granular level.
 
 ## 2. HTML
 
@@ -36,7 +36,7 @@ let html = 'This is<h1>H1 Title<h1>';
 </div>
 ```
 
-## 3. Properties
+## 3. Attribute
 
 Here is an example of a reactive attribute:
 
@@ -53,7 +53,24 @@ function onclick(e){
 </button>
 ```
 
-## 4. Is the attribute visible?
+Note: The `$attributes` attribute mentioned in the previous chapter also fully supports reactive data.
+
+<CodeBox/>
+
+```jsx
+let name = 'alins';
+function logAttributes(e){
+    name += '!';
+    console.log(e.target.outerHTML);
+}
+<button $mount='#App'
+    inner-attr="test"
+    $attributes={`name=${name}&value=framework`}
+    onclick={logAttributes} 
+>Click Me!</button>
+```
+
+## 4. Attribute enable
 
 The attribute accepts an object passed in a value and enable attribute. We can use the enable attribute to control whether the HTML attribute takes effect. The example is as follows:
 
@@ -143,7 +160,7 @@ function toggleClass(e){
 
 ## 6. Style
 
-The responsive binding of styles is very flexible and can be strings, objects, and single-property styles.
+The reactive binding of styles is very flexible and can be strings, objects, and single-property styles.
 
 ### 6.1 String style
 
@@ -219,10 +236,10 @@ function modifyStyle(){
 </div>
 ```
 
-## 7. Shallow responsive data
+## 7. Shallow reactive data
 
-When Alins performs responsive processing on object types, it will perform deep monitoring of the object, that is, it will recursively traverse all levels of the object's attributes, which may cause unnecessary performance loss in some scenarios.
+When Alins performs reactive processing on object types, it will perform deep monitoring of the object, that is, it will recursively traverse all levels of the object's attributes, which may cause unnecessary performance loss in some scenarios.
 
-Shallow responsive data is only valid for object types, which means that only the first-layer properties are monitored responsively. This can effectively improve performance in some scenarios with deeply nested objects and only focusing on first-level property changes.
+Shallow reactive data is only valid for object types, which means that only the first-layer properties are monitored responsively. This can effectively improve performance in some scenarios with deeply nested objects and only focusing on first-level property changes.
 
-The declaration of shallow responsive data will be introduced in Section 4.4 of the [Compilation Rules](./rule.html) chapter. Only do here
+The declaration of shallow reactive data will be introduced in Section 4.4 of the [Compilation Rules](./rule.html) chapter. Only do here

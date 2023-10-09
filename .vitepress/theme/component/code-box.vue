@@ -192,7 +192,9 @@ onMounted(async ()=>{
         </div>
         <div v-show="logs.length > 0" class="result-box console-result">
             <i title='Clear Console' class="ei-times" @click="logs=[]"></i>
-            <div :class="'console-item '+item.type" v-for="item in logs">{{ item.msg }}</div>
+            <div class="console-box">
+                <div :class="'console-item '+item.type" v-for="item in logs">{{ item.msg }}</div>
+            </div>
         </div>
         <div style="position: relative;" v-show="showCompileResult">
             <pre ref="compileRef" class="result-box compile-result"></pre>
@@ -289,18 +291,22 @@ onMounted(async ()=>{
                 color: #f44;
             }
         }
-        .console-item{
-            font-size: 13px;
-            line-height: 15px;
-            color: #ccc;
-            padding: 3px 15px;
-            border-bottom: 1px solid #333;
-            word-break: break-all;
-            &:last-child{
-                border-color: transparent;
-            }
-            &.warn{
-                background-color: #322b08;
+        .console-box{
+            width: 100%;
+            overflow: auto;
+            .console-item{
+                font-size: 13px;
+                line-height: 15px;
+                color: #ccc;
+                padding: 3px 15px;
+                border-bottom: 1px solid #333;
+                word-break: break-all;
+                &:last-child{
+                    border-color: transparent;
+                }
+                &.warn{
+                    background-color: #322b08;
+                }
             }
         }
     }

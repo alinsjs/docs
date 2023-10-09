@@ -73,7 +73,7 @@ Dom.button({
 </script>
 ```
 
-Note: The join API means to concatenate a string with responsive data to return an array. You can also use array form directly
+Note: The join API means to concatenate a string with reactive data to return an array. You can also use array form directly
 
 ```js
 ['count is ', count, '; countAdd1 is ', countAdd1]

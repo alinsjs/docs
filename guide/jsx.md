@@ -123,7 +123,7 @@ const html = 'This is <h1>h1 title</h1>';
 <div $html={html} $mount='#App'>Internal elements will be invalid</div>;
 ```
 
-## 6.$attributes attribute
+## 6.$attributes
 
 The `$attributes` attribute is used to aggregate HTML attributes. You can use objects to set attributes in batches, as shown below
 
@@ -147,6 +147,25 @@ function logAttributes(e){
 >Click Me!</button>
 ```
 
+`$attributes` also supports passing in string types, using the format of name=value&name=value to pass in strings
+
+<CodeBox/>
+
+```jsx
+let attrStr = 'name=TestName&value=TestValue';
+function logAttributes(e){
+     const attrs = e.target.attributes;
+     for(let item of attrs){
+         console.log(`${item.name}=${item.value}`);
+     }
+}
+<button $mount='#App'
+     inner-attr="test"
+     $attributes={attrStr}
+     onclick={logAttributes}
+>Click Me!</button>
+```
+
 ## 7. Dynamic node
 
 Since the essence of Alins is to directly operate Dom, creating dynamic nodes is also very intuitive. You can just directly mount JSX elements. Here is an example.
@@ -164,4 +183,4 @@ function addChild(e){
 </div>
 ```
 
-**Note: The _id variable here uses an underscore prefix to identify a static data, otherwise id++ will be identified as calculated data and cause responsive changes**
+**Note: The _id variable here uses an underscore prefix to identify a static data, otherwise id++ will be identified as calculated data and cause reactive changes**
