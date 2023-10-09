@@ -27,7 +27,7 @@ function modifyMsg(e){
      console.log(e.target.outerHTML);
 }
 <button
-     $mount='#App'
+     $:App
      $msg
      msg2:msg
      onclick:modifyMsg>
